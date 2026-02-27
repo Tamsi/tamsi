@@ -58,7 +58,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
-          className="flex gap-3"
+          className="flex flex-wrap justify-center gap-3"
         >
           {socials.map(({ label, href, icon: Icon }) => (
             <Button
@@ -70,7 +70,7 @@ export function Hero() {
             >
               <a href={href} target="_blank" rel="noopener noreferrer">
                 <Icon className="size-5" />
-                {label}
+                <span className="hidden sm:inline">{label}</span>
               </a>
             </Button>
           ))}
