@@ -44,14 +44,24 @@ export function About() {
               <MapPin className="size-4 text-primary" />
               {t.about.location}
             </div>
-            <div className="flex items-center gap-1.5 text-sm">
+            <a
+              href={t.about.companyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-sm transition-colors hover:text-primary"
+            >
               <Briefcase className="size-4 text-primary" />
               {t.about.company}
-            </div>
-            <div className="flex items-center gap-1.5 text-sm">
+            </a>
+            <a
+              href={t.about.schoolUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-sm transition-colors hover:text-primary"
+            >
               <GraduationCap className="size-4 text-primary" />
               {t.about.school}
-            </div>
+            </a>
           </div>
         </div>
       </Reveal>
