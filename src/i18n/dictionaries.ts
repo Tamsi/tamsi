@@ -28,7 +28,9 @@ export const dictionaries = {
       bio2: 'Mon parcours couvre le web dans sa globalité — du <strong class="text-foreground">Drupal</strong> et <strong class="text-foreground">Symfony</strong> au <strong class="text-foreground">React / Next.js</strong>, en passant par du <strong class="text-foreground">React Native</strong> (apps Asmodee &amp; Crédit Agricole), du <strong class="text-foreground">Shopify</strong> et des serveurs <strong class="text-foreground">MCP</strong> pour l\'intégration IA. Formé à <strong class="text-foreground">42</strong>, je mets la rigueur algorithmique au service de projets ambitieux.',
       location: 'Paris, France',
       company: 'Livingcolor',
+      companyUrl: 'https://www.livingcolor.fr/',
       school: '42',
+      schoolUrl: 'https://42.fr/',
       languagesTitle: 'Langues',
       languages: [
         { name: 'Français', level: 'Natif' },
@@ -139,7 +141,9 @@ export const dictionaries = {
       bio2: 'My background covers the full web spectrum — from <strong class="text-foreground">Drupal</strong> and <strong class="text-foreground">Symfony</strong> to <strong class="text-foreground">React / Next.js</strong>, including <strong class="text-foreground">React Native</strong> (Asmodee &amp; Crédit Agricole apps), <strong class="text-foreground">Shopify</strong>, and <strong class="text-foreground">MCP</strong> servers for AI integration. Trained at <strong class="text-foreground">42</strong>, I bring algorithmic rigor to ambitious projects.',
       location: 'Paris, France',
       company: 'Livingcolor',
+      companyUrl: 'https://www.livingcolor.fr/',
       school: '42',
+      schoolUrl: 'https://42.fr/en/homepage/',
       languagesTitle: 'Languages',
       languages: [
         { name: 'French', level: 'Native' },
