@@ -24,26 +24,32 @@ interface LocaleContextValue {
 
 const LocaleContext = createContext<LocaleContextValue | null>(null)
 
+function getInitialLocale(): Locale {
+  if (typeof window === 'undefined') return defaultLocale
+  try {
+    const stored = localStorage.getItem('locale') as Locale | null
+    if (stored && locales.includes(stored)) return stored
+  } catch {
+    // localStorage may be unavailable (private mode, sandboxed iframe, …)
+  }
+  const browserLang = navigator.language.split('-')[0]
+  return browserLang === 'fr' ? 'fr' : 'en'
+}
+
 export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleRaw] = useState<Locale>(defaultLocale)
+  const [locale, setLocaleRaw] = useState<Locale>(getInitialLocale)
 
   useEffect(() => {
-    const stored = localStorage.getItem('locale') as Locale | null
-    if (stored && locales.includes(stored)) {
-      setLocaleRaw(stored)
-      document.documentElement.lang = stored
-    } else {
-      const browserLang = navigator.language.split('-')[0]
-      const detected: Locale = browserLang === 'fr' ? 'fr' : 'en'
-      setLocaleRaw(detected)
-      document.documentElement.lang = detected
-    }
-  }, [])
+    document.documentElement.lang = locale
+  }, [locale])
 
   const setLocale = useCallback((next: Locale) => {
     setLocaleRaw(next)
-    localStorage.setItem('locale', next)
-    document.documentElement.lang = next
+    try {
+      localStorage.setItem('locale', next)
+    } catch {
+      // ignore
+    }
     document.title = dictionaries[next].meta.title
   }, [])
 

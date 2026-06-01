@@ -2,6 +2,16 @@ export const locales = ['fr', 'en'] as const
 export type Locale = (typeof locales)[number]
 export const defaultLocale: Locale = 'fr'
 
+export type BioSegment = { text: string; highlight?: boolean }
+
+export type ProjectItem = {
+  title: string
+  language: string
+  url: string
+  source: 'github' | 'gitlab'
+  description: string
+}
+
 export const dictionaries = {
   fr: {
     meta: {
@@ -24,8 +34,48 @@ export const dictionaries = {
       quote:
         '\u201cControlling complexity is the essence of computer programming.\u201d',
       quoteAuthor: 'Brian Kernighan',
-      bio1: 'Développeur web avec <strong class="text-foreground">~8 ans d\'expérience</strong> chez <strong class="text-foreground">Livingcolor</strong>, où j\'interviens en tant que prestataire sur des projets variés pour de grands comptes\u00a0: <strong class="text-foreground">TotalEnergies</strong>, <strong class="text-foreground">France Télévisions</strong>, <strong class="text-foreground">AFP</strong>, <strong class="text-foreground">TV5Monde</strong>, <strong class="text-foreground">Harmonie Mutuelle</strong>, ou encore des maisons <strong class="text-foreground">LVMH</strong> (Krug, Moët, Hennessy).',
-      bio2: 'Mon parcours couvre le web dans sa globalité — du <strong class="text-foreground">Drupal</strong> et <strong class="text-foreground">Symfony</strong> au <strong class="text-foreground">React / Next.js</strong>, en passant par du <strong class="text-foreground">React Native</strong> (apps Asmodee &amp; Crédit Agricole), du <strong class="text-foreground">Shopify</strong> et des serveurs <strong class="text-foreground">MCP</strong> pour l\'intégration IA. Formé à <strong class="text-foreground">42</strong>, je mets la rigueur algorithmique au service de projets ambitieux.',
+      bio1: [
+        { text: "Développeur web avec " },
+        { text: "~8 ans d'expérience", highlight: true },
+        { text: ' chez ' },
+        { text: 'Livingcolor', highlight: true },
+        {
+          text: ", où j'interviens en tant que prestataire sur des projets variés pour de grands comptes\u00a0: ",
+        },
+        { text: 'TotalEnergies', highlight: true },
+        { text: ', ' },
+        { text: 'France Télévisions', highlight: true },
+        { text: ', ' },
+        { text: 'AFP', highlight: true },
+        { text: ', ' },
+        { text: 'TV5Monde', highlight: true },
+        { text: ', ' },
+        { text: 'Harmonie Mutuelle', highlight: true },
+        { text: ', ou encore des maisons ' },
+        { text: 'LVMH', highlight: true },
+        { text: ' (Krug, Moët, Hennessy).' },
+      ] satisfies BioSegment[],
+      bio2: [
+        { text: 'Mon parcours couvre le web dans sa globalité — du ' },
+        { text: 'Drupal', highlight: true },
+        { text: ' et ' },
+        { text: 'Symfony', highlight: true },
+        { text: ' au ' },
+        { text: 'React / Next.js', highlight: true },
+        { text: ', en passant par du ' },
+        { text: 'React Native', highlight: true },
+        { text: ' (apps Asmodee &amp; Crédit Agricole), du ' },
+        { text: 'Shopify', highlight: true },
+        { text: ' et des serveurs ' },
+        { text: 'MCP', highlight: true },
+        {
+          text: " pour l'intégration IA. Formé à ",
+        },
+        { text: '42', highlight: true },
+        {
+          text: ', je mets la rigueur algorithmique au service de projets ambitieux.',
+        },
+      ] satisfies BioSegment[],
       location: 'Paris, France',
       company: 'Livingcolor',
       companyUrl: 'https://www.livingcolor.fr/',
@@ -83,30 +133,54 @@ export const dictionaries = {
       title: 'Projets',
       items: [
         {
+          title: 'VisualQ',
+          language: 'Next.js / TypeScript',
+          url: 'https://github.com/abecms/visualq',
+          source: 'github',
           description:
             "Plateforme de tests de régression visuelle propulsée par l'IA — compare des captures d'écran avec Pixelmatch, intègre GitLab CI & JIRA, et utilise OpenAI Vision pour l'analyse intelligente des différences.",
         },
         {
+          title: 'ScoreJamAi',
+          language: 'Next.js / TypeScript',
+          url: 'https://github.com/abecms/ScoreJamAi',
+          source: 'github',
           description:
             "Générateur de formulaires propulsé par l'IA — créez des formulaires de notation personnalisés, publiez-les pour vos utilisateurs et laissez l'IA évaluer les réponses avec des analyses détaillées.",
         },
         {
+          title: 'redbee-mcp',
+          language: 'Python',
+          url: 'https://github.com/tamsi/redbee-mcp',
+          source: 'github',
           description:
             "Serveur MCP pour Red Bee Media OTT — permet aux assistants IA d'interagir avec les API de la plateforme de streaming via le Model Context Protocol.",
         },
         {
+          title: '42school',
+          language: 'C / C++ / Python',
+          url: 'https://github.com/tamsi/42school',
+          source: 'github',
           description:
             'Cursus complet de 42 — de libft à ft_transcendence (Pong multijoueur avec Django, WebSockets, OAuth2, microservices Docker).',
         },
         {
+          title: 'pin_article',
+          language: 'PHP',
+          url: 'https://gitlab.com/tamsi/pin_article',
+          source: 'gitlab',
           description:
             "Module Drupal 8 — permet aux éditeurs de contenu d'épingler et de désépingler des articles en haut des pages de listing.",
         },
         {
+          title: 'piscine-42',
+          language: 'C',
+          url: 'https://github.com/Tamsi/piscine-42/tree/master/to_git',
+          source: 'github',
           description:
             'Collection de projets de la piscine 42 — exercices de programmation C de shell00 à c09, couvrant les algorithmes et la programmation système.',
         },
-      ],
+      ] satisfies ProjectItem[],
     },
     contact: {
       title: 'Contact',
@@ -137,8 +211,44 @@ export const dictionaries = {
       quote:
         '\u201cControlling complexity is the essence of computer programming.\u201d',
       quoteAuthor: 'Brian Kernighan',
-      bio1: 'Web developer with <strong class="text-foreground">~8 years of experience</strong> at <strong class="text-foreground">Livingcolor</strong>, working as a contractor on diverse projects for major clients: <strong class="text-foreground">TotalEnergies</strong>, <strong class="text-foreground">France Télévisions</strong>, <strong class="text-foreground">AFP</strong>, <strong class="text-foreground">TV5Monde</strong>, <strong class="text-foreground">Harmonie Mutuelle</strong>, and <strong class="text-foreground">LVMH</strong> houses (Krug, Moët, Hennessy).',
-      bio2: 'My background covers the full web spectrum — from <strong class="text-foreground">Drupal</strong> and <strong class="text-foreground">Symfony</strong> to <strong class="text-foreground">React / Next.js</strong>, including <strong class="text-foreground">React Native</strong> (Asmodee &amp; Crédit Agricole apps), <strong class="text-foreground">Shopify</strong>, and <strong class="text-foreground">MCP</strong> servers for AI integration. Trained at <strong class="text-foreground">42</strong>, I bring algorithmic rigor to ambitious projects.',
+      bio1: [
+        { text: 'Web developer with ' },
+        { text: '~8 years of experience', highlight: true },
+        { text: ' at ' },
+        { text: 'Livingcolor', highlight: true },
+        {
+          text: ', working as a contractor on diverse projects for major clients: ',
+        },
+        { text: 'TotalEnergies', highlight: true },
+        { text: ', ' },
+        { text: 'France Télévisions', highlight: true },
+        { text: ', ' },
+        { text: 'AFP', highlight: true },
+        { text: ', ' },
+        { text: 'TV5Monde', highlight: true },
+        { text: ', ' },
+        { text: 'Harmonie Mutuelle', highlight: true },
+        { text: ', and ' },
+        { text: 'LVMH', highlight: true },
+        { text: ' houses (Krug, Moët, Hennessy).' },
+      ] satisfies BioSegment[],
+      bio2: [
+        { text: 'My background covers the full web spectrum — from ' },
+        { text: 'Drupal', highlight: true },
+        { text: ' and ' },
+        { text: 'Symfony', highlight: true },
+        { text: ' to ' },
+        { text: 'React / Next.js', highlight: true },
+        { text: ', including ' },
+        { text: 'React Native', highlight: true },
+        { text: ' (Asmodee &amp; Crédit Agricole apps), ' },
+        { text: 'Shopify', highlight: true },
+        { text: ', and ' },
+        { text: 'MCP', highlight: true },
+        { text: ' servers for AI integration. Trained at ' },
+        { text: '42', highlight: true },
+        { text: ', I bring algorithmic rigor to ambitious projects.' },
+      ] satisfies BioSegment[],
       location: 'Paris, France',
       company: 'Livingcolor',
       companyUrl: 'https://www.livingcolor.fr/',
@@ -196,30 +306,54 @@ export const dictionaries = {
       title: 'Projects',
       items: [
         {
+          title: 'VisualQ',
+          language: 'Next.js / TypeScript',
+          url: 'https://github.com/abecms/visualq',
+          source: 'github',
           description:
             'Visual regression testing platform powered by AI — compares screenshots with Pixelmatch, integrates GitLab CI & JIRA, and uses OpenAI Vision for intelligent diff analysis.',
         },
         {
+          title: 'ScoreJamAi',
+          language: 'Next.js / TypeScript',
+          url: 'https://github.com/abecms/ScoreJamAi',
+          source: 'github',
           description:
             'AI-powered form builder — create custom scoring forms, publish them for your users, and let AI grade the responses with detailed analytics.',
         },
         {
+          title: 'redbee-mcp',
+          language: 'Python',
+          url: 'https://github.com/tamsi/redbee-mcp',
+          source: 'github',
           description:
             'MCP Server for Red Bee Media OTT — lets AI assistants interact with streaming platform APIs via Model Context Protocol.',
         },
         {
+          title: '42school',
+          language: 'C / C++ / Python',
+          url: 'https://github.com/tamsi/42school',
+          source: 'github',
           description:
             'Full 42 cursus — from libft to ft_transcendence (multiplayer Pong with Django, WebSockets, OAuth2, Docker microservices).',
         },
         {
+          title: 'pin_article',
+          language: 'PHP',
+          url: 'https://gitlab.com/tamsi/pin_article',
+          source: 'gitlab',
           description:
             'Drupal 8 module — allows content editors to pin and unpin articles to the top of listing pages.',
         },
         {
+          title: 'piscine-42',
+          language: 'C',
+          url: 'https://github.com/Tamsi/piscine-42/tree/master/to_git',
+          source: 'github',
           description:
             'Collection of 42 piscine projects — C programming exercises from shell00 to c09, covering algorithms and system programming.',
         },
-      ],
+      ] satisfies ProjectItem[],
     },
     contact: {
       title: 'Contact',

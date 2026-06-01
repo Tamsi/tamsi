@@ -4,6 +4,19 @@ import { Quote, MapPin, GraduationCap, Briefcase } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Reveal } from '@/components/ui/reveal'
 import { useLocale } from '@/i18n/locale-context'
+import type { BioSegment } from '@/i18n/dictionaries'
+
+function renderBio(segments: readonly BioSegment[]) {
+  return segments.map((segment, i) =>
+    segment.highlight ? (
+      <strong key={i} className="text-foreground">
+        {segment.text}
+      </strong>
+    ) : (
+      <span key={i}>{segment.text}</span>
+    ),
+  )
+}
 
 export function About() {
   const { t } = useLocale()
@@ -30,14 +43,12 @@ export function About() {
 
       <Reveal delay={0.2}>
         <div className="space-y-4 text-muted-foreground">
-          <p
-            className="text-base leading-relaxed sm:text-lg"
-            dangerouslySetInnerHTML={{ __html: t.about.bio1 }}
-          />
-          <p
-            className="text-base leading-relaxed sm:text-lg"
-            dangerouslySetInnerHTML={{ __html: t.about.bio2 }}
-          />
+          <p className="text-base leading-relaxed sm:text-lg">
+            {renderBio(t.about.bio1)}
+          </p>
+          <p className="text-base leading-relaxed sm:text-lg">
+            {renderBio(t.about.bio2)}
+          </p>
 
           <div className="flex flex-wrap gap-3 pt-2">
             <div className="flex items-center gap-1.5 text-sm">

@@ -5,47 +5,9 @@ import { ExternalLink, Github, GitlabIcon } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { StaggerContainer, StaggerItem } from '@/components/ui/reveal'
 import { useLocale } from '@/i18n/locale-context'
+import type { ProjectItem } from '@/i18n/dictionaries'
 
-const projectsMeta = [
-  {
-    title: 'VisualQ',
-    language: 'Next.js / TypeScript',
-    url: 'https://github.com/abecms/visualq',
-    source: 'github' as const,
-  },
-  {
-    title: 'ScoreJamAi',
-    language: 'Next.js / TypeScript',
-    url: 'https://github.com/abecms/ScoreJamAi',
-    source: 'github' as const,
-  },
-  {
-    title: 'redbee-mcp',
-    language: 'Python',
-    url: 'https://github.com/tamsi/redbee-mcp',
-    source: 'github' as const,
-  },
-  {
-    title: '42school',
-    language: 'C / C++ / Python',
-    url: 'https://github.com/tamsi/42school',
-    source: 'github' as const,
-  },
-  {
-    title: 'pin_article',
-    language: 'PHP',
-    url: 'https://gitlab.com/tamsi/pin_article',
-    source: 'gitlab' as const,
-  },
-  {
-    title: 'piscine-42',
-    language: 'C',
-    url: 'https://github.com/Tamsi/piscine-42/tree/master/to_git',
-    source: 'github' as const,
-  },
-]
-
-function SourceIcon({ source }: { source: 'github' | 'gitlab' }) {
+function SourceIcon({ source }: { source: ProjectItem['source'] }) {
   return source === 'github' ? (
     <Github className="size-4" />
   ) : (
@@ -66,7 +28,7 @@ export function Projects() {
         </StaggerItem>
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {projectsMeta.map((project, i) => (
+          {t.projects.items.map((project) => (
             <StaggerItem key={project.title}>
               <motion.a
                 href={project.url}
@@ -85,7 +47,7 @@ export function Projects() {
                 </div>
 
                 <p className="mb-4 flex-1 text-sm leading-relaxed text-muted-foreground">
-                  {t.projects.items[i]?.description}
+                  {project.description}
                 </p>
 
                 <Badge variant="outline" className="self-start">
