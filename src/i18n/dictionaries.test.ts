@@ -27,7 +27,7 @@ describe('dictionaries', () => {
         expect(p.title).toBeTruthy()
         expect(p.language).toBeTruthy()
         expect(p.url).toMatch(/^https?:\/\//)
-        expect(['github', 'gitlab']).toContain(p.source)
+        expect(['github', 'gitlab', 'huggingface']).toContain(p.source)
         expect(p.description).toBeTruthy()
       }
     }

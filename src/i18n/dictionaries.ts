@@ -8,7 +8,7 @@ export type ProjectItem = {
   title: string
   language: string
   url: string
-  source: 'github' | 'gitlab'
+  source: 'github' | 'gitlab' | 'huggingface'
   description: string
 }
 
@@ -133,6 +133,22 @@ export const dictionaries = {
       title: 'Projets',
       items: [
         {
+          title: 'AI Code Reviewer',
+          language: 'Gradio / MCP',
+          url: 'https://huggingface.co/spaces/ImTamsi/ai-code-reviewer',
+          source: 'huggingface',
+          description:
+            "Démo Gradio en ligne pour analyser un dépôt GitHub (revue de code, bugs, dette technique, sécurité, performance, tests manquants) via Qwen3.6-27B — serveur MCP et modèle sur GitHub / le Hub.",
+        },
+        {
+          title: 'redbee-mcp',
+          language: 'Python',
+          url: 'https://github.com/Tamsi/redbee-mcp',
+          source: 'github',
+          description:
+            "Serveur MCP pour Red Bee Media OTT — permet aux assistants IA d'interagir avec les API de la plateforme de streaming via le Model Context Protocol.",
+        },
+        {
           title: 'VisualQ',
           language: 'Next.js / TypeScript',
           url: 'https://github.com/abecms/visualq',
@@ -149,33 +165,17 @@ export const dictionaries = {
             "Générateur de formulaires propulsé par l'IA — créez des formulaires de notation personnalisés, publiez-les pour vos utilisateurs et laissez l'IA évaluer les réponses avec des analyses détaillées.",
         },
         {
-          title: 'redbee-mcp',
-          language: 'Python',
-          url: 'https://github.com/tamsi/redbee-mcp',
-          source: 'github',
-          description:
-            "Serveur MCP pour Red Bee Media OTT — permet aux assistants IA d'interagir avec les API de la plateforme de streaming via le Model Context Protocol.",
-        },
-        {
-          title: '42school',
-          language: 'C / C++ / Python',
-          url: 'https://github.com/tamsi/42school',
-          source: 'github',
-          description:
-            'Cursus complet de 42 — de libft à ft_transcendence (Pong multijoueur avec Django, WebSockets, OAuth2, microservices Docker).',
-        },
-        {
           title: 'pin_article',
           language: 'PHP',
-          url: 'https://gitlab.com/tamsi/pin_article',
-          source: 'gitlab',
+          url: 'https://github.com/Tamsi/pin_article',
+          source: 'github',
           description:
             "Module Drupal 8 — permet aux éditeurs de contenu d'épingler et de désépingler des articles en haut des pages de listing.",
         },
         {
           title: 'piscine-42',
           language: 'C',
-          url: 'https://github.com/Tamsi/piscine-42/tree/master/to_git',
+          url: 'https://github.com/Tamsi/piscine-42',
           source: 'github',
           description:
             'Collection de projets de la piscine 42 — exercices de programmation C de shell00 à c09, couvrant les algorithmes et la programmation système.',
@@ -306,6 +306,22 @@ export const dictionaries = {
       title: 'Projects',
       items: [
         {
+          title: 'AI Code Reviewer',
+          language: 'Gradio / MCP',
+          url: 'https://huggingface.co/spaces/ImTamsi/ai-code-reviewer',
+          source: 'huggingface',
+          description:
+            'Live Gradio demo to analyze a GitHub repo (code review, bugs, tech debt, security, performance, missing tests) via Qwen3.6-27B — MCP server and model on GitHub / the Hub.',
+        },
+        {
+          title: 'redbee-mcp',
+          language: 'Python',
+          url: 'https://github.com/Tamsi/redbee-mcp',
+          source: 'github',
+          description:
+            'MCP Server for Red Bee Media OTT — lets AI assistants interact with streaming platform APIs via Model Context Protocol.',
+        },
+        {
           title: 'VisualQ',
           language: 'Next.js / TypeScript',
           url: 'https://github.com/abecms/visualq',
@@ -322,33 +338,17 @@ export const dictionaries = {
             'AI-powered form builder — create custom scoring forms, publish them for your users, and let AI grade the responses with detailed analytics.',
         },
         {
-          title: 'redbee-mcp',
-          language: 'Python',
-          url: 'https://github.com/tamsi/redbee-mcp',
-          source: 'github',
-          description:
-            'MCP Server for Red Bee Media OTT — lets AI assistants interact with streaming platform APIs via Model Context Protocol.',
-        },
-        {
-          title: '42school',
-          language: 'C / C++ / Python',
-          url: 'https://github.com/tamsi/42school',
-          source: 'github',
-          description:
-            'Full 42 cursus — from libft to ft_transcendence (multiplayer Pong with Django, WebSockets, OAuth2, Docker microservices).',
-        },
-        {
           title: 'pin_article',
           language: 'PHP',
-          url: 'https://gitlab.com/tamsi/pin_article',
-          source: 'gitlab',
+          url: 'https://github.com/Tamsi/pin_article',
+          source: 'github',
           description:
             'Drupal 8 module — allows content editors to pin and unpin articles to the top of listing pages.',
         },
         {
           title: 'piscine-42',
           language: 'C',
-          url: 'https://github.com/Tamsi/piscine-42/tree/master/to_git',
+          url: 'https://github.com/Tamsi/piscine-42',
           source: 'github',
           description:
             'Collection of 42 piscine projects — C programming exercises from shell00 to c09, covering algorithms and system programming.',

@@ -15,7 +15,7 @@ const itemsMeta: {
     icon: Briefcase,
   },
   {
-    orgUrl: 'https://huggingface.co/',
+    orgUrl: 'https://huggingface.co/ImTamsi',
     icon: Award,
   },
   {

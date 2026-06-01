@@ -4,15 +4,14 @@ import { motion } from 'motion/react'
 import { ExternalLink, Github, GitlabIcon } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { StaggerContainer, StaggerItem } from '@/components/ui/reveal'
+import { HuggingFaceIcon } from '@/components/ui/hugging-face-icon'
 import { useLocale } from '@/i18n/locale-context'
 import type { ProjectItem } from '@/i18n/dictionaries'
 
 function SourceIcon({ source }: { source: ProjectItem['source'] }) {
-  return source === 'github' ? (
-    <Github className="size-4" />
-  ) : (
-    <GitlabIcon className="size-4" />
-  )
+  if (source === 'github') return <Github className="size-4" />
+  if (source === 'huggingface') return <HuggingFaceIcon className="size-4" />
+  return <GitlabIcon className="size-4" />
 }
 
 export function Projects() {
