@@ -20,9 +20,8 @@ Full-stack developer in **Paris**, building **AI-powered devtools** and **MCP se
 
 | Project | Description |
 |---------|-------------|
-| [**ai-code-reviewer-mcp**](https://github.com/Tamsi/ai-code-reviewer-mcp) | MCP server that reviews GitHub repos (bugs, security, tech debt, tests) via an OpenAI-compatible LLM |
+| [**ai-code-reviewer-mcp**](https://github.com/Tamsi/ai-code-reviewer-mcp) | MCP server that reviews GitHub repos (bugs, security, tech debt, tests) via an OpenAI-compatible LLM · [Try it live](https://huggingface.co/spaces/ImTamsi/ai-code-reviewer) on Hugging Face |
 | [**redbee-mcp**](https://github.com/Tamsi/redbee-mcp) | MCP bridge for the Red Bee media API — built for Claude & Cursor |
-| [**AI Code Reviewer (demo)**](https://huggingface.co/spaces/ImTamsi/ai-code-reviewer) | Try the reviewer in your browser — [Hugging Face Space](https://huggingface.co/spaces/ImTamsi/ai-code-reviewer) |
 
 ---
 
