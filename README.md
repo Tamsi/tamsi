@@ -22,7 +22,7 @@ Full-stack developer in **Paris**, building **AI-powered devtools** and **MCP se
 |---------|-------------|
 | [**ai-code-reviewer-mcp**](https://github.com/Tamsi/ai-code-reviewer-mcp) | MCP server that reviews GitHub repos (bugs, security, tech debt, tests) via an OpenAI-compatible LLM |
 | [**redbee-mcp**](https://github.com/Tamsi/redbee-mcp) | MCP bridge for the Red Bee media API — built for Claude & Cursor |
-| [**dream-defender**](https://github.com/Tamsi/dream-defender) | Game demo · [Play on Vercel](https://dream-defender.vercel.app) |
+| [**AI Code Reviewer (demo)**](https://huggingface.co/spaces/ImTamsi/ai-code-reviewer) | Try the reviewer in your browser — [Hugging Face Space](https://huggingface.co/spaces/ImTamsi/ai-code-reviewer) |
 
 ---
 
