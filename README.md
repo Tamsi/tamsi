@@ -5,7 +5,6 @@ Full-stack developer in **Paris**, building **AI-powered devtools** and **MCP se
 🌐 **[tamsi.dev](https://tamsi.dev)** · [GitLab](https://gitlab.com/Tamsi)
 
 ---
-
 ## Focus
 
 | Area | What I work on |
@@ -15,7 +14,6 @@ Full-stack developer in **Paris**, building **AI-powered devtools** and **MCP se
 | **Product** | Next.js, TypeScript, Firebase, Playwright |
 
 ---
-
 ## Featured projects
 
 | Project | Description |
@@ -25,7 +23,6 @@ Full-stack developer in **Paris**, building **AI-powered devtools** and **MCP se
 | [**git-mentor**](https://github.com/Tamsi/git-mentor) | A lightweight GitHub‑centric assistant that helps you manage code reviews, discussions, and more. |
 
 ---
-
 ## Stack
 
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
@@ -42,21 +39,9 @@ Full-stack developer in **Paris**, building **AI-powered devtools** and **MCP se
 ![Playwright](https://img.shields.io/badge/Playwright-45ba4b?style=flat-square&logo=playwright&logoColor=white)
 
 ---
-
 ## Contact
 
 - Website: [tamsi.dev](https://tamsi.dev)
 - GitLab: [@Tamsi](https://gitlab.com/Tamsi)
 
 ---
-
-## About this repository
-
-This repository contains the **Next.js portfolio** behind [tamsi.dev](https://tamsi.dev).
-
-```bash
-npm install
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to run it locally.
