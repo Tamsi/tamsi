@@ -1,4 +1,4 @@
-# Hi, I'm Tamsi 👋
+# Hi, I'm Tamsi
 
 Full-stack developer in **Paris**, building **AI-powered devtools** and **MCP servers**.
 
