@@ -10,11 +10,11 @@ import {
 } from 'react'
 import {
   dictionaries,
-  defaultLocale,
   locales,
   type Locale,
   type Dictionary,
 } from './dictionaries'
+import { persistLocaleCookie, readLocaleCookie } from './locale-cookie'
 
 interface LocaleContextValue {
   locale: Locale
@@ -24,32 +24,45 @@ interface LocaleContextValue {
 
 const LocaleContext = createContext<LocaleContextValue | null>(null)
 
-function getInitialLocale(): Locale {
-  if (typeof window === 'undefined') return defaultLocale
-  try {
-    const stored = localStorage.getItem('locale') as Locale | null
-    if (stored && locales.includes(stored)) return stored
-  } catch {
-    // localStorage may be unavailable (private mode, sandboxed iframe, …)
-  }
-  const browserLang = navigator.language.split('-')[0]
-  return browserLang === 'fr' ? 'fr' : 'en'
+type LocaleProviderProps = {
+  children: ReactNode
+  /** From server cookie — must match the first client render to avoid hydration errors. */
+  initialLocale: Locale
 }
 
-export function LocaleProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleRaw] = useState<Locale>(getInitialLocale)
+export function LocaleProvider({ children, initialLocale }: LocaleProviderProps) {
+  const [locale, setLocaleRaw] = useState<Locale>(initialLocale)
 
   useEffect(() => {
     document.documentElement.lang = locale
   }, [locale])
 
+  useEffect(() => {
+    const cookieLocale = readLocaleCookie()
+    if (cookieLocale) {
+      if (cookieLocale !== initialLocale) setLocaleRaw(cookieLocale)
+      return
+    }
+    try {
+      const stored = localStorage.getItem('locale') as Locale | null
+      if (stored && locales.includes(stored) && stored !== initialLocale) {
+        setLocaleRaw(stored)
+        persistLocaleCookie(stored)
+      }
+    } catch {
+      // ignore
+    }
+  }, [initialLocale])
+
   const setLocale = useCallback((next: Locale) => {
     setLocaleRaw(next)
+    persistLocaleCookie(next)
     try {
       localStorage.setItem('locale', next)
     } catch {
       // ignore
     }
+    document.documentElement.lang = next
     document.title = dictionaries[next].meta.title
   }, [])
 

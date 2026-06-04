@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Suspense } from "react";
+import { Figtree, Inter } from "next/font/google";
+import { SyncLocaleFromUrl } from "@/components/i18n/sync-locale-from-url";
+import { StickyAudienceToggle } from "@/components/ui/sticky-audience-toggle";
 import { LocaleProvider } from "@/i18n/locale-context";
+import { getServerLocale } from "@/i18n/locale.server";
+import { buildPageMetadata } from "@/lib/seo";
 import "./globals.css";
 
 const inter = Inter({
@@ -8,28 +13,44 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-export const metadata: Metadata = {
-  title: "Tamsi Besson — Développeur Web / Web Developer",
-  description:
-    "Portfolio de Tamsi Besson, développeur web basé à Paris avec ~8 ans d'expérience. React, Next.js, TypeScript, Python.",
-  metadataBase: new URL("https://tamsibesson.dev"),
-  openGraph: {
-    title: "Tamsi Besson — Développeur Web / Web Developer",
-    description:
-      "Portfolio de Tamsi Besson, développeur web basé à Paris.",
-    type: "website",
-  },
-};
+const figtree = Figtree({
+  subsets: ["latin"],
+  variable: "--font-figtree",
+});
 
-export default function RootLayout({
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+  return buildPageMetadata(locale, "/");
+}
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const initialLocale = await getServerLocale();
+
   return (
-    <html lang="fr" className="dark" suppressHydrationWarning>
-      <body className={`${inter.variable} antialiased`}>
-        <LocaleProvider>{children}</LocaleProvider>
+    <html lang={initialLocale} className="dark" suppressHydrationWarning>
+      <head>
+        <link
+          rel="alternate"
+          type="text/plain"
+          href="/llms.txt"
+          title="LLM-oriented site summary"
+        />
+      </head>
+      <body
+        className={`${inter.variable} ${figtree.variable} portfolio-page antialiased`}
+        suppressHydrationWarning
+      >
+        <LocaleProvider initialLocale={initialLocale}>
+          <Suspense fallback={null}>
+            <SyncLocaleFromUrl />
+          </Suspense>
+          {children}
+          <StickyAudienceToggle />
+        </LocaleProvider>
       </body>
     </html>
   );

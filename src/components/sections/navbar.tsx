@@ -6,7 +6,7 @@ import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useLocale } from '@/i18n/locale-context'
 
-const navKeys = ['about', 'experience', 'skills', 'projects', 'contact'] as const
+const navKeys = ['about', 'experience', 'interests', 'projects', 'contact'] as const
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -26,7 +26,9 @@ export function Navbar() {
     } else {
       document.body.style.overflow = ''
     }
-    return () => { document.body.style.overflow = '' }
+    return () => {
+      document.body.style.overflow = ''
+    }
   }, [open])
 
   const handleClick = useCallback(
@@ -48,25 +50,27 @@ export function Navbar() {
   const Wrapper = prefersReducedMotion ? 'nav' : motion.nav
 
   const LocaleToggle = (
-    <div className="flex items-center rounded-md border border-border/50 text-xs">
+    <div className="flex items-center rounded-full border border-[var(--landing-border-subtle)] text-xs">
       <button
+        type="button"
         onClick={() => setLocale('fr')}
         className={cn(
-          'rounded-l-md px-2 py-1 transition-colors',
+          'rounded-l-full px-2.5 py-1 transition-colors',
           locale === 'fr'
-            ? 'bg-primary text-primary-foreground'
-            : 'text-muted-foreground hover:text-foreground',
+            ? 'bg-[var(--landing-accent)] text-white'
+            : 'text-[var(--landing-text-muted)] hover:text-[var(--landing-text)]',
         )}
       >
         FR
       </button>
       <button
+        type="button"
         onClick={() => setLocale('en')}
         className={cn(
-          'rounded-r-md px-2 py-1 transition-colors',
+          'rounded-r-full px-2.5 py-1 transition-colors',
           locale === 'en'
-            ? 'bg-primary text-primary-foreground'
-            : 'text-muted-foreground hover:text-foreground',
+            ? 'bg-[var(--landing-accent)] text-white'
+            : 'text-[var(--landing-text-muted)] hover:text-[var(--landing-text)]',
         )}
       >
         EN
@@ -80,25 +84,24 @@ export function Navbar() {
         {...(!prefersReducedMotion && {
           initial: { y: -60, opacity: 0 },
           animate: { y: 0, opacity: 1 },
-          transition: { duration: 0.5, delay: 0.6, ease: [0.25, 0.1, 0.25, 1] },
+          transition: { duration: 0.5, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] },
         })}
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+          'fixed top-0 right-0 left-0 z-50 transition-all duration-300',
           scrolled || open
-            ? 'bg-background/80 backdrop-blur-lg border-b border-border/50 shadow-sm'
+            ? 'border-b border-[var(--landing-border-subtle)] bg-[var(--landing-header-scrolled-bg)] backdrop-blur-lg'
             : 'bg-transparent',
         )}
       >
-        <div className="mx-auto flex h-16 max-w-4xl items-center justify-between px-6">
+        <div className="portfolio-container flex h-[var(--landing-nav-h)] items-center justify-between">
           <a
             href="#hero"
             onClick={(e) => handleClick(e, '#hero')}
-            className="text-sm font-bold tracking-tight text-foreground transition-colors hover:text-primary"
+            className="font-[family-name:var(--landing-font-display)] text-sm font-semibold tracking-tight text-[var(--landing-text)] transition-colors hover:text-[var(--landing-accent)]"
           >
-            TB
+            Tamsi
           </a>
 
-          {/* Desktop nav */}
           <div className="hidden items-center gap-1 md:flex">
             <ul className="flex items-center gap-1">
               {navKeys.map((key) => (
@@ -106,23 +109,24 @@ export function Navbar() {
                   <a
                     href={`#${key}`}
                     onClick={(e) => handleClick(e, `#${key}`)}
-                    className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground hover:bg-accent/50"
+                    className="group relative rounded-md px-3 py-1.5 text-sm text-[var(--landing-text-muted)] transition-colors hover:bg-[var(--landing-card-bg-hover)] hover:text-[var(--landing-text)]"
                   >
                     {t.nav[key]}
+                    <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 rounded-full bg-[var(--landing-accent)] transition-all duration-300 group-hover:w-[calc(100%-12px)]" />
                   </a>
                 </li>
               ))}
             </ul>
-            <div className="ml-2">{LocaleToggle}</div>
+            <div className="ml-3">{LocaleToggle}</div>
           </div>
 
-          {/* Mobile: locale toggle + burger */}
           <div className="flex items-center gap-3 md:hidden">
             {LocaleToggle}
             <button
+              type="button"
               onClick={() => setOpen((v) => !v)}
               aria-label="Toggle menu"
-              className="rounded-md p-1.5 text-muted-foreground transition-colors hover:text-foreground hover:bg-accent/50"
+              className="rounded-md p-1.5 text-[var(--landing-text-muted)] transition-colors hover:bg-[var(--landing-card-bg-hover)] hover:text-[var(--landing-text)]"
             >
               {open ? <X className="size-5" /> : <Menu className="size-5" />}
             </button>
@@ -130,7 +134,6 @@ export function Navbar() {
         </div>
       </Wrapper>
 
-      {/* Mobile overlay menu */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -138,7 +141,7 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-background/95 backdrop-blur-md md:hidden"
+            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-md md:hidden"
           >
             <nav className="flex h-full flex-col items-center justify-center gap-6">
               {navKeys.map((key, i) => (
@@ -150,7 +153,7 @@ export function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ delay: i * 0.05, duration: 0.25 }}
-                  className="text-2xl font-semibold text-foreground transition-colors hover:text-primary"
+                  className="font-[family-name:var(--landing-font-display)] text-2xl font-semibold text-[var(--landing-text)] transition-colors hover:text-[var(--landing-accent)]"
                 >
                   {t.nav[key]}
                 </motion.a>

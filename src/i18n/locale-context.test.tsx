@@ -16,23 +16,21 @@ function LocaleReader() {
 }
 
 describe('LocaleProvider', () => {
-  it('reads the stored locale from localStorage on mount', () => {
-    localStorage.setItem('locale', 'en')
+  it('uses initialLocale on first render (SSR-safe)', () => {
     render(
-      <LocaleProvider>
+      <LocaleProvider initialLocale="fr">
         <LocaleReader />
       </LocaleProvider>,
     )
-    expect(screen.getByTestId('locale')).toHaveTextContent('en')
+    expect(screen.getByTestId('locale')).toHaveTextContent('fr')
     expect(screen.getByTestId('title')).toHaveTextContent(
-      dictionaries.en.meta.title,
+      dictionaries.fr.meta.title,
     )
   })
 
-  it('setLocale updates the context, localStorage, <html lang> and document.title', () => {
-    localStorage.setItem('locale', 'fr')
+  it('setLocale updates the context, localStorage, cookie, lang and document.title', () => {
     render(
-      <LocaleProvider>
+      <LocaleProvider initialLocale="fr">
         <LocaleReader />
       </LocaleProvider>,
     )
@@ -48,6 +46,7 @@ describe('LocaleProvider', () => {
     expect(localStorage.getItem('locale')).toBe('en')
     expect(document.documentElement.lang).toBe('en')
     expect(document.title).toBe(dictionaries.en.meta.title)
+    expect(document.cookie).toContain('locale=en')
   })
 
   it('rejects useLocale outside the provider', () => {

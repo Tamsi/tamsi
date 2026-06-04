@@ -1,10 +1,17 @@
 'use client'
 
-import { Github, Linkedin, GitlabIcon, Mail } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Reveal } from '@/components/ui/reveal'
+import { Github, Linkedin, GitlabIcon, Mail, ArrowUpRight } from 'lucide-react'
+import { motion } from 'motion/react'
+import { Reveal, StaggerContainer, StaggerItem } from '@/components/ui/reveal'
+import { SectionLabel } from '@/components/ui/section-label'
 import { HuggingFaceIcon } from '@/components/ui/hugging-face-icon'
+import {
+  FloatingGlow,
+  MotionButton,
+  MotionLink,
+} from '@/components/ui/motion-primitives'
 import { useLocale } from '@/i18n/locale-context'
+import { springSnappy } from '@/lib/motion'
 
 const links = [
   {
@@ -32,51 +39,77 @@ const links = [
     href: 'mailto:tamsi.besson@gmail.com',
     icon: Mail,
   },
-]
+] as const
 
 export function Contact() {
   const { t } = useLocale()
 
   return (
-    <footer id="contact" className="relative overflow-hidden border-t border-border/40 px-6 py-24 sm:py-32">
-      <div
-        aria-hidden
-        className="animate-glow-pulse pointer-events-none absolute left-1/2 top-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/20 blur-[140px]"
-      />
+    <footer
+      id="contact"
+      className="portfolio-section relative overflow-hidden border-t border-[var(--landing-border-subtle)]"
+    >
+      <FloatingGlow className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
-      <div className="relative z-10 mx-auto max-w-xl text-center">
-        <Reveal>
-          <h2 className="mb-4 text-3xl font-bold tracking-tight sm:text-4xl">
+      <div className="portfolio-container relative z-10 max-w-xl text-center">
+        <Reveal variant="fade-up-blur">
+          <SectionLabel>{t.contact.sectionBadge}</SectionLabel>
+          <motion.h2
+            className="portfolio-heading-lg mb-4"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             {t.contact.title}
-          </h2>
-          <p className="mb-10 text-muted-foreground">
-            {t.contact.subtitle}
-          </p>
+          </motion.h2>
+          <p className="portfolio-body mb-10">{t.contact.subtitle}</p>
         </Reveal>
 
         <Reveal delay={0.15}>
-          <div className="flex flex-wrap justify-center gap-3">
+          <MotionButton
+            variant="primary"
+            className="mb-8 inline-flex"
+            onClick={() => {
+              window.location.href = 'mailto:tamsi.besson@gmail.com'
+            }}
+          >
+            tamsi.besson@gmail.com
+            <motion.span
+              whileHover={{ rotate: 45 }}
+              transition={springSnappy}
+            >
+              <ArrowUpRight className="size-4" />
+            </motion.span>
+          </MotionButton>
+
+          <StaggerContainer stagger={0.07} className="flex flex-wrap justify-center gap-2">
             {links.map(({ label, href, icon: Icon }) => (
-              <Button
-                key={label}
-                variant="outline"
-                size="lg"
-                className="btn-shimmer gap-2"
-                asChild
-              >
-                <a href={href} target="_blank" rel="noopener noreferrer">
-                  <Icon className="size-5" />
+              <StaggerItem key={label} variant="scale-in" spring>
+                <MotionLink
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="portfolio-btn-outline gap-2 px-4 py-2 text-sm"
+                >
+                  <Icon className="size-4" />
                   {label}
-                </a>
-              </Button>
+                </MotionLink>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </Reveal>
 
         <Reveal delay={0.3}>
-          <p className="mt-16 text-xs text-muted-foreground/50">
+          <motion.p
+            className="mt-16 text-xs text-[var(--landing-text-muted)]/60"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+          >
             {t.contact.copyright.replace('{year}', String(new Date().getFullYear()))}
-          </p>
+          </motion.p>
         </Reveal>
       </div>
     </footer>

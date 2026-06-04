@@ -3,7 +3,14 @@
 import { motion, type Variants, useReducedMotion } from 'motion/react'
 import { type ReactNode } from 'react'
 
-type RevealVariant = 'fade-up' | 'fade-down' | 'fade-left' | 'fade-right' | 'scale-in' | 'fade'
+type RevealVariant =
+  | 'fade-up'
+  | 'fade-down'
+  | 'fade-left'
+  | 'fade-right'
+  | 'scale-in'
+  | 'fade'
+  | 'fade-up-blur'
 
 const ease = [0.25, 0.1, 0.25, 1] as const
 
@@ -41,6 +48,10 @@ const variants: Record<RevealVariant, Variants> = {
   fade: {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
+  },
+  'fade-up-blur': {
+    hidden: { opacity: 0, y: 24, filter: 'blur(8px)' },
+    visible: { opacity: 1, y: 0, filter: 'blur(0px)' },
   },
 }
 
@@ -125,18 +136,24 @@ interface StaggerItemProps {
   variant?: RevealVariant
   duration?: number
   className?: string
+  spring?: boolean
 }
 
 export function StaggerItem({
   children,
   variant = 'fade-up',
-  duration = 0.5,
+  duration = 0.55,
   className,
+  spring = false,
 }: StaggerItemProps) {
   return (
     <motion.div
       variants={variants[variant]}
-      transition={{ duration, ease }}
+      transition={
+        spring
+          ? { type: 'spring', stiffness: 280, damping: 24 }
+          : { duration, ease }
+      }
       className={className}
     >
       {children}

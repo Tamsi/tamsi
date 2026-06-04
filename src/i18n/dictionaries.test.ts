@@ -16,9 +16,11 @@ describe('dictionaries', () => {
     const projectsCounts = locales.map((l) => dictionaries[l].projects.items.length)
     const experienceCounts = locales.map((l) => dictionaries[l].experience.items.length)
     const languageCounts = locales.map((l) => dictionaries[l].about.languages.length)
+    const interestCounts = locales.map((l) => dictionaries[l].interests.groups.length)
     expect(new Set(projectsCounts).size).toBe(1)
     expect(new Set(experienceCounts).size).toBe(1)
     expect(new Set(languageCounts).size).toBe(1)
+    expect(new Set(interestCounts).size).toBe(1)
   })
 
   it('every project has the required fields', () => {

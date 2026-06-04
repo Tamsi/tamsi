@@ -91,7 +91,7 @@ export function ParticleConstellation({
       mouseRef.current = { x: -9999, y: -9999 }
     }
 
-    const primaryColor = { r: 168, g: 85, b: 247 }
+    const primaryColor = { r: 129, g: 74, b: 200 }
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height)
