@@ -1,5 +1,5 @@
 import { interestMediaById } from '@/data/interests-media'
-import { EMAIL, SITE_URL, socialLinks } from '@/data/site-links'
+import { CURSOR_PROFILE_URL, SITE_URL, socialLinks } from '@/data/site-links'
 import {
   dictionaries,
   type Dictionary,
@@ -131,7 +131,7 @@ export function buildPortfolioMachineBlocks(locale: Locale): MachineBlock[] {
 
   push({ type: 'h2', text: t.contact.title })
   push({ type: 'p', text: t.contact.subtitle })
-  push({ type: 'link', label: 'EMAIL', url: `mailto:${EMAIL}` })
+  push({ type: 'link', label: 'CURSOR', url: CURSOR_PROFILE_URL })
   for (const { label, href } of socialLinks) {
     push({ type: 'link', label: label.toUpperCase(), url: href })
   }
@@ -158,7 +158,7 @@ export function buildLlmsTxt(locale: Locale = 'en'): string {
     `- Sitemap: ${SITE_URL}/sitemap.xml`,
     '',
     '## Contact',
-    `- Email: ${EMAIL}`,
+    `- Cursor: ${CURSOR_PROFILE_URL}`,
     ...socialLinks.map((l) => `- ${l.label}: ${l.href}`),
     '',
     '## Summary',

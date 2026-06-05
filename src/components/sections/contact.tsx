@@ -1,6 +1,8 @@
 'use client'
 
-import { Github, Linkedin, GitlabIcon, Mail, ArrowUpRight } from 'lucide-react'
+import { Github, Linkedin, GitlabIcon, ArrowUpRight } from 'lucide-react'
+import { CursorIcon } from '@/components/ui/cursor-icon'
+import { CURSOR_PROFILE_URL, EMAIL } from '@/data/site-links'
 import { motion } from 'motion/react'
 import { Reveal, StaggerContainer, StaggerItem } from '@/components/ui/reveal'
 import { SectionLabel } from '@/components/ui/section-label'
@@ -35,9 +37,9 @@ const links = [
     icon: HuggingFaceIcon,
   },
   {
-    label: 'Email',
-    href: 'mailto:tamsi.besson@gmail.com',
-    icon: Mail,
+    label: 'Cursor',
+    href: CURSOR_PROFILE_URL,
+    icon: CursorIcon,
   },
 ] as const
 
@@ -71,10 +73,10 @@ export function Contact() {
             variant="primary"
             className="mb-8 inline-flex"
             onClick={() => {
-              window.location.href = 'mailto:tamsi.besson@gmail.com'
+              window.location.href = `mailto:${EMAIL}`
             }}
           >
-            tamsi.besson@gmail.com
+            {EMAIL}
             <motion.span
               whileHover={{ rotate: 45 }}
               transition={springSnappy}

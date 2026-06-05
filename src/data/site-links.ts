@@ -6,6 +6,8 @@ export const PERSON_NAME = 'Tamsi Besson'
 
 export const EMAIL = 'tamsi.besson@gmail.com'
 
+export const CURSOR_PROFILE_URL = 'https://cursor.com/@tamsi'
+
 export const socialLinks = [
   {
     label: 'LinkedIn',
@@ -14,5 +16,5 @@ export const socialLinks = [
   { label: 'GitHub', href: 'https://github.com/Tamsi' },
   { label: 'GitLab', href: 'https://gitlab.com/Tamsi' },
   { label: 'Hugging Face', href: 'https://huggingface.co/ImTamsi' },
-  { label: 'Email', href: `mailto:${EMAIL}` },
+  { label: 'Cursor', href: CURSOR_PROFILE_URL },
 ] as const

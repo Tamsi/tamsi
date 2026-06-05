@@ -4,6 +4,8 @@ import { motion, useReducedMotion } from 'motion/react'
 import { ArrowUpRight, Github, Linkedin, GitlabIcon } from 'lucide-react'
 import { ParticleConstellation } from '@/components/ui/particle-constellation'
 import { HuggingFaceIcon } from '@/components/ui/hugging-face-icon'
+import { CursorIcon } from '@/components/ui/cursor-icon'
+import { CURSOR_PROFILE_URL } from '@/data/site-links'
 import {
   HeroGlowPulse,
   MotionButton,
@@ -32,6 +34,11 @@ const socials = [
     label: 'Hugging Face',
     href: 'https://huggingface.co/ImTamsi',
     icon: HuggingFaceIcon,
+  },
+  {
+    label: 'Cursor',
+    href: CURSOR_PROFILE_URL,
+    icon: CursorIcon,
   },
 ] as const
 
