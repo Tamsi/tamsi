@@ -42,5 +42,6 @@ Full-stack developer in **Paris**, building **AI-powered devtools** and **MCP se
 ## Contact
 
 - Website: [tamsi.dev](https://tamsi.dev)
+- Cursor: https://cursor.com/@tamsi
 
 ---
