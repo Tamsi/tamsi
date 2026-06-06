@@ -228,7 +228,7 @@ a:hover .portfolio-entry-title,
 
 .portfolio-interest-media {
   position: relative;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   border-radius: var(--landing-radius-md);
   border: 1px solid var(--landing-border-subtle);
