@@ -1,7 +1,4 @@
-'use client'
-
 import type { BlogBlock } from '@/content/blog'
-import { BlogIllustration } from '@/components/blog/blog-illustration'
 
 export function ArticleContent({ blocks }: { blocks: BlogBlock[] }) {
   return (
@@ -28,15 +25,6 @@ export function ArticleContent({ blocks }: { blocks: BlogBlock[] }) {
                   <li key={item}>{item}</li>
                 ))}
               </ul>
-            )
-          case 'illustration':
-            return (
-              <BlogIllustration
-                key={index}
-                id={block.id}
-                alt={block.alt}
-                variant="inline"
-              />
             )
           default:
             return null

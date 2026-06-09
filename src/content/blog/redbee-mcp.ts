@@ -16,11 +16,6 @@ export const redbeeMcp: BlogPost = {
           text: 'Quand le Model Context Protocol est arrivé, l’intérêt m’a paru évident : enfin un moyen standard de brancher l’IDE sur des outils réels, pas seulement sur le code du repo. Je travaille avec les APIs Red Bee Media (OTT, streaming). Doc, Postman, copier-coller de tokens — ça fonctionne, mais ça casse le flow quand tu veux juste vérifier un endpoint pendant une feature.',
         },
         {
-          type: 'illustration',
-          id: 'redbee-mcp',
-          alt: 'Schéma : IDE, hub MCP redbee et APIs OTT Red Bee Media connectés',
-        },
-        {
           type: 'heading',
           level: 2,
           text: 'Pourquoi je l’ai fait si vite',
@@ -96,11 +91,6 @@ export const redbeeMcp: BlogPost = {
         {
           type: 'paragraph',
           text: 'When the Model Context Protocol showed up, the point felt obvious: finally a standard way to plug the IDE into real tools, not just repo code. I work with Red Bee Media APIs (OTT, streaming). Docs, Postman, copy-pasting tokens — it works, but it breaks flow when you only want to sanity-check an endpoint mid-feature.',
-        },
-        {
-          type: 'illustration',
-          id: 'redbee-mcp',
-          alt: 'Diagram: IDE, redbee MCP hub, and Red Bee Media OTT APIs connected',
         },
         {
           type: 'heading',

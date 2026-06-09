@@ -39,11 +39,6 @@ export const qwenRemoteInference: BlogPost = {
           ],
         },
         {
-          type: 'illustration',
-          id: 'qwen-aws',
-          alt: 'Schéma : Cursor et git-mentor local connectés à Qwen 27B servi en vLLM sur AWS',
-        },
-        {
           type: 'heading',
           level: 2,
           text: 'Comment c’est monté (en bref)',
@@ -152,11 +147,6 @@ git-mentor analyze --user Tamsi`,
             'Same IDE workflow; only the model changes. No need to leave Cursor.',
             'Independence: if pricing or limits shift again, my stack stays mine.',
           ],
-        },
-        {
-          type: 'illustration',
-          id: 'qwen-aws',
-          alt: 'Diagram: Cursor and local git-mentor connected to Qwen 27B served via vLLM on AWS',
         },
         {
           type: 'heading',

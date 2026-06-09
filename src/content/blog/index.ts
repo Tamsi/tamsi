@@ -3,7 +3,7 @@ import { redbeeMcp } from './redbee-mcp'
 import { qwenRemoteInference } from './qwen-remote-inference'
 import type { BlogPost } from './types'
 
-export type { BlogBlock, BlogCoverId, BlogPost, BlogPostContent } from './types'
+export type { BlogBlock, BlogPost, BlogPostContent } from './types'
 
 export const blogPosts: BlogPost[] = [
   qwenRemoteInference,

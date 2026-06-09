@@ -25,11 +25,6 @@ export const aiCodeReviewerMcp: BlogPost = {
           text: 'ai-code-reviewer-mcp n’est pas une « meilleure prompt engineering ». C’est exposer des outils : lire le diff, cibler un fichier, formuler un commentaire PR. L’agent choisit les étapes ; moi je contrôle ce qu’il a le droit de toucher. Ça évite les reviews vague-du-vendredi et ça s’accroche au modèle distant (tokens gratuits) dont je parle dans l’autre article.',
         },
         {
-          type: 'illustration',
-          id: 'ai-code-reviewer',
-          alt: 'Schéma : diff GitHub analysé par le serveur MCP de revue de code',
-        },
-        {
           type: 'heading',
           level: 2,
           text: 'Pourquoi c’est utile pour moi',
@@ -98,11 +93,6 @@ server.tool('analyze_snippet', { path, diffHunk, focus }, async (input) => {
         {
           type: 'paragraph',
           text: 'ai-code-reviewer-mcp isn’t “better prompt engineering.” It’s exposed tools: read the diff, target a file, draft a PR comment. The agent picks steps; I control what it’s allowed to touch. That kills vague Friday-afternoon reviews and pairs well with the remote model (free tokens) from my other post.',
-        },
-        {
-          type: 'illustration',
-          id: 'ai-code-reviewer',
-          alt: 'Diagram: GitHub diff analyzed by the MCP code review server',
         },
         {
           type: 'heading',

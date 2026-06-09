@@ -418,11 +418,6 @@ a:hover .portfolio-entry-title,
   margin-top: 1.25rem;
 }
 
-.portfolio-article > .portfolio-blog-cover {
-  margin-top: 2.25rem;
-  margin-bottom: 2.25rem;
-}
-
 .portfolio-article h2 {
   margin-top: 2.5rem;
   font-family: var(--landing-font-display);
@@ -470,47 +465,6 @@ a:hover .portfolio-entry-title,
 .portfolio-article code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   color: var(--landing-text);
-}
-
-.portfolio-blog-cover {
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--landing-radius-md);
-  border: 1px solid var(--landing-border-subtle);
-  background: var(--landing-surface);
-  box-shadow: 0 16px 40px -20px rgba(129, 74, 200, 0.45);
-}
-
-.portfolio-blog-cover--inline {
-  aspect-ratio: 16 / 9;
-}
-
-.portfolio-blog-cover-glow {
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    ellipse 70% 60% at 50% 100%,
-    rgba(129, 74, 200, 0.2) 0%,
-    transparent 70%
-  );
-  z-index: 1;
-}
-
-.portfolio-blog-cover svg {
-  position: relative;
-  z-index: 0;
-  display: block;
-}
-
-.group:hover .portfolio-blog-cover--inline {
-  border-color: rgba(129, 74, 200, 0.35);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .portfolio-blog-cover {
-    box-shadow: none;
-  }
 }
 
 .portfolio-blog-read-progress {
