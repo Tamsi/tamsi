@@ -467,6 +467,37 @@ a:hover .portfolio-entry-title,
   color: var(--landing-text);
 }
 
+.portfolio-blog-image {
+  margin: 0;
+}
+
+.portfolio-blog-image-frame {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: var(--landing-radius-md);
+  border: 1px solid var(--landing-border-subtle);
+  background: var(--landing-surface);
+}
+
+.portfolio-blog-image-img {
+  object-fit: contain;
+  background: #0a0a0a;
+}
+
+.portfolio-blog-image-caption {
+  margin-top: 0.625rem;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--landing-text-muted);
+  text-align: center;
+}
+
+.portfolio-article > .portfolio-blog-image {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 .portfolio-blog-read-progress {
   position: fixed;
   top: var(--landing-nav-h);

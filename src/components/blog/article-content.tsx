@@ -1,4 +1,5 @@
 import type { BlogBlock } from '@/content/blog'
+import { BlogImage } from '@/components/blog/blog-image'
 
 export function ArticleContent({ blocks }: { blocks: BlogBlock[] }) {
   return (
@@ -25,6 +26,15 @@ export function ArticleContent({ blocks }: { blocks: BlogBlock[] }) {
                   <li key={item}>{item}</li>
                 ))}
               </ul>
+            )
+          case 'image':
+            return (
+              <BlogImage
+                key={index}
+                src={block.src}
+                alt={block.alt}
+                caption={block.caption}
+              />
             )
           default:
             return null
