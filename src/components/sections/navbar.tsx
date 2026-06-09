@@ -1,18 +1,39 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useLocale } from '@/i18n/locale-context'
 
-const navKeys = ['about', 'experience', 'interests', 'projects', 'contact'] as const
+const anchorNavKeys = [
+  'about',
+  'experience',
+  'interests',
+  'projects',
+  'contact',
+] as const
+
+type NavKey = (typeof anchorNavKeys)[number] | 'blog'
+
+const navItems: { key: NavKey; href: string; isPage?: boolean }[] = [
+  { key: 'about', href: '/#about' },
+  { key: 'experience', href: '/#experience' },
+  { key: 'interests', href: '/#interests' },
+  { key: 'projects', href: '/#projects' },
+  { key: 'blog', href: '/blog', isPage: true },
+  { key: 'contact', href: '/#contact' },
+]
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const prefersReducedMotion = useReducedMotion()
+  const pathname = usePathname()
   const { locale, setLocale, t } = useLocale()
+  const isHome = pathname === '/'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50)
@@ -31,11 +52,16 @@ export function Navbar() {
     }
   }, [open])
 
-  const handleClick = useCallback(
+  const handleAnchorClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      if (!href.startsWith('/#')) return
+
+      const hash = href.slice(1)
+      if (!isHome) return
+
       e.preventDefault()
       setOpen(false)
-      const el = document.querySelector(href)
+      const el = document.querySelector(hash)
       if (!el) return
       setTimeout(() => {
         window.scrollTo({
@@ -44,7 +70,7 @@ export function Navbar() {
         })
       }, 10)
     },
-    [],
+    [isHome],
   )
 
   const Wrapper = prefersReducedMotion ? 'nav' : motion.nav
@@ -78,6 +104,9 @@ export function Navbar() {
     </div>
   )
 
+  const navLinkClass =
+    'group relative rounded-md px-3 py-1.5 text-sm text-[var(--landing-text-muted)] transition-colors hover:bg-[var(--landing-card-bg-hover)] hover:text-[var(--landing-text)]'
+
   return (
     <>
       <Wrapper
@@ -94,26 +123,46 @@ export function Navbar() {
         )}
       >
         <div className="portfolio-container flex h-[var(--landing-nav-h)] items-center justify-between">
-          <a
-            href="#hero"
-            onClick={(e) => handleClick(e, '#hero')}
+          <Link
+            href="/"
             className="font-[family-name:var(--landing-font-display)] text-sm font-semibold tracking-tight text-[var(--landing-text)] transition-colors hover:text-[var(--landing-accent)]"
           >
             Tamsi
-          </a>
+          </Link>
 
           <div className="hidden items-center gap-1 md:flex">
             <ul className="flex items-center gap-1">
-              {navKeys.map((key) => (
+              {navItems.map(({ key, href, isPage }) => (
                 <li key={key}>
-                  <a
-                    href={`#${key}`}
-                    onClick={(e) => handleClick(e, `#${key}`)}
-                    className="group relative rounded-md px-3 py-1.5 text-sm text-[var(--landing-text-muted)] transition-colors hover:bg-[var(--landing-card-bg-hover)] hover:text-[var(--landing-text)]"
-                  >
-                    {t.nav[key]}
-                    <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 rounded-full bg-[var(--landing-accent)] transition-all duration-300 group-hover:w-[calc(100%-12px)]" />
-                  </a>
+                  {isPage ? (
+                    <Link
+                      href={href}
+                      className={cn(
+                        navLinkClass,
+                        pathname.startsWith(href) &&
+                          'text-[var(--landing-text)]',
+                      )}
+                    >
+                      {t.nav[key]}
+                      <span
+                        className={cn(
+                          'absolute bottom-0 left-1/2 h-0.5 -translate-x-1/2 rounded-full bg-[var(--landing-accent)] transition-all duration-300',
+                          pathname.startsWith(href)
+                            ? 'w-[calc(100%-12px)]'
+                            : 'w-0 group-hover:w-[calc(100%-12px)]',
+                        )}
+                      />
+                    </Link>
+                  ) : (
+                    <Link
+                      href={href}
+                      onClick={(e) => handleAnchorClick(e, href)}
+                      className={navLinkClass}
+                    >
+                      {t.nav[key]}
+                      <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 rounded-full bg-[var(--landing-accent)] transition-all duration-300 group-hover:w-[calc(100%-12px)]" />
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -144,20 +193,44 @@ export function Navbar() {
             className="fixed inset-0 z-40 bg-black/95 backdrop-blur-md md:hidden"
           >
             <nav className="flex h-full flex-col items-center justify-center gap-6">
-              {navKeys.map((key, i) => (
-                <motion.a
-                  key={key}
-                  href={`#${key}`}
-                  onClick={(e) => handleClick(e, `#${key}`)}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ delay: i * 0.05, duration: 0.25 }}
-                  className="font-[family-name:var(--landing-font-display)] text-2xl font-semibold text-[var(--landing-text)] transition-colors hover:text-[var(--landing-accent)]"
-                >
-                  {t.nav[key]}
-                </motion.a>
-              ))}
+              {navItems.map(({ key, href, isPage }, i) =>
+                isPage ? (
+                  <motion.div
+                    key={key}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ delay: i * 0.05, duration: 0.25 }}
+                  >
+                    <Link
+                      href={href}
+                      onClick={() => setOpen(false)}
+                      className="font-[family-name:var(--landing-font-display)] text-2xl font-semibold text-[var(--landing-text)] transition-colors hover:text-[var(--landing-accent)]"
+                    >
+                      {t.nav[key]}
+                    </Link>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key={key}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ delay: i * 0.05, duration: 0.25 }}
+                  >
+                    <Link
+                      href={href}
+                      onClick={(e) => {
+                        handleAnchorClick(e, href)
+                        setOpen(false)
+                      }}
+                      className="font-[family-name:var(--landing-font-display)] text-2xl font-semibold text-[var(--landing-text)] transition-colors hover:text-[var(--landing-accent)]"
+                    >
+                      {t.nav[key]}
+                    </Link>
+                  </motion.div>
+                ),
+              )}
             </nav>
           </motion.div>
         )}

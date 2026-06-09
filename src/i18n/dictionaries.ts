@@ -29,12 +29,16 @@ export const dictionaries = {
       machineTitle: 'Tamsi Besson — Portfolio lisible par machine',
       machineDescription:
         'Portfolio structuré pour agents IA et crawlers : expérience, projets open source, stack MCP/LLM. Version visuelle sur tamsi.dev.',
+      blogTitle: 'Blog — Tamsi Besson',
+      blogDescription:
+        'Pourquoi j’ai monté ces outils : tokens LLM gratuits, MCP pour le travail quotidien, revue de code sans surcoût Cursor.',
     },
     nav: {
       about: 'À propos',
       experience: 'Expérience',
       interests: 'Intérêts',
       projects: 'Projets',
+      blog: 'Blog',
       contact: 'Contact',
     },
     audience: {
@@ -261,6 +265,16 @@ export const dictionaries = {
         },
       ] satisfies ProjectItem[],
     },
+    blog: {
+      title: 'Blog',
+      sectionBadge: 'Articles',
+      subtitle:
+        'Le pourquoi d’abord — puis l’essentiel du comment (stack, quantification, MCP).',
+      homeSubtitle: 'Intérêt et mise en place légère derrière mes projets récents.',
+      allPosts: 'Tous les articles',
+      backToBlog: 'Retour au blog',
+      readingTime: '{minutes} min de lecture',
+    },
     contact: {
       title: 'Contact',
       sectionBadge: 'Échange',
@@ -278,12 +292,16 @@ export const dictionaries = {
       machineTitle: 'Tamsi Besson — Machine-readable portfolio',
       machineDescription:
         'Structured portfolio for AI agents and crawlers: experience, open source, MCP/LLM stack. Visual site at tamsi.dev.',
+      blogTitle: 'Blog — Tamsi Besson',
+      blogDescription:
+        'Why I built these tools: free LLM tokens, MCP for daily work, code review without extra Cursor cost.',
     },
     nav: {
       about: 'About',
       experience: 'Experience',
       interests: 'Interests',
       projects: 'Projects',
+      blog: 'Blog',
       contact: 'Contact',
     },
     audience: {
@@ -508,6 +526,16 @@ export const dictionaries = {
             'AI-powered scoring form builder — publish forms and let AI grade responses with detailed analytics.',
         },
       ] satisfies ProjectItem[],
+    },
+    blog: {
+      title: 'Blog',
+      sectionBadge: 'Articles',
+      subtitle:
+        'Why first — then the essentials of how (stack, quantization, MCP).',
+      homeSubtitle: 'Motivation and a light technical setup behind recent projects.',
+      allPosts: 'All posts',
+      backToBlog: 'Back to blog',
+      readingTime: '{minutes} min read',
     },
     contact: {
       title: 'Contact',

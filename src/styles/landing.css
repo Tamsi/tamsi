@@ -406,5 +406,132 @@ a:hover .portfolio-entry-title,
   .portfolio-text-accent {
     animation: none;
   }
+}
 
+.portfolio-article {
+  font-family: var(--landing-font-body);
+  color: var(--landing-text-muted);
+  line-height: 1.75;
+}
+
+.portfolio-article > * + * {
+  margin-top: 1.25rem;
+}
+
+.portfolio-article > .portfolio-blog-cover {
+  margin-top: 2.25rem;
+  margin-bottom: 2.25rem;
+}
+
+.portfolio-article h2 {
+  margin-top: 2.5rem;
+  font-family: var(--landing-font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--landing-text);
+}
+
+.portfolio-article h3 {
+  margin-top: 2rem;
+  font-family: var(--landing-font-display);
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--landing-text);
+}
+
+.portfolio-article p {
+  font-size: 1.0625rem;
+}
+
+.portfolio-article ul {
+  margin-left: 1.25rem;
+  list-style: disc;
+}
+
+.portfolio-article li + li {
+  margin-top: 0.5rem;
+}
+
+.portfolio-article li::marker {
+  color: var(--landing-accent);
+}
+
+.portfolio-article pre {
+  overflow-x: auto;
+  border-radius: var(--landing-radius-md);
+  border: 1px solid var(--landing-border-subtle);
+  background: var(--landing-surface);
+  padding: 1rem 1.25rem;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+.portfolio-article code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  color: var(--landing-text);
+}
+
+.portfolio-blog-cover {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--landing-radius-md);
+  border: 1px solid var(--landing-border-subtle);
+  background: var(--landing-surface);
+  box-shadow: 0 16px 40px -20px rgba(129, 74, 200, 0.45);
+}
+
+.portfolio-blog-cover--inline {
+  aspect-ratio: 16 / 9;
+}
+
+.portfolio-blog-cover-glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 100%,
+    rgba(129, 74, 200, 0.2) 0%,
+    transparent 70%
+  );
+  z-index: 1;
+}
+
+.portfolio-blog-cover svg {
+  position: relative;
+  z-index: 0;
+  display: block;
+}
+
+.group:hover .portfolio-blog-cover--inline {
+  border-color: rgba(129, 74, 200, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-blog-cover {
+    box-shadow: none;
+  }
+}
+
+.portfolio-blog-read-progress {
+  position: fixed;
+  top: var(--landing-nav-h);
+  left: 0;
+  z-index: 51;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+.portfolio-blog-read-progress-bar {
+  height: 100%;
+  width: 100%;
+  transform-origin: left center;
+  background: linear-gradient(
+    90deg,
+    var(--landing-accent) 0%,
+    #b794f4 100%
+  );
+  box-shadow: 0 0 12px rgba(129, 74, 200, 0.6);
 }

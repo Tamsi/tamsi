@@ -4,6 +4,7 @@ import { About } from "@/components/sections/about";
 import { Experience } from "@/components/sections/experience";
 import { Interests } from "@/components/sections/interests";
 import { Projects } from "@/components/sections/projects";
+import { BlogPreview } from "@/components/sections/blog-preview";
 import { Contact } from "@/components/sections/contact";
 import { JsonLd } from "@/components/seo/json-ld";
 import { getServerLocale } from "@/i18n/locale.server";
@@ -22,6 +23,7 @@ export default async function Home() {
         <Experience />
         <Interests />
         <Projects />
+        <BlogPreview />
         <Contact />
       </main>
     </>

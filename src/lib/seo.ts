@@ -12,8 +12,10 @@ import {
   SITE_URL,
   socialLinks,
 } from '@/data/site-links'
+import type { BlogPost } from '@/content/blog'
+import { blogPostPath, getBlogPostContent } from '@/lib/blog'
 
-export type SitePath = '/' | '/machine'
+export type SitePath = '/' | '/machine' | '/blog'
 
 export function localePageUrl(path: SitePath, locale: Locale): string {
   const url = new URL(path, SITE_URL)
@@ -162,5 +164,114 @@ export function buildStructuredDataGraph(locale: Locale, path: SitePath) {
       buildWebSiteJsonLd(locale),
       buildProfilePageJsonLd(locale, path),
     ],
+  }
+}
+
+export function buildBlogListingMetadata(locale: Locale): Metadata {
+  const t = dictionaries[locale]
+  const canonical = localePageUrl('/blog', locale)
+
+  return {
+    title: t.meta.blogTitle,
+    description: t.meta.blogDescription,
+    metadataBase: new URL(SITE_URL),
+    alternates: {
+      canonical,
+      languages: buildLanguageAlternates('/blog'),
+    },
+    robots: { index: true, follow: true },
+    openGraph: {
+      type: 'website',
+      locale: locale === 'fr' ? 'fr_FR' : 'en_US',
+      url: canonical,
+      siteName: SITE_NAME,
+      title: t.meta.blogTitle,
+      description: t.meta.blogDescription,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t.meta.blogTitle,
+      description: t.meta.blogDescription,
+    },
+  }
+}
+
+export function buildBlogPostMetadata(
+  locale: Locale,
+  post: BlogPost,
+): Metadata {
+  const content = getBlogPostContent(post, locale)
+  const path = blogPostPath(post.slug)
+  const canonical = `${SITE_URL}${path}`
+
+  return {
+    title: `${content.title} — ${SITE_NAME}`,
+    description: content.description,
+    metadataBase: new URL(SITE_URL),
+    alternates: {
+      canonical,
+      languages: buildLanguageAlternates('/blog'),
+    },
+    robots: { index: true, follow: true },
+    openGraph: {
+      type: 'article',
+      locale: locale === 'fr' ? 'fr_FR' : 'en_US',
+      url: canonical,
+      siteName: SITE_NAME,
+      title: content.title,
+      description: content.description,
+      publishedTime: post.publishedAt,
+      authors: [PERSON_NAME],
+      tags: post.tags,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: content.title,
+      description: content.description,
+    },
+  }
+}
+
+export function buildBlogListingJsonLd(locale: Locale) {
+  const t = dictionaries[locale]
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    '@id': `${localePageUrl('/blog', locale)}#blog`,
+    url: localePageUrl('/blog', locale),
+    name: t.blog.title,
+    description: t.meta.blogDescription,
+    inLanguage: locale,
+    author: { '@id': `${SITE_URL}/#person` },
+    isPartOf: { '@id': `${SITE_URL}/#website` },
+  }
+}
+
+export function buildBlogPostJsonLd(locale: Locale, post: BlogPost) {
+  const content = getBlogPostContent(post, locale)
+  const url = `${SITE_URL}${blogPostPath(post.slug)}`
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    '@id': `${url}#article`,
+    headline: content.title,
+    description: content.description,
+    datePublished: post.publishedAt,
+    inLanguage: locale,
+    url,
+    author: {
+      '@type': 'Person',
+      '@id': `${SITE_URL}/#person`,
+      name: PERSON_NAME,
+    },
+    publisher: {
+      '@type': 'Person',
+      '@id': `${SITE_URL}/#person`,
+      name: PERSON_NAME,
+    },
+    keywords: post.tags.join(', '),
+    isPartOf: { '@id': `${localePageUrl('/blog', locale)}#blog` },
+    mainEntityOfPage: url,
   }
 }
