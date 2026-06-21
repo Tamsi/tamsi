@@ -51,9 +51,9 @@ Day-to-day: **Cursor** (rules, plugins, agent skills), **Ollama** & **Hugging Fa
 
 ## Background
 
-**Web developer @ [Livingcolor](https://www.livingcolor.fr)** since 2018 — Drupal, Symfony, React/Next.js, React Native, Shopify, and AI integrations for **France Télévisions**, **TV5Monde**, **AFP**, **Harmonie Mutuelle**, and **LVMH** houses (Krug, Moët, Hennessy).
+**Full-Stack developer @ [Livingcolor](https://www.livingcolor.fr)** since 2018 — Drupal, Symfony, React/Next.js, React Native, Shopify and AI integrations
 
-**42** (Level II) · **Stanford ML Specialization** (Coursera) · **Fundamentals of MCP** (Hugging Face, 2025)
+**42** Digital Technologies Architect, Datorprogrammering · Multiple **AI certifiactions** from Stanford Online and Hugging Face
 
 ---
 
@@ -79,7 +79,7 @@ Day-to-day: **Cursor** (rules, plugins, agent skills), **Ollama** & **Hugging Fa
 | Portfolio | [tamsi.dev](https://tamsi.dev) |
 | Blog | [tamsi.dev/blog](https://tamsi.dev/blog) |
 | GitHub | [github.com/Tamsi](https://github.com/Tamsi) |
-| GitLab | [gitlab.com/Tamsi](https://gitlab.com/Tamsi) |
+| X | [x.com/tamsi](https://x.com/tamsi_besson) |
 | LinkedIn | [tamsi-besson](https://www.linkedin.com/in/tamsi-besson-71228a14b/) |
 | Cursor | [cursor.com/@tamsi](https://cursor.com/@tamsi) |
 
