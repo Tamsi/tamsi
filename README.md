@@ -26,13 +26,11 @@
 ## Agent stack
 
 ```
-Hermes Agent  →  LivingColor plugin  →  Jira / GitLab / GitHub MCP
+Hermes Agent  →  LivingColor plugin  →  End-to-end automation from Jira to PR/MR
               ↘  LivingColor Skills   →  versioned, testable expert behaviors
-              ↘  LivingColor Evolution →  auto-audit skills & open PRs
-Cursor / Claude  →  MCP servers  →  repos, APIs, VRT, code review
+              ↘  LivingColor Evolution →  auto-audit and self-evolution skills
+Cursor / Claude  →  AI agentic IDE and Cloud automations
 ```
-
-Day-to-day: **Cursor** (rules, plugins, agent skills), **Ollama** & **Hugging Face** for inference, **Playwright** for capture & automation, **Next.js / TypeScript / Python / Firebase** for products.
 
 ---
 
