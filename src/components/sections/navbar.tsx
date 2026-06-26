@@ -190,7 +190,7 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-md md:hidden"
+            className="fixed inset-0 z-40 bg-[var(--landing-bg)]/95 backdrop-blur-md md:hidden"
           >
             <nav className="flex h-full flex-col items-center justify-center gap-6">
               {navItems.map(({ key, href, isPage }, i) =>

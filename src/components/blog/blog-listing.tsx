@@ -26,7 +26,7 @@ export function BlogListing() {
         <div>
           {posts.map((post, index) => (
             <StaggerItem key={post.slug} variant="fade-up">
-              <BlogPostCard post={post} index={index} />
+              <BlogPostCard post={post} />
             </StaggerItem>
           ))}
         </div>

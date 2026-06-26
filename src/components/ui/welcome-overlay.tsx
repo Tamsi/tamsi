@@ -104,9 +104,9 @@ export function WelcomeOverlay() {
         accent,
         {
           textShadow: [
-            '0 0 0px rgba(129,74,200,0)',
-            '0 0 28px rgba(129,74,200,0.55)',
-            '0 0 12px rgba(129,74,200,0.35)',
+            '0 0 0px rgba(37,99,235,0)',
+            '0 0 28px rgba(37,99,235,0.35)',
+            '0 0 12px rgba(37,99,235,0.2)',
           ],
           duration: 1200,
         },

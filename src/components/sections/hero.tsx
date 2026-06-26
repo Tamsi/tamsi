@@ -2,12 +2,10 @@
 
 import { motion, useReducedMotion } from 'motion/react'
 import { ArrowUpRight, Github, Linkedin, GitlabIcon } from 'lucide-react'
-import { ParticleConstellation } from '@/components/ui/particle-constellation'
 import { HuggingFaceIcon } from '@/components/ui/hugging-face-icon'
 import { CursorIcon } from '@/components/ui/cursor-icon'
 import { CURSOR_PROFILE_URL } from '@/data/site-links'
 import {
-  HeroGlowPulse,
   MotionButton,
   MotionLink,
 } from '@/components/ui/motion-primitives'
@@ -136,11 +134,8 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[100dvh] flex-col items-center justify-center overflow-hidden px-6 pb-24 pt-32 text-center md:px-10 md:pt-40"
+      className="relative flex min-h-[100dvh] flex-col items-center justify-center px-6 pb-24 pt-32 text-center md:px-10 md:pt-40"
     >
-      <HeroGlowPulse />
-      <ParticleConstellation />
-
       {reduced ? (
         <div className="portfolio-container relative z-10 flex flex-col items-center gap-6">
           {content}
@@ -166,12 +161,12 @@ export function Hero() {
           <motion.div
             animate={reduced ? undefined : { y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
-            className="h-10 w-6 rounded-full border-2 border-white/20 p-1"
+            className="h-10 w-6 rounded-full border-2 border-[var(--landing-border-subtle)] p-1"
           >
             <motion.div
               animate={reduced ? undefined : { opacity: [0.4, 1, 0.4] }}
               transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
-              className="mx-auto h-2 w-1 rounded-full bg-white/60"
+              className="mx-auto h-2 w-1 rounded-full bg-[var(--landing-text-muted)]"
             />
           </motion.div>
         </a>

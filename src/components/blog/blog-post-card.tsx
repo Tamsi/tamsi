@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import { ArrowUpRight, Clock } from 'lucide-react'
-import { motion } from 'motion/react'
 import type { BlogPost } from '@/content/blog'
 import {
   blogPostPath,
@@ -10,25 +9,17 @@ import {
   getBlogPostContent,
 } from '@/lib/blog'
 import { useLocale } from '@/i18n/locale-context'
-import { springSnappy } from '@/lib/motion'
 
 type BlogPostCardProps = {
   post: BlogPost
-  index?: number
 }
 
-export function BlogPostCard({ post, index = 0 }: BlogPostCardProps) {
+export function BlogPostCard({ post }: BlogPostCardProps) {
   const { locale, t } = useLocale()
   const content = getBlogPostContent(post, locale)
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ delay: index * 0.04, ...springSnappy }}
-      className="border-b border-[var(--landing-border-subtle)] py-7 first:border-t"
-    >
+    <article className="border-b border-[var(--landing-border-subtle)] py-7 first:border-t">
       <Link
         href={blogPostPath(post.slug)}
         className="group mb-3 flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between"
@@ -69,6 +60,6 @@ export function BlogPostCard({ post, index = 0 }: BlogPostCardProps) {
           ))}
         </ul>
       </div>
-    </motion.article>
+    </article>
   )
 }

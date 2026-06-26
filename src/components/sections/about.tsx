@@ -2,7 +2,12 @@
 
 import { MapPin, GraduationCap, Briefcase } from 'lucide-react'
 import { motion } from 'motion/react'
-import { Reveal, StaggerContainer, StaggerItem } from '@/components/ui/reveal'
+import {
+  ScrollGroup,
+  ScrollItem,
+  ScrollReveal,
+  ScrollScrub,
+} from '@/components/ui/homepage-scroll'
 import { SectionLabel } from '@/components/ui/section-label'
 import { useLocale } from '@/i18n/locale-context'
 import type { BioSegment } from '@/i18n/dictionaries'
@@ -29,14 +34,14 @@ export function About() {
       className="portfolio-section border-t border-[var(--landing-border-subtle)]"
     >
       <div className="portfolio-container max-w-3xl">
-        <Reveal variant="fade-up-blur">
+        <ScrollScrub>
           <div className="mb-12 text-center">
             <SectionLabel>{t.about.sectionBadge}</SectionLabel>
             <h2 className="portfolio-heading-lg">{t.about.title}</h2>
           </div>
-        </Reveal>
+        </ScrollScrub>
 
-        <Reveal variant="fade-up" delay={0.1}>
+        <ScrollReveal blur>
           <blockquote className="portfolio-quote mb-14">
             <p className="text-lg italic text-[var(--landing-text-muted)] sm:text-xl">
               {t.about.quote}
@@ -45,28 +50,28 @@ export function About() {
               — {t.about.quoteAuthor}
             </footer>
           </blockquote>
-        </Reveal>
+        </ScrollReveal>
 
-        <Reveal delay={0.15}>
+        <ScrollReveal>
           <div className="mb-14">
             <SectionLabel>{t.about.focusTitle}</SectionLabel>
             <p className="portfolio-body-sm mb-8 max-w-xl">{t.about.focusSubtitle}</p>
-            <StaggerContainer stagger={0.1} className="portfolio-focus-grid">
+            <ScrollGroup className="portfolio-focus-grid">
               {t.about.focusItems.map((item) => (
-                <StaggerItem key={item.title} variant="fade-up">
+                <ScrollItem key={item.title}>
                   <article className="portfolio-focus-item text-left">
                     <h3 className="portfolio-heading-md mb-2 text-base text-[var(--landing-text)]">
                       {item.title}
                     </h3>
                     <p className="portfolio-body-sm leading-relaxed">{item.description}</p>
                   </article>
-                </StaggerItem>
+                </ScrollItem>
               ))}
-            </StaggerContainer>
+            </ScrollGroup>
           </div>
-        </Reveal>
+        </ScrollReveal>
 
-        <Reveal variant="fade-up-blur" delay={0.2}>
+        <ScrollReveal>
           <div className="space-y-5 text-[var(--landing-text-muted)]">
             <p className="text-base leading-relaxed sm:text-lg">
               {renderBio(t.about.bio1)}
@@ -104,9 +109,9 @@ export function About() {
               </motion.a>
             </div>
           </div>
-        </Reveal>
+        </ScrollReveal>
 
-        <Reveal delay={0.3}>
+        <ScrollReveal>
           <p className="mt-10 text-sm text-[var(--landing-text-muted)]">
             <span className="font-medium uppercase tracking-wider text-[var(--landing-text-muted)]/70">
               {t.about.languagesTitle}
@@ -116,7 +121,7 @@ export function About() {
               .map(({ name, level }) => `${name} (${level})`)
               .join(' · ')}
           </p>
-        </Reveal>
+        </ScrollReveal>
       </div>
     </section>
   )

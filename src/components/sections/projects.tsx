@@ -1,14 +1,17 @@
 'use client'
 
 import { ArrowUpRight } from 'lucide-react'
-import { motion } from 'motion/react'
-import { StaggerContainer, StaggerItem } from '@/components/ui/reveal'
+import {
+  ScrollGroup,
+  ScrollItem,
+  ScrollReveal,
+  ScrollScrub,
+} from '@/components/ui/homepage-scroll'
 import { SectionLabel } from '@/components/ui/section-label'
 import { HuggingFaceIcon } from '@/components/ui/hugging-face-icon'
 import { useLocale } from '@/i18n/locale-context'
 import type { ProjectItem } from '@/i18n/dictionaries'
 import { Github, GitlabIcon } from 'lucide-react'
-import { springSnappy } from '@/lib/motion'
 
 function SourceIcon({ source }: { source: ProjectItem['source'] }) {
   if (source === 'huggingface') return <HuggingFaceIcon className="size-4 shrink-0" />
@@ -29,50 +32,38 @@ export function Projects() {
       id="projects"
       className="portfolio-section border-t border-[var(--landing-border-subtle)]"
     >
-      <StaggerContainer stagger={0.06} className="portfolio-container max-w-3xl">
-        <StaggerItem variant="fade-up-blur">
+      <ScrollGroup className="portfolio-container max-w-3xl">
+        <ScrollScrub>
           <div className="mb-10 text-center sm:text-left">
             <SectionLabel>{t.projects.sectionBadge}</SectionLabel>
             <h2 className="portfolio-heading-lg">{t.projects.title}</h2>
             <p className="portfolio-body mt-3">{t.projects.sectionSubtitle}</p>
           </div>
-        </StaggerItem>
+        </ScrollScrub>
 
-        <StaggerItem variant="fade-up">
+        <ScrollItem>
           <p className="mb-2 text-xs font-medium uppercase tracking-wider text-[var(--landing-accent)]">
             {t.projects.featuredLabel}
           </p>
-        </StaggerItem>
+        </ScrollItem>
 
         <div>
-          {t.projects.items.map((project, index) => (
-            <StaggerItem key={project.title} variant="fade-up">
-              <ProjectEntry project={project} index={index} />
-            </StaggerItem>
+          {t.projects.items.map((project) => (
+            <ScrollItem key={project.title}>
+              <ProjectEntry project={project} />
+            </ScrollItem>
           ))}
         </div>
-      </StaggerContainer>
+      </ScrollGroup>
     </section>
   )
 }
 
-function ProjectEntry({
-  project,
-  index,
-}: {
-  project: ProjectItem
-  index: number
-}) {
+function ProjectEntry({ project }: { project: ProjectItem }) {
   const demoUrl = DEMO_URLS[project.title]
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ delay: index * 0.04, ...springSnappy }}
-      className="border-b border-[var(--landing-border-subtle)] py-7 first:border-t"
-    >
+    <article className="border-b border-[var(--landing-border-subtle)] py-7 first:border-t">
       <a
         href={project.url}
         target="_blank"
@@ -99,6 +90,6 @@ function ProjectEntry({
           Live demo →
         </a>
       )}
-    </motion.article>
+    </article>
   )
 }

@@ -2,7 +2,12 @@
 
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
-import { StaggerContainer, StaggerItem } from '@/components/ui/reveal'
+import {
+  ScrollGroup,
+  ScrollItem,
+  ScrollReveal,
+  ScrollScrub,
+} from '@/components/ui/homepage-scroll'
 import { SectionLabel } from '@/components/ui/section-label'
 import { BlogPostCard } from '@/components/blog/blog-post-card'
 import { getAllBlogPosts } from '@/lib/blog'
@@ -19,8 +24,8 @@ export function BlogPreview() {
       id="blog"
       className="portfolio-section border-t border-[var(--landing-border-subtle)]"
     >
-      <StaggerContainer stagger={0.06} className="portfolio-container max-w-3xl">
-        <StaggerItem variant="fade-up-blur">
+      <ScrollGroup className="portfolio-container max-w-3xl">
+        <ScrollScrub>
           <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="text-center sm:text-left">
               <SectionLabel>{t.blog.sectionBadge}</SectionLabel>
@@ -35,16 +40,16 @@ export function BlogPreview() {
               <ArrowUpRight className="size-4" />
             </Link>
           </div>
-        </StaggerItem>
+        </ScrollScrub>
 
         <div>
-          {posts.map((post, index) => (
-            <StaggerItem key={post.slug} variant="fade-up">
-              <BlogPostCard post={post} index={index} />
-            </StaggerItem>
+          {posts.map((post) => (
+            <ScrollItem key={post.slug}>
+              <BlogPostCard post={post} />
+            </ScrollItem>
           ))}
         </div>
-      </StaggerContainer>
+      </ScrollGroup>
     </section>
   )
 }

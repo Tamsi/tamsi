@@ -1,9 +1,9 @@
 .portfolio-machine-page {
-  --machine-bg: #0a0a0c;
-  --machine-text: #e8e6f0;
-  --machine-muted: #8b8798;
-  --machine-accent: #b794f6;
-  --machine-border: rgba(183, 148, 246, 0.22);
+  --machine-bg: #fafafa;
+  --machine-text: #18181b;
+  --machine-muted: #71717a;
+  --machine-accent: #2563eb;
+  --machine-border: rgba(9, 9, 11, 0.1);
   --machine-font: var(--font-mono, ui-monospace, 'Fragment Mono', 'Source Code Pro', monospace);
 
   min-height: 100dvh;
@@ -39,7 +39,7 @@
   gap: 1rem;
   padding: 0.75rem 1.25rem;
   border-bottom: 1px solid var(--machine-border);
-  background: rgba(10, 10, 12, 0.92);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(12px);
 }
 
@@ -84,7 +84,7 @@
 
 .portfolio-machine-locale button.is-active {
   background: var(--machine-accent);
-  color: #0a0a0c;
+  color: #ffffff;
   border-radius: 999px;
 }
 

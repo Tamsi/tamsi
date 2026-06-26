@@ -2,7 +2,12 @@
 
 import { Briefcase, GraduationCap, Award, ExternalLink } from 'lucide-react'
 import { motion } from 'motion/react'
-import { Reveal } from '@/components/ui/reveal'
+import {
+  ScrollGroup,
+  ScrollItem,
+  ScrollReveal,
+  ScrollScrub,
+} from '@/components/ui/homepage-scroll'
 import { SectionLabel } from '@/components/ui/section-label'
 import { useLocale } from '@/i18n/locale-context'
 import { springBouncy, springSnappy } from '@/lib/motion'
@@ -41,12 +46,12 @@ export function Experience() {
       className="portfolio-section border-t border-[var(--landing-border-subtle)]"
     >
       <div className="portfolio-container max-w-3xl">
-        <Reveal variant="fade-up-blur">
+        <ScrollScrub>
           <div className="mb-14 text-center sm:text-left">
             <SectionLabel>{t.experience.sectionBadge}</SectionLabel>
             <h2 className="portfolio-heading-lg">{t.experience.title}</h2>
           </div>
-        </Reveal>
+        </ScrollScrub>
 
         <div className="relative">
           <motion.div
@@ -58,16 +63,16 @@ export function Experience() {
             transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1] }}
           />
 
-          <div className="space-y-14">
+          <ScrollGroup className="space-y-14">
             {t.experience.items.map((item, i) => {
               const meta = itemsMeta[i]
               const Icon = meta.icon
 
               return (
-                <Reveal key={item.title} variant="fade-up" delay={i * 0.06}>
+                <ScrollItem key={item.title}>
                   <div className="relative pl-10 sm:pl-12">
                     <motion.div
-                      className="absolute top-1 left-0 flex size-4 items-center justify-center rounded-full border border-[var(--landing-accent)] bg-black"
+                      className="absolute top-1 left-0 flex size-4 items-center justify-center rounded-full border border-[var(--landing-accent)] bg-[var(--landing-bg)]"
                       initial={{ scale: 0 }}
                       whileInView={{ scale: 1 }}
                       viewport={{ once: true }}
@@ -118,10 +123,10 @@ export function Experience() {
                       </motion.a>
                     )}
                   </div>
-                </Reveal>
+                </ScrollItem>
               )
             })}
-          </div>
+          </ScrollGroup>
         </div>
       </div>
     </section>

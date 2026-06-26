@@ -25,7 +25,7 @@ export const dictionaries = {
     meta: {
       title: 'Tamsi Besson — Full-stack · MCP & AI devtools',
       description:
-        'Développeur full-stack à Paris. Serveurs MCP, revue de code IA, Next.js, TypeScript, Python. Portfolio et projets open source sur GitHub.',
+        'AI Engineer à Paris. Serveurs MCP, revue de code IA, Next.js, TypeScript, Python. Portfolio et projets open source sur GitHub.',
       machineTitle: 'Tamsi Besson — Portfolio lisible par machine',
       machineDescription:
         'Portfolio structuré pour agents IA et crawlers : expérience, projets open source, stack MCP/LLM. Version visuelle sur tamsi.dev.',
@@ -56,8 +56,8 @@ export const dictionaries = {
     hero: {
       badgeNew: '2026',
       badge: 'MCP & AI devtools',
-      title: 'Développeur full-stack',
-      titleAccent: 'MCP, IA & produits web',
+      title: 'AI Engineer',
+      titleAccent: 'MCP, agents & produits web',
       subtitle:
         'Basé à Paris — je construis des serveurs MCP, des workflows LLM et des apps Next.js pour les équipes produit et les grands comptes.',
       ctaPrimary: 'Voir les projets',
@@ -90,7 +90,7 @@ export const dictionaries = {
         },
       ],
       bio1: [
-        { text: 'Développeur full-stack à ' },
+        { text: 'AI Engineer à ' },
         { text: 'Paris', highlight: true },
         { text: ', avec ' },
         { text: "~8 ans d'expérience", highlight: true },
@@ -135,7 +135,7 @@ export const dictionaries = {
       viewCertificate: 'Voir le certificat',
       items: [
         {
-          title: 'Développeur Web',
+          title: 'AI & Web Engineer',
           org: 'Livingcolor',
           period: 'Jan 2018 — Présent',
           location: 'Lieusaint, Île-de-France',
@@ -293,7 +293,7 @@ export const dictionaries = {
     meta: {
       title: 'Tamsi Besson — Full-stack · MCP & AI devtools',
       description:
-        'Full-stack developer in Paris. MCP servers, AI code review, Next.js, TypeScript, Python. Portfolio and open source on GitHub.',
+        'AI Engineer in Paris. MCP servers, AI code review, Next.js, TypeScript, Python. Portfolio and open source on GitHub.',
       machineTitle: 'Tamsi Besson — Machine-readable portfolio',
       machineDescription:
         'Structured portfolio for AI agents and crawlers: experience, open source, MCP/LLM stack. Visual site at tamsi.dev.',
@@ -324,8 +324,8 @@ export const dictionaries = {
     hero: {
       badgeNew: '2026',
       badge: 'MCP & AI devtools',
-      title: 'Full-stack developer',
-      titleAccent: 'MCP servers & AI workflows',
+      title: 'AI Engineer',
+      titleAccent: 'MCP agents & AI workflows',
       subtitle:
         'Based in Paris — I build MCP servers, LLM workflows, and Next.js apps for product teams and enterprise clients.',
       ctaPrimary: 'View projects',
@@ -357,7 +357,7 @@ export const dictionaries = {
         },
       ],
       bio1: [
-        { text: 'Full-stack developer in ' },
+        { text: 'AI Engineer in ' },
         { text: 'Paris', highlight: true },
         { text: ' with ' },
         { text: '~8 years of experience', highlight: true },
@@ -402,7 +402,7 @@ export const dictionaries = {
       viewCertificate: 'View certificate',
       items: [
         {
-          title: 'Web Developer',
+          title: 'AI & Web Engineer',
           org: 'Livingcolor',
           period: 'Jan 2018 — Present',
           location: 'Lieusaint, Île-de-France',

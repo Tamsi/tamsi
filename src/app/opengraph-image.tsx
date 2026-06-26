@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 import { PERSON_NAME, SITE_NAME } from '@/data/site-links'
 
-export const alt = `${PERSON_NAME} — Full-stack · MCP & AI devtools`
+export const alt = `${PERSON_NAME} — AI Engineer · MCP & AI devtools`
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -17,8 +17,8 @@ export default function OpenGraphImage() {
           justifyContent: 'space-between',
           padding: 72,
           background:
-            'linear-gradient(145deg, #0a0a0f 0%, #12121a 45%, #1a1028 100%)',
-          color: '#f4f4f5',
+            'linear-gradient(145deg, #fafafa 0%, #f4f4f5 45%, #eff6ff 100%)',
+          color: '#18181b',
           fontFamily: 'system-ui, sans-serif',
         }}
       >
@@ -28,7 +28,7 @@ export default function OpenGraphImage() {
               fontSize: 28,
               letterSpacing: '0.2em',
               textTransform: 'uppercase',
-              color: '#a78bfa',
+              color: '#2563eb',
             }}
           >
             {SITE_NAME}
@@ -36,11 +36,11 @@ export default function OpenGraphImage() {
           <div style={{ fontSize: 64, fontWeight: 700, lineHeight: 1.1 }}>
             {PERSON_NAME}
           </div>
-          <div style={{ fontSize: 32, color: '#d4d4d8', maxWidth: 900 }}>
-            Full-stack · MCP servers · AI devtools · Paris
+          <div style={{ fontSize: 32, color: '#52525b', maxWidth: 900 }}>
+            AI Engineer · MCP servers · AI devtools · Paris
           </div>
         </div>
-        <div style={{ fontSize: 22, color: '#71717a' }}>
+        <div style={{ fontSize: 22, color: '#a1a1aa' }}>
           Portfolio · Open source · Machine view at /machine
         </div>
       </div>

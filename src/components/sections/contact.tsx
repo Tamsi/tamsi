@@ -4,7 +4,12 @@ import { Github, Linkedin, GitlabIcon, ArrowUpRight } from 'lucide-react'
 import { CursorIcon } from '@/components/ui/cursor-icon'
 import { CURSOR_PROFILE_URL, EMAIL } from '@/data/site-links'
 import { motion } from 'motion/react'
-import { Reveal, StaggerContainer, StaggerItem } from '@/components/ui/reveal'
+import {
+  ScrollGroup,
+  ScrollItem,
+  ScrollReveal,
+  ScrollScrub,
+} from '@/components/ui/homepage-scroll'
 import { SectionLabel } from '@/components/ui/section-label'
 import { HuggingFaceIcon } from '@/components/ui/hugging-face-icon'
 import {
@@ -54,21 +59,13 @@ export function Contact() {
       <FloatingGlow className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
 
       <div className="portfolio-container relative z-10 max-w-xl text-center">
-        <Reveal variant="fade-up-blur">
+        <ScrollScrub>
           <SectionLabel>{t.contact.sectionBadge}</SectionLabel>
-          <motion.h2
-            className="portfolio-heading-lg mb-4"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            {t.contact.title}
-          </motion.h2>
+          <h2 className="portfolio-heading-lg mb-4">{t.contact.title}</h2>
           <p className="portfolio-body mb-10">{t.contact.subtitle}</p>
-        </Reveal>
+        </ScrollScrub>
 
-        <Reveal delay={0.15}>
+        <ScrollReveal>
           <MotionButton
             variant="primary"
             className="mb-8 inline-flex"
@@ -85,9 +82,9 @@ export function Contact() {
             </motion.span>
           </MotionButton>
 
-          <StaggerContainer stagger={0.07} className="flex flex-wrap justify-center gap-2">
+          <ScrollGroup className="flex flex-wrap justify-center gap-2">
             {links.map(({ label, href, icon: Icon }) => (
-              <StaggerItem key={label} variant="scale-in" spring>
+              <ScrollItem key={label}>
                 <MotionLink
                   href={href}
                   target="_blank"
@@ -97,22 +94,16 @@ export function Contact() {
                   <Icon className="size-4" />
                   {label}
                 </MotionLink>
-              </StaggerItem>
+              </ScrollItem>
             ))}
-          </StaggerContainer>
-        </Reveal>
+          </ScrollGroup>
+        </ScrollReveal>
 
-        <Reveal delay={0.3}>
-          <motion.p
-            className="mt-16 text-xs text-[var(--landing-text-muted)]/60"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4, duration: 0.5 }}
-          >
+        <ScrollReveal>
+          <p className="mt-16 text-xs text-[var(--landing-text-muted)]/60">
             {t.contact.copyright.replace('{year}', String(new Date().getFullYear()))}
-          </motion.p>
-        </Reveal>
+          </p>
+        </ScrollReveal>
       </div>
     </footer>
   )

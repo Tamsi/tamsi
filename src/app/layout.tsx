@@ -32,7 +32,7 @@ export default async function RootLayout({
   const initialLocale = await getServerLocale();
 
   return (
-    <html lang={initialLocale} className="dark" suppressHydrationWarning>
+    <html lang={initialLocale} suppressHydrationWarning>
       <head>
         <link
           rel="alternate"
