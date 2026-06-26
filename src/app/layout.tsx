@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Figtree, Inter } from "next/font/google";
 import { SyncLocaleFromUrl } from "@/components/i18n/sync-locale-from-url";
 import { StickyAudienceToggle } from "@/components/ui/sticky-audience-toggle";
+import { WelcomeOverlay } from "@/components/ui/welcome-overlay";
 import { LocaleProvider } from "@/i18n/locale-context";
 import { getServerLocale } from "@/i18n/locale.server";
 import { buildPageMetadata } from "@/lib/seo";
@@ -48,6 +49,7 @@ export default async function RootLayout({
           <Suspense fallback={null}>
             <SyncLocaleFromUrl />
           </Suspense>
+          <WelcomeOverlay />
           {children}
           <StickyAudienceToggle />
         </LocaleProvider>

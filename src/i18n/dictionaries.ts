@@ -48,6 +48,11 @@ export const dictionaries = {
       machineHint:
         'Vue structurée pour agents et crawlers — liens explicites, sans interface marketing.',
     },
+    welcome: {
+      line1: 'Bienvenue',
+      line2: 'chez',
+      line3: 'Tamsi',
+    },
     hero: {
       badgeNew: '2026',
       badge: 'MCP & AI devtools',
@@ -310,6 +315,11 @@ export const dictionaries = {
       machine: 'Machine',
       machineHint:
         'Structured view for agents and crawlers — explicit links, no marketing chrome.',
+    },
+    welcome: {
+      line1: 'Welcome',
+      line2: 'to',
+      line3: 'Tamsi',
     },
     hero: {
       badgeNew: '2026',

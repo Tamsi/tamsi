@@ -520,3 +520,113 @@ a:hover .portfolio-entry-title,
   );
   box-shadow: 0 0 12px rgba(129, 74, 200, 0.6);
 }
+
+/* Welcome overlay — anime.js entrance animation */
+.portfolio-welcome-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--landing-bg);
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
+
+.portfolio-welcome-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding-inline: 1.5rem;
+  text-align: center;
+}
+
+.portfolio-welcome-text {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0 0.5ch;
+  font-family: var(--landing-font-display);
+  font-size: clamp(2rem, 7vw, 4.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--landing-text);
+}
+
+.portfolio-welcome-word {
+  display: inline-flex;
+  white-space: nowrap;
+}
+
+.portfolio-welcome-char {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  will-change: transform, opacity, filter;
+}
+
+.portfolio-welcome-word[data-word-accent] {
+  background: linear-gradient(
+    135deg,
+    var(--landing-accent) 0%,
+    #b794f4 50%,
+    var(--landing-accent-hover) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* The animated char spans are inline-block, which breaks the parent's
+   background-clip:text flow (children inherit color:transparent but not the
+   gradient). Apply the gradient on each character inside the accent word so
+   "Tamsi" stays visible while remaining transformable by anime.js. */
+.portfolio-welcome-word[data-word-accent] .portfolio-welcome-char {
+  background: linear-gradient(
+    135deg,
+    var(--landing-accent) 0%,
+    #b794f4 50%,
+    var(--landing-accent-hover) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.portfolio-welcome-line,
+.portfolio-welcome-line-accent {
+  display: block;
+  height: 2px;
+  border-radius: 9999px;
+  transform-origin: center;
+  transform: scaleX(0);
+  opacity: 0;
+}
+
+.portfolio-welcome-line {
+  width: clamp(120px, 22vw, 280px);
+  background: var(--landing-border-subtle);
+}
+
+.portfolio-welcome-line-accent {
+  width: clamp(60px, 12vw, 140px);
+  margin-top: -2px;
+  background: linear-gradient(
+    90deg,
+    var(--landing-accent) 0%,
+    #b794f4 100%
+  );
+  box-shadow: 0 0 12px rgba(129, 74, 200, 0.55);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-welcome-line,
+  .portfolio-welcome-line-accent {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
