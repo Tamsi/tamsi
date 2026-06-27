@@ -4,13 +4,7 @@ import type { WalkBounds } from '@/lib/tokyo-game/littlest-tokyo'
 
 const _normalMatrix = new THREE.Matrix3()
 const _worldNormal = new THREE.Vector3()
-
-function meshWorldNormalY(hit: THREE.Intersection): number {
-  if (!hit.face) return 0
-  _normalMatrix.getNormalMatrix(hit.object.matrixWorld)
-  _worldNormal.copy(hit.face.normal).applyMatrix3(_normalMatrix).normalize()
-  return _worldNormal.y
-}
+const MAX_NAV_CELLS = 6_000
 
 /** Road/sidewalk ground meshes in the official Littlest Tokyo GLB. */
 export function isStreetMesh(mesh: THREE.Mesh): boolean {
@@ -25,6 +19,13 @@ export function collectStreetMeshes(root: THREE.Object3D): THREE.Mesh[] {
     }
   })
   return streets
+}
+
+function meshWorldNormalY(hit: THREE.Intersection): number {
+  if (!hit.face) return 0
+  _normalMatrix.getNormalMatrix(hit.object.matrixWorld)
+  _worldNormal.copy(hit.face.normal).applyMatrix3(_normalMatrix).normalize()
+  return _worldNormal.y
 }
 
 export function computeStreetBounds(streets: THREE.Mesh[]): WalkBounds {
@@ -69,13 +70,28 @@ export function raycastStreetY(
   return null
 }
 
+function pickCellSize(bounds: WalkBounds, requested: number): number {
+  let cellSize = requested
+  const spanX = bounds.maxX - bounds.minX
+  const spanZ = bounds.maxZ - bounds.minZ
+
+  for (let i = 0; i < 8; i++) {
+    const cols = Math.ceil(spanX / cellSize)
+    const rows = Math.ceil(spanZ / cellSize)
+    if (cols * rows <= MAX_NAV_CELLS) return cellSize
+    cellSize *= 1.35
+  }
+  return cellSize
+}
+
 /** Pre-bake walkable road cells from Plane* geometry. */
 export function bakeStreetNavGrid(
   ctx: StreetWalkContext,
   raycaster: THREE.Raycaster,
-  cellSize = 0.008,
+  requestedCellSize = 0.012,
 ): StreetNavGrid {
   const bounds = computeStreetBounds(ctx.streets as THREE.Mesh[])
+  const cellSize = pickCellSize(bounds, requestedCellSize)
   const cols = Math.ceil((bounds.maxX - bounds.minX) / cellSize)
   const rows = Math.ceil((bounds.maxZ - bounds.minZ) / cellSize)
   const cells: (StreetNavCell | null)[] = new Array(cols * rows).fill(null)
@@ -100,9 +116,14 @@ export function bakeStreetNavGrid(
     }
   }
 
-  const streetSet = new Set<THREE.Object3D>(ctx.streets)
-
-  return { bounds, cellSize, cols, rows, cells, streetSet }
+  return {
+    bounds,
+    cellSize,
+    cols,
+    rows,
+    cells,
+    streetSet: new Set<THREE.Object3D>(ctx.streets),
+  }
 }
 
 export function navCellAt(
@@ -114,10 +135,6 @@ export function navCellAt(
   const row = Math.floor((z - nav.bounds.minZ) / nav.cellSize)
   if (col < 0 || row < 0 || col >= nav.cols || row >= nav.rows) return null
   return nav.cells[row * nav.cols + col] ?? null
-}
-
-export function isStreetWalkable(nav: StreetNavGrid, x: number, z: number): boolean {
-  return navCellAt(nav, x, z) !== null
 }
 
 export function findStreetSpawn(
@@ -154,55 +171,70 @@ export function findStreetSpawn(
   return { x, z, y: cell?.y ?? 0 }
 }
 
-export function createStreetDebugOverlay(
-  nav: StreetNavGrid,
-  model: THREE.Object3D,
-): THREE.Group {
+/** One merged mesh — built lazily on first toggle to avoid OOM at load. */
+export function createStreetDebugHolder(model: THREE.Object3D): THREE.Group {
   const group = new THREE.Group()
   group.name = 'street-debug'
   group.visible = false
   model.add(group)
+  return group
+}
 
-  const mat = new THREE.MeshBasicMaterial({
-    color: 0x4df0ff,
-    transparent: true,
-    opacity: 0.35,
-    depthWrite: false,
-  })
+export function buildStreetDebugMesh(
+  nav: StreetNavGrid,
+  model: THREE.Object3D,
+  holder: THREE.Group,
+): void {
+  if (holder.children.length > 0) return
 
-  model.updateWorldMatrix(true, false)
-  const tileGeo = new THREE.PlaneGeometry(nav.cellSize * 0.9, nav.cellSize * 0.9)
+  const half = nav.cellSize * 0.45
+  const positions: number[] = []
   const worldPos = new THREE.Vector3()
 
   for (let row = 0; row < nav.rows; row++) {
     for (let col = 0; col < nav.cols; col++) {
       const cell = nav.cells[row * nav.cols + col]
       if (!cell) continue
-      const tile = new THREE.Mesh(tileGeo, mat)
-      tile.rotation.x = -Math.PI / 2
       worldPos.set(
         nav.bounds.minX + (col + 0.5) * nav.cellSize,
         cell.y + 0.001,
         nav.bounds.minZ + (row + 0.5) * nav.cellSize,
       )
       model.worldToLocal(worldPos)
-      tile.position.copy(worldPos)
-      tile.renderOrder = 999
-      group.add(tile)
+      const { x, y, z } = worldPos
+      positions.push(
+        x - half, y, z - half,
+        x + half, y, z - half,
+        x + half, y, z + half,
+        x - half, y, z - half,
+        x + half, y, z + half,
+        x - half, y, z + half,
+      )
     }
   }
 
-  return group
+  const geometry = new THREE.BufferGeometry()
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3))
+
+  const mesh = new THREE.Mesh(
+    geometry,
+    new THREE.MeshBasicMaterial({
+      color: 0x4df0ff,
+      transparent: true,
+      opacity: 0.32,
+      depthWrite: false,
+    }),
+  )
+  mesh.renderOrder = 999
+  holder.add(mesh)
 }
 
-export function isStreetObject(
+export function toggleStreetDebug(
   nav: StreetNavGrid,
-  object: THREE.Object3D,
+  model: THREE.Object3D,
+  holder: THREE.Group,
 ): boolean {
-  let node: THREE.Object3D | null = object
-  while (node) {
-    if (nav.streetSet.has(node)) return true
-    node = node.parent
-  }
-  return false
+  buildStreetDebugMesh(nav, model, holder)
+  holder.visible = !holder.visible
+  return holder.visible
 }

@@ -5,7 +5,7 @@ export type BlogBlock =
   | { type: 'heading'; level: 2 | 3; text: string }
   | { type: 'code'; language: string; code: string }
   | { type: 'list'; items: string[] }
-  | { type: 'image'; src: string; alt: string; caption?: string }
+  | { type: 'image'; src: string; alt: string; caption?: string; link?: { href: string; label: string } }
 
 export type BlogPostContent = {
   title: string

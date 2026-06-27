@@ -13,7 +13,7 @@ import {
   socialLinks,
 } from '@/data/site-links'
 import type { BlogPost } from '@/content/blog'
-import { blogPostPath, getBlogPostContent } from '@/lib/blog'
+import { getBlogPostContent, blogPostLocaleUrl } from '@/lib/blog'
 
 export type SitePath = '/' | '/machine' | '/blog' | '/tokyo'
 
@@ -212,13 +212,21 @@ export function buildBlogListingMetadata(locale: Locale): Metadata {
   }
 }
 
+export function buildBlogPostLanguageAlternates(slug: string) {
+  const languages: Record<string, string> = {}
+  for (const locale of locales) {
+    languages[locale] = `${SITE_URL}${blogPostLocaleUrl(slug, locale)}`
+  }
+  languages['x-default'] = `${SITE_URL}${blogPostLocaleUrl(slug, defaultLocale)}`
+  return languages
+}
+
 export function buildBlogPostMetadata(
   locale: Locale,
   post: BlogPost,
 ): Metadata {
   const content = getBlogPostContent(post, locale)
-  const path = blogPostPath(post.slug)
-  const canonical = `${SITE_URL}${path}`
+  const canonical = `${SITE_URL}${blogPostLocaleUrl(post.slug, locale)}`
 
   return {
     title: `${content.title} — ${SITE_NAME}`,
@@ -226,7 +234,7 @@ export function buildBlogPostMetadata(
     metadataBase: new URL(SITE_URL),
     alternates: {
       canonical,
-      languages: buildLanguageAlternates('/blog'),
+      languages: buildBlogPostLanguageAlternates(post.slug),
     },
     robots: { index: true, follow: true },
     openGraph: {
@@ -265,7 +273,7 @@ export function buildBlogListingJsonLd(locale: Locale) {
 
 export function buildBlogPostJsonLd(locale: Locale, post: BlogPost) {
   const content = getBlogPostContent(post, locale)
-  const url = `${SITE_URL}${blogPostPath(post.slug)}`
+  const url = `${SITE_URL}${blogPostLocaleUrl(post.slug, locale)}`
 
   return {
     '@context': 'https://schema.org',

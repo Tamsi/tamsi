@@ -1,4 +1,7 @@
 import type { Locale } from '@/i18n/dictionaries'
+import { locales } from '@/i18n/dictionaries'
+import { defaultLocale } from '@/i18n/dictionaries'
+import { SITE_URL } from '@/data/site-links'
 import {
   blogPosts,
   blogPostsBySlug,
@@ -21,7 +24,31 @@ export function getBlogPostContent(
   post: BlogPost,
   locale: Locale,
 ): BlogPostContent {
-  return post.content[locale]
+  const content = post.content[locale]
+  if (!content) {
+    throw new Error(
+      `Blog post "${post.slug}" is missing content for locale "${locale}". Every article must define fr and en.`,
+    )
+  }
+  return content
+}
+
+export function assertBlogPostsHaveAllLocales(posts: BlogPost[] = blogPosts): void {
+  for (const post of posts) {
+    for (const locale of locales) {
+      const content = post.content[locale]
+      if (!content?.title?.trim() || !content.description?.trim()) {
+        throw new Error(
+          `Blog post "${post.slug}" is missing complete "${locale}" content.`,
+        )
+      }
+      if (!content.blocks.length) {
+        throw new Error(
+          `Blog post "${post.slug}" has no blocks for locale "${locale}".`,
+        )
+      }
+    }
+  }
 }
 
 export function getBlogSlugs(): string[] {
@@ -38,4 +65,12 @@ export function formatBlogDate(isoDate: string, locale: Locale): string {
 
 export function blogPostPath(slug: string): `/blog/${string}` {
   return `/blog/${slug}`
+}
+
+export function blogPostLocaleUrl(slug: string, locale: Locale): string {
+  const url = new URL(blogPostPath(slug), SITE_URL)
+  if (locale !== defaultLocale) {
+    url.searchParams.set('locale', locale)
+  }
+  return url.pathname + url.search
 }

@@ -1,6 +1,5 @@
 import * as THREE from 'three'
 import {
-  isStreetWalkable,
   navCellAt,
   type StreetNavGrid,
 } from '@/lib/tokyo-game/walkable-surfaces'
@@ -184,5 +183,3 @@ export function smoothstep(t: number): number {
   const c = THREE.MathUtils.clamp(t, 0, 1)
   return c * c * (3 - 2 * c)
 }
-
-export { isStreetWalkable }

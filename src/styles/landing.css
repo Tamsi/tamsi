@@ -501,6 +501,22 @@ a:hover .portfolio-entry-title,
   text-align: center;
 }
 
+.portfolio-blog-image-link {
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+  text-align: center;
+}
+
+.portfolio-blog-image-link a {
+  color: var(--landing-accent);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.portfolio-blog-image-link a:hover {
+  text-decoration: underline;
+}
+
 .portfolio-article > .portfolio-blog-image {
   margin-top: 2rem;
   margin-bottom: 2rem;

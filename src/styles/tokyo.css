@@ -114,6 +114,17 @@
   background: rgb(26 16 51 / 0.85);
 }
 
+.tokyo-hud-error {
+  position: relative;
+  z-index: 3;
+  margin: 0;
+  padding: 0.65rem 1rem;
+  font-size: 0.8125rem;
+  color: #fecaca;
+  background: rgb(60 10 10 / 0.85);
+  border-bottom: 1px solid rgb(248 113 113 / 0.35);
+}
+
 .tokyo-hud-enter {
   margin: 0;
   align-self: flex-start;

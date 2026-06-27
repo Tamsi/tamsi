@@ -10,6 +10,7 @@ import {
   tryMoveOnStreets,
   type StreetWalkRuntime,
 } from '@/lib/tokyo-game/collision'
+import { toggleStreetDebug } from '@/lib/tokyo-game/walkable-surfaces'
 import {
   CAMERA_TRANSITION_SEC,
   createPlayer,
@@ -49,11 +50,17 @@ function clampWalk(pos: { x: number; z: number }, bounds: WalkBounds): void {
 
 type TokyoGameCanvasProps = {
   onModeChange?: (mode: 'overview' | 'playing') => void
+  onLoadError?: (message: string | null) => void
 }
 
-export function TokyoGameCanvas({ onModeChange }: TokyoGameCanvasProps) {
+export function TokyoGameCanvas({ onModeChange, onLoadError }: TokyoGameCanvasProps) {
   const mountRef = useRef<HTMLDivElement>(null)
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading')
+  const [loadError, setLoadError] = useState<string | null>(null)
+
+  useEffect(() => {
+    onLoadError?.(null)
+  }, [onLoadError])
   const [playing, setPlaying] = useState(false)
 
   useEffect(() => {
@@ -86,8 +93,8 @@ export function TokyoGameCanvas({ onModeChange }: TokyoGameCanvasProps) {
 
       if (mode === 'playing' && e.key.toLowerCase() === 'b') {
         e.preventDefault()
-        if (debugOverlay) {
-          debugOverlay.visible = !debugOverlay.visible
+        if (debugOverlay && tokyoModel && walkRuntime) {
+          toggleStreetDebug(walkRuntime.nav, tokyoModel, debugOverlay)
         }
         return
       }
@@ -264,17 +271,18 @@ export function TokyoGameCanvas({ onModeChange }: TokyoGameCanvasProps) {
         controls.update()
         controls.enabled = true
 
-        // Show walkable tiles briefly so routes are obvious after load
-        debugOverlay.visible = true
-        window.setTimeout(() => {
-          if (!disposed && debugOverlay) debugOverlay.visible = false
-        }, 2500)
-
         setStatus('ready')
         raf = requestAnimationFrame(tick)
       })
-      .catch(() => {
-        if (!disposed) setStatus('error')
+      .catch((err: unknown) => {
+        console.error('Tokyo scene load failed:', err)
+        if (!disposed) {
+          const message =
+            err instanceof Error ? err.message : 'Unknown load error'
+          setLoadError(message)
+          onLoadError?.(message)
+          setStatus('error')
+        }
       })
 
     return () => {
@@ -289,7 +297,7 @@ export function TokyoGameCanvas({ onModeChange }: TokyoGameCanvasProps) {
         mount.removeChild(renderer.domElement)
       }
     }
-  }, [onModeChange])
+  }, [onModeChange, onLoadError])
 
   return (
     <div
@@ -298,6 +306,7 @@ export function TokyoGameCanvas({ onModeChange }: TokyoGameCanvasProps) {
       aria-label="Tokyo mini-game viewport"
       data-status={status}
       data-playing={playing ? 'true' : 'false'}
+      data-load-error={loadError ?? undefined}
     />
   )
 }

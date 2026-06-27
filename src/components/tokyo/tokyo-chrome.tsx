@@ -16,13 +16,19 @@ export function TokyoChrome() {
   const t = dictionaries[locale].tokyo
   const homeHref = locale === defaultLocale ? '/' : `/?locale=${locale}`
   const [playing, setPlaying] = useState(false)
+  const [loadError, setLoadError] = useState<string | null>(null)
   const onModeChange = useCallback((mode: 'overview' | 'playing') => {
     setPlaying(mode === 'playing')
   }, [])
 
   return (
     <div className="tokyo-page">
-      <TokyoGameCanvas onModeChange={onModeChange} />
+      <TokyoGameCanvas onLoadError={setLoadError} onModeChange={onModeChange} />
+      {loadError && (
+        <p className="tokyo-hud-error" role="alert">
+          {t.loadError}: {loadError}
+        </p>
+      )}
       <header className="tokyo-hud">
         <Link href={homeHref} className="tokyo-hud-back">
           ← {t.back}
@@ -34,7 +40,7 @@ export function TokyoChrome() {
         <p className="tokyo-hud-hint">
           {playing ? t.controls : t.enterPrompt}
         </p>
-        {!playing && (
+        {!playing && !loadError && (
           <p className="tokyo-hud-enter" aria-hidden="true">
             ↵ Enter
           </p>

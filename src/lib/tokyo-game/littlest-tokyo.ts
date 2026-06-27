@@ -2,14 +2,13 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import {
   DRACOLoader,
-  DRACO_GLTF_CONFIG,
 } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { Sky } from 'three/examples/jsm/objects/Sky.js'
 import type { StreetWalkRuntime } from '@/lib/tokyo-game/collision'
 import {
   bakeStreetNavGrid,
   collectStreetMeshes,
-  createStreetDebugOverlay,
+  createStreetDebugHolder,
   findStreetSpawn,
 } from '@/lib/tokyo-game/walkable-surfaces'
 
@@ -50,23 +49,34 @@ export function setupTokyoSky(
   uniforms.sunPosition.value.set(-0.8, 0.19, 0.56)
 
   const pmrem = new THREE.PMREMGenerator(renderer)
+  pmrem.compileEquirectangularShader()
   scene.environment = pmrem.fromScene(envScene).texture
   pmrem.dispose()
 
   scene.add(sky)
 }
 
+/** Served from public/draco/gltf — import.meta Draco URLs break under Next.js bundling. */
+const DRACO_DECODER_PATH = '/draco/gltf/'
+
 export async function loadLittlestTokyo(
   scene: THREE.Scene,
 ): Promise<LittlestTokyoScene> {
   const dracoLoader = new DRACOLoader()
-  dracoLoader.setDecoderPath(DRACO_GLTF_CONFIG)
+  dracoLoader.setDecoderPath({
+    js: `${DRACO_DECODER_PATH}draco_wasm_wrapper.js`,
+    wasm: `${DRACO_DECODER_PATH}draco_decoder.wasm`,
+  })
 
   const loader = new GLTFLoader()
   loader.setDRACOLoader(dracoLoader)
 
-  const gltf = await loader.loadAsync(LITTLEST_TOKYO_URL)
-  dracoLoader.dispose()
+  let gltf
+  try {
+    gltf = await loader.loadAsync(LITTLEST_TOKYO_URL)
+  } finally {
+    dracoLoader.dispose()
+  }
 
   const model = gltf.scene
   model.position.set(1, 1, 0)
@@ -86,7 +96,7 @@ export async function loadLittlestTokyo(
   const nav = bakeStreetNavGrid(ctx, raycaster)
   const walk: StreetWalkRuntime = { ctx, nav }
   const spawn = findStreetSpawn(nav)
-  const debugOverlay = createStreetDebugOverlay(nav, model)
+  const debugOverlay = createStreetDebugHolder(model)
 
   const mixer = new THREE.AnimationMixer(model)
   if (gltf.animations[0]) {

@@ -34,6 +34,7 @@ export function ArticleContent({ blocks }: { blocks: BlogBlock[] }) {
                 src={block.src}
                 alt={block.alt}
                 caption={block.caption}
+                link={block.link}
               />
             )
           default:

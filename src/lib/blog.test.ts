@@ -1,10 +1,13 @@
 import { describe, it, expect } from 'vitest'
 import {
+  assertBlogPostsHaveAllLocales,
   formatBlogDate,
   getAllBlogPosts,
   getBlogPost,
+  getBlogPostContent,
   getBlogSlugs,
 } from './blog'
+import { locales } from '@/i18n/dictionaries'
 
 describe('blog', () => {
   it('lists posts sorted by date descending', () => {
@@ -26,5 +29,17 @@ describe('blog', () => {
   it('formats dates per locale', () => {
     expect(formatBlogDate('2026-06-01', 'fr')).toContain('2026')
     expect(formatBlogDate('2026-06-01', 'en')).toContain('2026')
+  })
+
+  it('requires every post to have fr and en content', () => {
+    expect(() => assertBlogPostsHaveAllLocales()).not.toThrow()
+    for (const post of getAllBlogPosts()) {
+      for (const locale of locales) {
+        const content = getBlogPostContent(post, locale)
+        expect(content.title.length).toBeGreaterThan(0)
+        expect(content.description.length).toBeGreaterThan(0)
+        expect(content.blocks.length).toBeGreaterThan(0)
+      }
+    }
   })
 })
