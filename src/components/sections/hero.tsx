@@ -10,6 +10,7 @@ import {
   MotionButton,
   MotionLink,
 } from '@/components/ui/motion-primitives'
+import { AdventureTeaserLink } from '@/components/ui/adventure-teaser-link'
 import { useLocale } from '@/i18n/locale-context'
 import { easeOut, staggerContainer } from '@/lib/motion'
 
@@ -101,6 +102,10 @@ export function Hero() {
         <MotionButton variant="outline" onClick={() => scrollTo('#contact')}>
           {t.hero.ctaSecondary}
         </MotionButton>
+      </motion.div>
+
+      <motion.div variants={heroItem} className="mt-2 w-full max-w-md">
+        <AdventureTeaserLink />
       </motion.div>
 
       <motion.div

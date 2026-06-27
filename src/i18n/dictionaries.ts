@@ -65,6 +65,11 @@ export const dictionaries = {
         'Basé à Paris — je construis des serveurs MCP, des workflows LLM et des apps Next.js pour les équipes produit et les grands comptes.',
       ctaPrimary: 'Voir les projets',
       ctaSecondary: 'Me contacter',
+      adventureTeaser: {
+        kicker: 'Side quest',
+        title: 'Aventure isométrique',
+        hint: 'Clique sur l’herbe pour explorer',
+      },
     },
     about: {
       title: 'À propos',
@@ -344,6 +349,11 @@ export const dictionaries = {
         'Based in Paris — I build MCP servers, LLM workflows, and Next.js apps for product teams and enterprise clients.',
       ctaPrimary: 'View projects',
       ctaSecondary: 'Get in touch',
+      adventureTeaser: {
+        kicker: 'Side quest',
+        title: 'Isometric adventure',
+        hint: 'Click the grass to explore',
+      },
     },
     about: {
       title: 'About',
