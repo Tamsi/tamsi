@@ -2,145 +2,64 @@
 
 import { useEffect, useRef } from 'react'
 import { useReducedMotion } from 'motion/react'
-import { animate } from 'animejs'
+import { mountHelixScene } from '@/lib/three-scroll-bg/helix-scene'
+import { mountOrbitScene } from '@/lib/three-scroll-bg/orbit-scene'
+import { scrollProgress } from '@/lib/three-scroll-bg/shared'
 
-function clamp(n: number, min: number, max: number) {
-  return Math.min(max, Math.max(min, n))
-}
+/** Switch variant: `'orbit'` (constellation) | `'helix'` (double helix flow) */
+const SCROLL_BG_VARIANT: 'orbit' | 'helix' = 'orbit'
 
-/** Fast progress (visible in the first ~2 viewports) + slow drift for the rest of the page */
-function scrollProgress(speed = 1) {
-  const y = window.scrollY
-  const vh = window.innerHeight
-  const max = document.documentElement.scrollHeight - vh
-  const fast = clamp(y / (vh * 2), 0, 1)
-  const slow = max > 0 ? clamp(y / max, 0, 1) : 0
-  return clamp((fast * 0.7 + slow * 0.3) * speed, 0, 1)
-}
+const VARIANT_CLASS = {
+  orbit: 'homepage-three-bg--orbit',
+  helix: 'homepage-three-bg--helix',
+} as const
 
-/**
- * Full-page background layer scrubbed to scroll via anime.js seek.
- * Fixed behind content — orbs + grid drift as you scroll the homepage.
- */
 export function HomepageScrollBackground() {
-  const rootRef = useRef<HTMLDivElement>(null)
+  const hostRef = useRef<HTMLDivElement>(null)
   const reduced = useReducedMotion()
 
   useEffect(() => {
     if (reduced) return
-    const root = rootRef.current
-    if (!root) return
+    const host = hostRef.current
+    if (!host) return
 
-    let cancelled = false
-    const layers = [
-      {
-        el: root.querySelector<HTMLElement>('[data-bg-layer="orb-1"]'),
-        speed: 1,
-        anim: null as ReturnType<typeof animate> | null,
-      },
-      {
-        el: root.querySelector<HTMLElement>('[data-bg-layer="orb-2"]'),
-        speed: 0.72,
-        anim: null as ReturnType<typeof animate> | null,
-      },
-      {
-        el: root.querySelector<HTMLElement>('[data-bg-layer="orb-3"]'),
-        speed: 1.35,
-        anim: null as ReturnType<typeof animate> | null,
-      },
-      {
-        el: root.querySelector<HTMLElement>('[data-bg-layer="grid"]'),
-        speed: 0.55,
-        anim: null as ReturnType<typeof animate> | null,
-      },
-      {
-        el: root.querySelector<HTMLElement>('[data-bg-layer="lines"]'),
-        speed: 1.1,
-        anim: null as ReturnType<typeof animate> | null,
-      },
-    ]
+    const scene =
+      SCROLL_BG_VARIANT === 'orbit'
+        ? mountOrbitScene(host)
+        : mountHelixScene(host)
 
-    const orb1 = layers[0].el
-    const orb2 = layers[1].el
-    const orb3 = layers[2].el
-    const grid = layers[3].el
-    const lines = layers[4].el
+    let targetP = scrollProgress()
+    let currentP = targetP
+    let raf = 0
+    let running = true
 
-    if (orb1) {
-      layers[0].anim = animate(orb1, {
-        translateX: ['-12vw', '28vw'],
-        translateY: ['-12vh', '55vh'],
-        scale: [0.75, 1.35],
-        duration: 1,
-        ease: 'linear',
-        autoplay: false,
-      })
+    const resize = () => {
+      scene.resize(host.clientWidth, host.clientHeight)
     }
 
-    if (orb2) {
-      layers[1].anim = animate(orb2, {
-        translateX: ['18vw', '-32vw'],
-        translateY: ['15vh', '-50vh'],
-        scale: [0.9, 1.55],
-        rotate: ['0deg', '-90deg'],
-        duration: 1,
-        ease: 'linear',
-        autoplay: false,
-      })
+    const frame = (time: number) => {
+      if (!running) return
+      raf = requestAnimationFrame(frame)
+      currentP += (targetP - currentP) * 0.06
+      scene.frame(currentP, time)
     }
 
-    if (orb3) {
-      layers[2].anim = animate(orb3, {
-        translateX: ['-22vw', '15vw'],
-        translateY: ['30vh', '-35vh'],
-        scale: [0.65, 1.25],
-        rotate: ['0deg', '120deg'],
-        duration: 1,
-        ease: 'linear',
-        autoplay: false,
-      })
+    const onScroll = () => {
+      targetP = scrollProgress()
     }
 
-    if (grid) {
-      layers[3].anim = animate(grid, {
-        translateY: ['0px', '-280px'],
-        rotate: ['0deg', '12deg'],
-        scale: [1, 1.15],
-        opacity: [0.45, 0.9],
-        duration: 1,
-        ease: 'linear',
-        autoplay: false,
-      })
-    }
-
-    if (lines) {
-      layers[4].anim = animate(lines, {
-        translateX: ['-12%', '18%'],
-        translateY: ['0%', '-40%'],
-        rotate: ['-6deg', '14deg'],
-        duration: 1,
-        ease: 'linear',
-        autoplay: false,
-      })
-    }
-
-    const tick = () => {
-      if (cancelled) return
-      for (const { anim, speed } of layers) {
-        if (!anim) continue
-        anim.seek(scrollProgress(speed) * anim.duration)
-      }
-    }
-
-    window.addEventListener('scroll', tick, { passive: true })
-    window.addEventListener('resize', tick, { passive: true })
-    requestAnimationFrame(tick)
+    const ro = new ResizeObserver(resize)
+    ro.observe(host)
+    resize()
+    raf = requestAnimationFrame(frame)
+    window.addEventListener('scroll', onScroll, { passive: true })
 
     return () => {
-      cancelled = true
-      window.removeEventListener('scroll', tick)
-      window.removeEventListener('resize', tick)
-      for (const { anim } of layers) anim?.revert()
+      running = false
+      cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', onScroll)
+      ro.disconnect()
+      scene.dispose()
     }
   }, [reduced])
 
@@ -148,19 +67,9 @@ export function HomepageScrollBackground() {
 
   return (
     <div
-      ref={rootRef}
+      ref={hostRef}
       aria-hidden
-      className="homepage-scroll-bg pointer-events-none fixed inset-0 z-0 overflow-hidden"
-    >
-      <div data-bg-layer="grid" className="homepage-scroll-bg__grid" />
-      <div data-bg-layer="lines" className="homepage-scroll-bg__lines">
-        <span />
-        <span />
-        <span />
-      </div>
-      <div data-bg-layer="orb-1" className="homepage-scroll-bg__orb homepage-scroll-bg__orb--1" />
-      <div data-bg-layer="orb-2" className="homepage-scroll-bg__orb homepage-scroll-bg__orb--2" />
-      <div data-bg-layer="orb-3" className="homepage-scroll-bg__orb homepage-scroll-bg__orb--3" />
-    </div>
+      className={`homepage-three-bg ${VARIANT_CLASS[SCROLL_BG_VARIANT]} pointer-events-none fixed inset-0 z-0`}
+    />
   )
 }

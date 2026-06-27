@@ -625,114 +625,54 @@ a:hover .portfolio-entry-title,
   }
 }
 
-/* Scroll-scrubbed homepage background (anime.js) */
-.homepage-scroll-bg {
+/* Three.js scroll backdrop */
+.homepage-three-bg {
   contain: strict;
 }
 
-.homepage-scroll-bg__orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(70px);
-  will-change: transform;
-}
-
-.homepage-scroll-bg__orb--1 {
-  top: 6%;
-  left: -8%;
-  width: min(75vw, 560px);
-  height: min(75vw, 560px);
-  background: radial-gradient(
-    circle,
-    rgba(37, 99, 235, 0.38) 0%,
-    rgba(37, 99, 235, 0.08) 45%,
-    transparent 72%
-  );
-}
-
-.homepage-scroll-bg__orb--2 {
-  top: 38%;
-  right: -12%;
-  width: min(65vw, 480px);
-  height: min(65vw, 480px);
-  background: radial-gradient(
-    circle,
-    rgba(14, 165, 233, 0.32) 0%,
-    rgba(14, 165, 233, 0.06) 50%,
-    transparent 72%
-  );
-}
-
-.homepage-scroll-bg__orb--3 {
-  bottom: 8%;
-  left: 18%;
-  width: min(55vw, 420px);
-  height: min(55vw, 420px);
-  background: radial-gradient(
-    circle,
-    rgba(99, 102, 241, 0.28) 0%,
-    rgba(99, 102, 241, 0.05) 48%,
-    transparent 70%
-  );
-}
-
-.homepage-scroll-bg__grid {
-  position: absolute;
-  inset: -25%;
-  background-image:
-    linear-gradient(rgba(37, 99, 235, 0.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(37, 99, 235, 0.09) 1px, transparent 1px);
-  background-size: 44px 44px;
-  transform-origin: 50% 30%;
-  -webkit-mask-image: radial-gradient(
-    ellipse 85% 75% at 50% 35%,
-    #000 15%,
-    transparent 72%
-  );
-  mask-image: radial-gradient(
-    ellipse 85% 75% at 50% 35%,
-    #000 15%,
-    transparent 72%
-  );
-}
-
-.homepage-scroll-bg__lines {
+.homepage-three-bg::after {
+  content: '';
   position: absolute;
   inset: 0;
-  transform-origin: 50% 50%;
+  pointer-events: none;
 }
 
-.homepage-scroll-bg__lines span {
-  position: absolute;
-  left: -10%;
-  width: 120%;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(37, 99, 235, 0.22) 35%,
-    rgba(14, 165, 233, 0.18) 65%,
-    transparent 100%
-  );
+.homepage-three-bg--orbit::after {
+  background:
+    radial-gradient(
+      ellipse 55% 50% at 72% 42%,
+      rgba(37, 99, 235, 0.06) 0%,
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 90% 80% at 50% 50%,
+      transparent 35%,
+      var(--landing-bg) 88%
+    );
 }
 
-.homepage-scroll-bg__lines span:nth-child(1) {
-  top: 22%;
-  transform: rotate(-8deg);
+.homepage-three-bg--helix::after {
+  background:
+    radial-gradient(
+      ellipse 48% 55% at 78% 38%,
+      rgba(14, 165, 233, 0.07) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse 85% 75% at 50% 50%,
+      transparent 30%,
+      var(--landing-bg) 90%
+    );
 }
 
-.homepage-scroll-bg__lines span:nth-child(2) {
-  top: 48%;
-  transform: rotate(4deg);
-}
-
-.homepage-scroll-bg__lines span:nth-child(3) {
-  top: 74%;
-  transform: rotate(-5deg);
+.homepage-three-bg canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .homepage-scroll-bg {
+  .homepage-three-bg {
     display: none;
   }
 }
