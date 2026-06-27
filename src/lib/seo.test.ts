@@ -49,6 +49,6 @@ describe('seo', () => {
   it('lists external profiles on person schema', () => {
     const person = buildPersonJsonLd('en') as { sameAs: string[] }
     expect(person.sameAs.some((u) => u.includes('github.com'))).toBe(true)
-    expect(person.sameAs.some((u) => u.includes('linkedin.com'))).toBe(true)
+    expect(person.sameAs.some((u) => u.includes('x.com'))).toBe(true)
   })
 })

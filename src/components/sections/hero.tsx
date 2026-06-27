@@ -1,10 +1,11 @@
 'use client'
 
 import { motion, useReducedMotion } from 'motion/react'
-import { ArrowUpRight, Github, Linkedin, GitlabIcon } from 'lucide-react'
+import { ArrowUpRight, Github } from 'lucide-react'
 import { HuggingFaceIcon } from '@/components/ui/hugging-face-icon'
 import { CursorIcon } from '@/components/ui/cursor-icon'
-import { CURSOR_PROFILE_URL } from '@/data/site-links'
+import { XIcon } from '@/components/ui/x-icon'
+import { CURSOR_PROFILE_URL, X_URL } from '@/data/site-links'
 import {
   MotionButton,
   MotionLink,
@@ -14,19 +15,14 @@ import { easeOut, staggerContainer } from '@/lib/motion'
 
 const socials = [
   {
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/tamsi-besson-71228a14b/',
-    icon: Linkedin,
+    label: 'X',
+    href: X_URL,
+    icon: XIcon,
   },
   {
     label: 'GitHub',
     href: 'https://github.com/Tamsi',
     icon: Github,
-  },
-  {
-    label: 'GitLab',
-    href: 'https://gitlab.com/Tamsi',
-    icon: GitlabIcon,
   },
   {
     label: 'Hugging Face',

@@ -8,13 +8,11 @@ export const EMAIL = 'tamsi.besson@gmail.com'
 
 export const CURSOR_PROFILE_URL = 'https://cursor.com/@tamsi'
 
+export const X_URL = 'https://x.com/tamsi_besson'
+
 export const socialLinks = [
-  {
-    label: 'LinkedIn',
-    href: 'https://www.linkedin.com/in/tamsi-besson-71228a14b/',
-  },
+  { label: 'X', href: X_URL },
   { label: 'GitHub', href: 'https://github.com/Tamsi' },
-  { label: 'GitLab', href: 'https://gitlab.com/Tamsi' },
   { label: 'Hugging Face', href: 'https://huggingface.co/ImTamsi' },
   { label: 'Cursor', href: CURSOR_PROFILE_URL },
 ] as const

@@ -77,8 +77,7 @@ Cursor / Claude  →  AI agentic IDE and Cloud automations
 | Portfolio | [tamsi.dev](https://tamsi.dev) |
 | Blog | [tamsi.dev/blog](https://tamsi.dev/blog) |
 | GitHub | [github.com/Tamsi](https://github.com/Tamsi) |
-| X | [x.com/tamsi](https://x.com/tamsi_besson) |
-| LinkedIn | [tamsi-besson](https://www.linkedin.com/in/tamsi-besson-71228a14b/) |
+| X | [@tamsi_besson](https://x.com/tamsi_besson) |
 | Cursor | [cursor.com/@tamsi](https://cursor.com/@tamsi) |
 
 ---
