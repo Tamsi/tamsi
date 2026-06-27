@@ -32,9 +32,9 @@ export const dictionaries = {
       blogTitle: 'Blog — Tamsi Besson',
       blogDescription:
         'Pourquoi j’ai monté ces outils : tokens LLM gratuits, MCP pour le travail quotidien, revue de code sans surcoût Cursor.',
-      tokyoTitle: 'Tokyo — mini balade 3D · Tamsi Besson',
-      tokyoDescription:
-        'Petit jeu de balade dans un Tokyo low-poly au crépuscule : Tokyo Tower, torii, pagode et néons. ZQSD ou flèches pour explorer.',
+      adventureTitle: 'Aventure isométrique · Tamsi Besson',
+      adventureDescription:
+        'Mini-jeu style Dofus : terrain herbeux, déplacement au clic.',
     },
     nav: {
       about: 'À propos',
@@ -290,14 +290,13 @@ export const dictionaries = {
         "Envie de collaborer sur du MCP, de l'IA ou un produit web\u00a0? Écrivez-moi.",
       copyright: '© {year} Tamsi Besson · tamsi.dev',
     },
-    tokyo: {
+    adventure: {
       kicker: 'Side quest',
-      title: 'Balade à Tokyo',
+      title: 'Aventure isométrique',
       back: 'Retour au portfolio',
-      enterPrompt: 'Fais tourner la map à la souris, puis Entrée pour marcher dans les rues.',
-      controls: 'ZQSD ou flèches — tu ne peux marcher que sur les routes. B = zones marchables.',
-      loadError: 'Impossible de charger le modèle 3D',
-      credit: 'Littlest Tokyo par Glen Fox — CC BY',
+      controls: 'Clique sur l\'herbe pour te déplacer.',
+      credit:
+        'Personnage par 2D!PIXX (CC BY 4.0) · opengameart.org/content/warrior-animated-character-isometric',
     },
   },
 
@@ -312,9 +311,9 @@ export const dictionaries = {
       blogTitle: 'Blog — Tamsi Besson',
       blogDescription:
         'Why I built these tools: free LLM tokens, MCP for daily work, code review without extra Cursor cost.',
-      tokyoTitle: 'Tokyo — 3D mini walk · Tamsi Besson',
-      tokyoDescription:
-        'A tiny low-poly Tokyo stroll at dusk: Tokyo Tower, torii gate, pagoda, and neon streets. WASD or arrow keys to explore.',
+      adventureTitle: 'Isometric adventure · Tamsi Besson',
+      adventureDescription:
+        'Dofus-style mini-game: grassy field, click to move.',
     },
     nav: {
       about: 'About',
@@ -569,14 +568,13 @@ export const dictionaries = {
         'Interested in MCP, AI tooling, or a web product? Drop me a line.',
       copyright: '© {year} Tamsi Besson · tamsi.dev',
     },
-    tokyo: {
+    adventure: {
       kicker: 'Side quest',
-      title: 'Walk around Tokyo',
+      title: 'Isometric adventure',
       back: 'Back to portfolio',
-      enterPrompt: 'Drag to rotate the map, then press Enter to walk the streets.',
-      controls: 'WASD or arrows — streets only. B = toggle walkable overlay.',
-      loadError: 'Failed to load the 3D model',
-      credit: 'Littlest Tokyo by Glen Fox — CC BY',
+      controls: 'Click the grass to move.',
+      credit:
+        'Character by 2D!PIXX (CC BY 4.0) · opengameart.org/content/warrior-animated-character-isometric',
     },
   },
 } as const

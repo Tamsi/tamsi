@@ -15,7 +15,27 @@ import {
 import type { BlogPost } from '@/content/blog'
 import { getBlogPostContent, blogPostLocaleUrl } from '@/lib/blog'
 
-export type SitePath = '/' | '/machine' | '/blog' | '/tokyo'
+export type SitePath = '/' | '/machine' | '/blog' | '/adventure'
+
+function pageMeta(
+  t: (typeof dictionaries)[Locale],
+  path: SitePath,
+): { title: string; description: string } {
+  switch (path) {
+    case '/machine':
+      return {
+        title: t.meta.machineTitle,
+        description: t.meta.machineDescription,
+      }
+    case '/adventure':
+      return {
+        title: t.meta.adventureTitle,
+        description: t.meta.adventureDescription,
+      }
+    default:
+      return { title: t.meta.title, description: t.meta.description }
+  }
+}
 
 export function localePageUrl(path: SitePath, locale: Locale): string {
   const url = new URL(path, SITE_URL)
@@ -39,18 +59,7 @@ export function buildPageMetadata(
   path: SitePath,
 ): Metadata {
   const t = dictionaries[locale]
-  const isMachine = path === '/machine'
-  const isTokyo = path === '/tokyo'
-  const title = isMachine
-    ? t.meta.machineTitle
-    : isTokyo
-      ? t.meta.tokyoTitle
-      : t.meta.title
-  const description = isMachine
-    ? t.meta.machineDescription
-    : isTokyo
-      ? t.meta.tokyoDescription
-      : t.meta.description
+  const { title, description } = pageMeta(t, path)
   const canonical = localePageUrl(path, locale)
 
   return {
@@ -148,23 +157,14 @@ export function buildWebSiteJsonLd(locale: Locale) {
 
 export function buildProfilePageJsonLd(locale: Locale, path: SitePath) {
   const t = dictionaries[locale]
-  const isMachine = path === '/machine'
-  const isTokyo = path === '/tokyo'
+  const { title, description } = pageMeta(t, path)
   return {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
     '@id': `${localePageUrl(path, locale)}#profile`,
     url: localePageUrl(path, locale),
-    name: isMachine
-      ? t.meta.machineTitle
-      : isTokyo
-        ? t.meta.tokyoTitle
-        : t.meta.title,
-    description: isMachine
-      ? t.meta.machineDescription
-      : isTokyo
-        ? t.meta.tokyoDescription
-        : t.meta.description,
+    name: title,
+    description,
     inLanguage: locale,
     isPartOf: { '@id': `${SITE_URL}/#website` },
     mainEntity: { '@id': `${SITE_URL}/#person` },
