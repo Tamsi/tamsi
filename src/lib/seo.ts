@@ -15,7 +15,7 @@ import {
 import type { BlogPost } from '@/content/blog'
 import { blogPostPath, getBlogPostContent } from '@/lib/blog'
 
-export type SitePath = '/' | '/machine' | '/blog'
+export type SitePath = '/' | '/machine' | '/blog' | '/tokyo'
 
 export function localePageUrl(path: SitePath, locale: Locale): string {
   const url = new URL(path, SITE_URL)
@@ -40,10 +40,17 @@ export function buildPageMetadata(
 ): Metadata {
   const t = dictionaries[locale]
   const isMachine = path === '/machine'
-  const title = isMachine ? t.meta.machineTitle : t.meta.title
+  const isTokyo = path === '/tokyo'
+  const title = isMachine
+    ? t.meta.machineTitle
+    : isTokyo
+      ? t.meta.tokyoTitle
+      : t.meta.title
   const description = isMachine
     ? t.meta.machineDescription
-    : t.meta.description
+    : isTokyo
+      ? t.meta.tokyoDescription
+      : t.meta.description
   const canonical = localePageUrl(path, locale)
 
   return {
@@ -142,13 +149,22 @@ export function buildWebSiteJsonLd(locale: Locale) {
 export function buildProfilePageJsonLd(locale: Locale, path: SitePath) {
   const t = dictionaries[locale]
   const isMachine = path === '/machine'
+  const isTokyo = path === '/tokyo'
   return {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
     '@id': `${localePageUrl(path, locale)}#profile`,
     url: localePageUrl(path, locale),
-    name: isMachine ? t.meta.machineTitle : t.meta.title,
-    description: isMachine ? t.meta.machineDescription : t.meta.description,
+    name: isMachine
+      ? t.meta.machineTitle
+      : isTokyo
+        ? t.meta.tokyoTitle
+        : t.meta.title,
+    description: isMachine
+      ? t.meta.machineDescription
+      : isTokyo
+        ? t.meta.tokyoDescription
+        : t.meta.description,
     inLanguage: locale,
     isPartOf: { '@id': `${SITE_URL}/#website` },
     mainEntity: { '@id': `${SITE_URL}/#person` },

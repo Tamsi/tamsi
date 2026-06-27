@@ -4,7 +4,7 @@ import { getBlogSlugs } from '@/lib/blog'
 import { defaultLocale, locales } from '@/i18n/dictionaries'
 import { localePageUrl, type SitePath } from '@/lib/seo'
 
-const paths: SitePath[] = ['/', '/machine', '/blog']
+const paths: SitePath[] = ['/', '/machine', '/blog', '/tokyo']
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entries: MetadataRoute.Sitemap = []

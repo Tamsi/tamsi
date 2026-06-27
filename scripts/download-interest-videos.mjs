@@ -16,8 +16,8 @@ const tmpDir = path.join(__dirname, '../.tmp-video-download')
 const VIDEOS = [
   {
     name: 'cursor',
-    url: 'https://www.youtube.com/watch?v=JSuS-zXMVwE',
-    label: 'Fireship — Cursor 3.0 first look (UI / motion, no presenter)',
+    url: 'https://www.youtube.com/watch?v=An8IM-kPyms',
+    label: 'Cursor showcase video',
     maxSec: 60,
   },
   {
