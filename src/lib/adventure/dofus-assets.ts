@@ -13,6 +13,8 @@ export const GRASS_GROUND_IDS = [53, 54, 55, 56, 57, 58, 59, 60] as const
 
 const PROXY = '/api/adventure/dofus'
 
+/** Grass tile source via NEXT_PUBLIC_ADVENTURE_DOFUS_TILES: unset (procedural), local, or remote. */
+
 const imageCache = new Map<string, Promise<HTMLImageElement>>()
 
 function loadImage(url: string): Promise<HTMLImageElement> {

@@ -155,11 +155,36 @@ async function loadLocalDofusGrass(): Promise<Map<number, HTMLImageElement>> {
       try {
         tiles.set(id, await loadImage(`/adventure/dofus/ground/${id}.png`))
       } catch {
-        // Optional user-provided extract.
+        // Missing optional extract.
       }
     }),
   )
   return tiles
+}
+
+async function tryLoadDofusGrass(): Promise<{
+  grassTiles: Map<number, HTMLImageElement>
+  grassMeta: Record<string, GfxSpriteMeta>
+} | null> {
+  const mode = process.env.NEXT_PUBLIC_ADVENTURE_DOFUS_TILES
+
+  if (mode === 'local') {
+    const grassTiles = await loadLocalDofusGrass()
+    return grassTiles.size > 0 ? { grassTiles, grassMeta: {} } : null
+  }
+
+  if (mode === 'remote' || mode === 'true') {
+    try {
+      const catalog: GroundCatalog = await loadGroundCatalog()
+      const grassTiles = await loadDofusGrassTiles(catalog)
+      if (grassTiles.size === 0) return null
+      return { grassTiles, grassMeta: catalog.sprites }
+    } catch {
+      return null
+    }
+  }
+
+  return null
 }
 
 export async function loadAdventureSprites(): Promise<AdventureSprites> {
@@ -170,14 +195,14 @@ export async function loadAdventureSprites(): Promise<AdventureSprites> {
     loadEnemySprites(),
   ])
 
-  const localGrass = await loadLocalDofusGrass()
-  if (localGrass.size > 0) {
+  const dofusGrass = await tryLoadDofusGrass()
+  if (dofusGrass) {
     return {
       source: 'dofus',
       cellW: DOFUS_CELL_W,
       cellHalfH: DOFUS_CELL_HALF_H,
-      grassTiles: localGrass,
-      grassMeta: {},
+      grassTiles: dofusGrass.grassTiles,
+      grassMeta: dofusGrass.grassMeta,
       characterRun,
       characterIdle,
       npcIdle,
@@ -185,34 +210,16 @@ export async function loadAdventureSprites(): Promise<AdventureSprites> {
     }
   }
 
-  try {
-    const catalog: GroundCatalog = await loadGroundCatalog()
-    const grassTiles = await loadDofusGrassTiles(catalog)
-    if (grassTiles.size === 0) throw new Error('No grass tiles loaded')
-
-    return {
-      source: 'dofus',
-      cellW: DOFUS_CELL_W,
-      cellHalfH: DOFUS_CELL_HALF_H,
-      grassTiles,
-      grassMeta: catalog.sprites,
-      characterRun,
-      characterIdle,
-      npcIdle,
-      enemySprites,
-    }
-  } catch {
-    const grassTiles = await loadProceduralGrassTiles()
-    return {
-      source: 'procedural',
-      cellW: DOFUS_CELL_W,
-      cellHalfH: DOFUS_CELL_HALF_H,
-      grassTiles,
-      grassMeta: {},
-      characterRun,
-      characterIdle,
-      npcIdle,
-      enemySprites,
-    }
+  const grassTiles = await loadProceduralGrassTiles()
+  return {
+    source: 'procedural',
+    cellW: DOFUS_CELL_W,
+    cellHalfH: DOFUS_CELL_HALF_H,
+    grassTiles,
+    grassMeta: {},
+    characterRun,
+    characterIdle,
+    npcIdle,
+    enemySprites,
   }
 }
