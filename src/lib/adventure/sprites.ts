@@ -8,7 +8,19 @@ import {
   type GfxSpriteMeta,
 } from '@/lib/adventure/dofus-assets'
 import { CHARACTER_SPRITE_ROW_COUNT } from '@/lib/adventure/isometric'
+import { NPC_IDLE_FRAME_COUNT, NPC_IDLE_ROW } from '@/lib/adventure/npc'
 import { loadProceduralGrassTiles } from '@/lib/adventure/grass-tile'
+import {
+  enemySpritePath,
+  type EnemySpriteSet,
+} from '@/lib/adventure/enemies'
+
+export type EnemyAnimationSet = {
+  idle: HTMLImageElement[]
+  attack: HTMLImageElement[]
+}
+
+export type EnemySpriteFrames = Record<EnemySpriteSet, EnemyAnimationSet>
 
 export type LocalCharacterFrames = Record<number, HTMLImageElement[]>
 
@@ -21,6 +33,10 @@ export type AdventureSprites = {
   characterRun: LocalCharacterFrames
   /** Standing idle loop per diagonal (2DPIXX warrior). */
   characterIdle: LocalCharacterFrames
+  /** Archivist NPC idle frames (2DPIXX wizard). */
+  npcIdle: HTMLImageElement[]
+  /** Dungeon enemy idle frames (tinted at draw time). */
+  enemySprites: EnemySpriteFrames
 }
 
 const RUN_FRAME_COUNT = 4
@@ -78,6 +94,60 @@ async function loadLocalCharacterIdle(): Promise<LocalCharacterFrames> {
   return frames
 }
 
+async function loadLocalNpcIdle(): Promise<HTMLImageElement[]> {
+  const frames: HTMLImageElement[] = []
+  await Promise.all(
+    Array.from({ length: NPC_IDLE_FRAME_COUNT }, async (_, frame) => {
+      const path = `/adventure/sprites/npc/wizard_idle_${NPC_IDLE_ROW}_${frame}.png`
+      try {
+        frames[frame] = await loadImage(path)
+      } catch {
+        // Missing frame — skip.
+      }
+    }),
+  )
+  return frames.filter(Boolean)
+}
+
+const ENEMY_SPRITE_SETS: EnemySpriteSet[] = [
+  'goblin',
+  'skeleton',
+  'wraith',
+  'brute',
+  'archmage',
+]
+
+async function loadEnemySprites(): Promise<EnemySpriteFrames> {
+  const result = {} as EnemySpriteFrames
+  await Promise.all(
+    ENEMY_SPRITE_SETS.map(async (set) => {
+      const idle: HTMLImageElement[] = []
+      const attack: HTMLImageElement[] = []
+      await Promise.all([
+        ...Array.from({ length: 4 }, async (_, frame) => {
+          try {
+            idle[frame] = await loadImage(enemySpritePath(set, frame, 'idle'))
+          } catch {
+            // Missing frame — skip.
+          }
+        }),
+        ...Array.from({ length: 4 }, async (_, frame) => {
+          try {
+            attack[frame] = await loadImage(enemySpritePath(set, frame, 'attack'))
+          } catch {
+            // Missing frame — skip.
+          }
+        }),
+      ])
+      result[set] = {
+        idle: idle.filter(Boolean),
+        attack: attack.filter(Boolean),
+      }
+    }),
+  )
+  return result
+}
+
 async function loadLocalDofusGrass(): Promise<Map<number, HTMLImageElement>> {
   const tiles = new Map<number, HTMLImageElement>()
   await Promise.all(
@@ -93,9 +163,11 @@ async function loadLocalDofusGrass(): Promise<Map<number, HTMLImageElement>> {
 }
 
 export async function loadAdventureSprites(): Promise<AdventureSprites> {
-  const [characterRun, characterIdle] = await Promise.all([
+  const [characterRun, characterIdle, npcIdle, enemySprites] = await Promise.all([
     loadLocalCharacterRun(),
     loadLocalCharacterIdle(),
+    loadLocalNpcIdle(),
+    loadEnemySprites(),
   ])
 
   const localGrass = await loadLocalDofusGrass()
@@ -108,6 +180,8 @@ export async function loadAdventureSprites(): Promise<AdventureSprites> {
       grassMeta: {},
       characterRun,
       characterIdle,
+      npcIdle,
+      enemySprites,
     }
   }
 
@@ -124,6 +198,8 @@ export async function loadAdventureSprites(): Promise<AdventureSprites> {
       grassMeta: catalog.sprites,
       characterRun,
       characterIdle,
+      npcIdle,
+      enemySprites,
     }
   } catch {
     const grassTiles = await loadProceduralGrassTiles()
@@ -135,6 +211,8 @@ export async function loadAdventureSprites(): Promise<AdventureSprites> {
       grassMeta: {},
       characterRun,
       characterIdle,
+      npcIdle,
+      enemySprites,
     }
   }
 }

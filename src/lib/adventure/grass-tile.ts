@@ -88,3 +88,21 @@ export function drawProceduralGrass(
   const footY = sy + cellHalfH
   drawIsoGrassTile(ctx, sx, footY, VARIANTS[variant % VARIANTS.length])
 }
+
+const STONE_VARIANTS: GrassShade[] = [
+  { top: '#6b7280', left: '#4b5563', right: '#78716c' },
+  { top: '#64748b', left: '#475569', right: '#737373' },
+  { top: '#71717a', left: '#52525b', right: '#78716c' },
+  { top: '#5c6370', left: '#434854', right: '#6b7280' },
+]
+
+export function drawProceduralStone(
+  ctx: CanvasRenderingContext2D,
+  sx: number,
+  sy: number,
+  cellHalfH: number,
+  variant: number,
+) {
+  const footY = sy + cellHalfH
+  drawIsoGrassTile(ctx, sx, footY, STONE_VARIANTS[variant % STONE_VARIANTS.length])
+}

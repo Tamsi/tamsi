@@ -1,35 +1,51 @@
 import type { GridPos, TileKind } from '@/lib/adventure/types'
+import {
+  getMapDefinition,
+  mapDimensions,
+  tileAtMap,
+  transitionAtMap,
+  type MapId,
+} from '@/lib/adventure/maps'
+import { enemyForMap } from '@/lib/adventure/enemies'
+import { dungeonDepth } from '@/lib/adventure/maps'
 
-const ASCII = [
-  '....................',
-  '..gggggggggggggggg..',
-  '..gggggggggggggggg..',
-  '..gggggggggggggggg..',
-  '..gggggggggggggggg..',
-  '..gggggggggggggggg..',
-  '..gggggggggggggggg..',
-  '..gggggggggggggggg..',
-  '..gggggggggggggggg..',
-  '..gggggggggggggggg..',
-  '..gggggggggggggggg..',
-  '..gggggggggggggggg..',
-  '..gggggggggggggggg..',
-  '....................',
-] as const
+export type { MapId } from '@/lib/adventure/maps'
 
-export const MAP_ROWS = ASCII.length
-export const MAP_COLS = ASCII[0].length
-
-export function tileAt(x: number, y: number): TileKind {
-  if (y < 0 || x < 0 || y >= MAP_ROWS || x >= MAP_COLS) return 'void'
-  const ch = ASCII[y][x]
-  return ch === 'g' ? 'grass' : 'void'
+export function tileAt(mapId: MapId, x: number, y: number): TileKind {
+  return tileAtMap(mapId, x, y)
 }
 
-export function isWalkable(x: number, y: number): boolean {
-  return tileAt(x, y) === 'grass'
+export function mapSize(mapId: MapId): { cols: number; rows: number } {
+  return mapDimensions(mapId)
 }
 
-export function findSpawn(): GridPos {
-  return { x: Math.floor(MAP_COLS / 2), y: Math.floor(MAP_ROWS / 2) }
+export function isNpcCell(mapId: MapId, x: number, y: number): boolean {
+  const def = getMapDefinition(mapId)
+  if (!def.npcPosition) return false
+  return def.npcPosition.x === x && def.npcPosition.y === y
 }
+
+export function isEnemyCell(mapId: MapId, x: number, y: number): boolean {
+  const depth = dungeonDepth(mapId)
+  const enemy = enemyForMap(mapId, depth)
+  if (!enemy) return false
+  return enemy.position.x === x && enemy.position.y === y
+}
+
+export function isWalkable(mapId: MapId, x: number, y: number): boolean {
+  const kind = tileAt(mapId, x, y)
+  if (kind === 'void') return false
+  if (isNpcCell(mapId, x, y)) return false
+  if (isEnemyCell(mapId, x, y)) return false
+  return true
+}
+
+export function findSpawn(mapId: MapId): GridPos {
+  return { ...getMapDefinition(mapId).spawn }
+}
+
+export function getTransition(mapId: MapId, x: number, y: number) {
+  return transitionAtMap(mapId, x, y)
+}
+
+export { getMapDefinition, transitionAtMap }
