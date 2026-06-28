@@ -13,7 +13,7 @@ import { BlogPostCard } from '@/components/blog/blog-post-card'
 import { getAllBlogPosts } from '@/lib/blog'
 import { useLocale } from '@/i18n/locale-context'
 
-const PREVIEW_COUNT = 2
+const PREVIEW_COUNT = 3
 
 export function BlogPreview() {
   const { t } = useLocale()
@@ -22,7 +22,7 @@ export function BlogPreview() {
   return (
     <section
       id="blog"
-      className="portfolio-section border-t border-[var(--landing-border-subtle)]"
+      className="portfolio-section border-t border-[var(--landing-border-subtle)] bg-[var(--landing-card-bg)]/30"
     >
       <ScrollGroup className="portfolio-container max-w-3xl">
         <ScrollScrub>
@@ -34,7 +34,7 @@ export function BlogPreview() {
             </div>
             <Link
               href="/blog"
-              className="portfolio-btn-outline mx-auto shrink-0 gap-2 sm:mx-0"
+              className="portfolio-btn-primary mx-auto shrink-0 gap-2 sm:mx-0"
             >
               {t.blog.allPosts}
               <ArrowUpRight className="size-4" />

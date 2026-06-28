@@ -22,10 +22,10 @@ export default async function Home() {
         <HomepageScroll>
           <Hero />
           <About />
+          <BlogPreview />
           <Experience />
           <Interests />
           <Projects />
-          <BlogPreview />
           <Contact />
         </HomepageScroll>
       </main>

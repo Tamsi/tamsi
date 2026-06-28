@@ -90,7 +90,7 @@ export function Hero() {
         variants={heroItem}
         className="mt-2 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
       >
-        <MotionButton variant="primary" onClick={() => scrollTo('#projects')}>
+        <MotionButton variant="primary" onClick={() => scrollTo('#blog')}>
           {t.hero.ctaPrimary}
           <motion.span
             animate={reduced ? undefined : { x: [0, 3, 0], y: [0, -3, 0] }}
@@ -99,7 +99,7 @@ export function Hero() {
             <ArrowUpRight className="size-4" />
           </motion.span>
         </MotionButton>
-        <MotionButton variant="outline" onClick={() => scrollTo('#contact')}>
+        <MotionButton variant="outline" onClick={() => scrollTo('#projects')}>
           {t.hero.ctaSecondary}
         </MotionButton>
       </motion.div>

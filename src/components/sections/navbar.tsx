@@ -10,20 +10,21 @@ import { useLocale } from '@/i18n/locale-context'
 
 const anchorNavKeys = [
   'about',
+  'blog',
   'experience',
   'interests',
   'projects',
   'contact',
 ] as const
 
-type NavKey = (typeof anchorNavKeys)[number] | 'blog'
+type NavKey = (typeof anchorNavKeys)[number]
 
-const navItems: { key: NavKey; href: string; isPage?: boolean }[] = [
+const navItems: { key: NavKey; href: string }[] = [
   { key: 'about', href: '/#about' },
+  { key: 'blog', href: '/#blog' },
   { key: 'experience', href: '/#experience' },
   { key: 'interests', href: '/#interests' },
   { key: 'projects', href: '/#projects' },
-  { key: 'blog', href: '/blog', isPage: true },
   { key: 'contact', href: '/#contact' },
 ]
 
@@ -104,6 +105,8 @@ export function Navbar() {
     </div>
   )
 
+  const isBlogActive = pathname.startsWith('/blog')
+
   const navLinkClass =
     'group relative rounded-md px-3 py-1.5 text-sm text-[var(--landing-text-muted)] transition-colors hover:bg-[var(--landing-card-bg-hover)] hover:text-[var(--landing-text)]'
 
@@ -132,37 +135,28 @@ export function Navbar() {
 
           <div className="hidden items-center gap-1 md:flex">
             <ul className="flex items-center gap-1">
-              {navItems.map(({ key, href, isPage }) => (
+              {navItems.map(({ key, href }) => (
                 <li key={key}>
-                  {isPage ? (
-                    <Link
-                      href={href}
+                  <Link
+                    href={href}
+                    onClick={(e) => handleAnchorClick(e, href)}
+                    className={cn(
+                      navLinkClass,
+                      key === 'blog' &&
+                        isBlogActive &&
+                        'text-[var(--landing-text)]',
+                    )}
+                  >
+                    {t.nav[key]}
+                    <span
                       className={cn(
-                        navLinkClass,
-                        pathname.startsWith(href) &&
-                          'text-[var(--landing-text)]',
+                        'absolute bottom-0 left-1/2 h-0.5 -translate-x-1/2 rounded-full bg-[var(--landing-accent)] transition-all duration-300',
+                        key === 'blog' && isBlogActive
+                          ? 'w-[calc(100%-12px)]'
+                          : 'w-0 group-hover:w-[calc(100%-12px)]',
                       )}
-                    >
-                      {t.nav[key]}
-                      <span
-                        className={cn(
-                          'absolute bottom-0 left-1/2 h-0.5 -translate-x-1/2 rounded-full bg-[var(--landing-accent)] transition-all duration-300',
-                          pathname.startsWith(href)
-                            ? 'w-[calc(100%-12px)]'
-                            : 'w-0 group-hover:w-[calc(100%-12px)]',
-                        )}
-                      />
-                    </Link>
-                  ) : (
-                    <Link
-                      href={href}
-                      onClick={(e) => handleAnchorClick(e, href)}
-                      className={navLinkClass}
-                    >
-                      {t.nav[key]}
-                      <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 rounded-full bg-[var(--landing-accent)] transition-all duration-300 group-hover:w-[calc(100%-12px)]" />
-                    </Link>
-                  )}
+                    />
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -193,44 +187,26 @@ export function Navbar() {
             className="fixed inset-0 z-40 bg-[var(--landing-bg)]/95 backdrop-blur-md md:hidden"
           >
             <nav className="flex h-full flex-col items-center justify-center gap-6">
-              {navItems.map(({ key, href, isPage }, i) =>
-                isPage ? (
-                  <motion.div
-                    key={key}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ delay: i * 0.05, duration: 0.25 }}
+              {navItems.map(({ key, href }, i) => (
+                <motion.div
+                  key={key}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ delay: i * 0.05, duration: 0.25 }}
+                >
+                  <Link
+                    href={href}
+                    onClick={(e) => {
+                      handleAnchorClick(e, href)
+                      setOpen(false)
+                    }}
+                    className="font-[family-name:var(--landing-font-display)] text-2xl font-semibold text-[var(--landing-text)] transition-colors hover:text-[var(--landing-accent)]"
                   >
-                    <Link
-                      href={href}
-                      onClick={() => setOpen(false)}
-                      className="font-[family-name:var(--landing-font-display)] text-2xl font-semibold text-[var(--landing-text)] transition-colors hover:text-[var(--landing-accent)]"
-                    >
-                      {t.nav[key]}
-                    </Link>
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key={key}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ delay: i * 0.05, duration: 0.25 }}
-                  >
-                    <Link
-                      href={href}
-                      onClick={(e) => {
-                        handleAnchorClick(e, href)
-                        setOpen(false)
-                      }}
-                      className="font-[family-name:var(--landing-font-display)] text-2xl font-semibold text-[var(--landing-text)] transition-colors hover:text-[var(--landing-accent)]"
-                    >
-                      {t.nav[key]}
-                    </Link>
-                  </motion.div>
-                ),
-              )}
+                    {t.nav[key]}
+                  </Link>
+                </motion.div>
+              ))}
             </nav>
           </motion.div>
         )}

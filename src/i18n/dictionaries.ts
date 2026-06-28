@@ -63,8 +63,8 @@ export const dictionaries = {
       titleAccent: 'MCP, agents & produits web',
       subtitle:
         'Basé à Paris — je construis des serveurs MCP, des workflows LLM et des apps Next.js pour les équipes produit et les grands comptes.',
-      ctaPrimary: 'Voir les projets',
-      ctaSecondary: 'Me contacter',
+      ctaPrimary: 'Lire le blog',
+      ctaSecondary: 'Voir les projets',
       adventureTeaser: {
         kicker: 'Side quest',
         title: 'Aventure isométrique',
@@ -123,7 +123,7 @@ export const dictionaries = {
         { text: 'VisualQ', highlight: true },
         { text: ' (tests de régression visuelle). Formé à ' },
         { text: '42', highlight: true },
-        { text: ', certifié MCP (Hugging Face) et spécialisation ML (Coursera).' },
+        { text: ', certifié AI Agents & MCP (Hugging Face) et spécialisation ML (Coursera).' },
       ] satisfies BioSegment[],
       location: 'Paris, France',
       company: 'Livingcolor',
@@ -151,6 +151,14 @@ export const dictionaries = {
             "Sites Drupal & Symfony, apps React / Next.js (France TV, Harmonie Mutuelle, TV5Monde), React Native (Asmodee, Crédit Agricole), Shopify, et intégrations IA (MCP, Playwright, Firebase) pour les workflows d'équipe.",
         },
         {
+          title: 'AI Agents Fundamentals',
+          org: 'Hugging Face',
+          period: 'Jun 2026',
+          location: 'En ligne',
+          description:
+            "Certification sur les fondamentaux des agents IA — tool calling, mémoire, orchestration et déploiement d'agents autonomes.",
+        },
+        {
           title: 'Fundamentals of MCP',
           org: 'Hugging Face',
           period: 'Nov 2025',
@@ -161,13 +169,13 @@ export const dictionaries = {
         {
           title: 'Machine Learning Specialization',
           org: 'Stanford Online · Coursera',
-          period: 'Sep 2024',
+          period: 'May 2024',
           location: 'En ligne',
           description:
             'Supervised & unsupervised learning, réseaux de neurones, systèmes de recommandation, reinforcement learning.',
         },
         {
-          title: 'Certificat Niveau II — Computer Programming',
+          title: 'Certificat Niveau 11 — Computer Programming',
           org: '42',
           period: '2021',
           location: 'Paris',
@@ -253,28 +261,44 @@ export const dictionaries = {
             'Pont MCP vers les API Red Bee Media OTT — pour Cursor, Claude et les clients MCP qui automatisent la plateforme streaming.',
         },
         {
+          title: 'livingcolor-plugin',
+          language: 'Python · Hermes Agent',
+          url: 'https://github.com/abecms/livingcolor-plugin',
+          source: 'github',
+          description:
+            'Plugin Hermes Agent pour la livraison autonome — work orders, gates Jira et déploiements validés par l\'humain.',
+        },
+        {
+          title: 'livingcolor-skills',
+          language: 'TypeScript · Hermes',
+          url: 'https://github.com/Tamsi/livingcolor-skills',
+          source: 'github',
+          description:
+            'Skills Hermes versionnées et portables — comportements experts réutilisables pour agents IA.',
+        },
+        {
+          title: 'livingcolor-evolution',
+          language: 'TypeScript · Hermes',
+          url: 'https://github.com/Tamsi/livingcolor-evolution',
+          source: 'github',
+          description:
+            'Auto-évolution des skills Hermes depuis le web — audit et mise à jour continue des comportements agents.',
+        },
+        {
           title: 'VisualQ',
           language: 'Next.js · TypeScript',
           url: 'https://github.com/abecms/visualq',
           source: 'github',
           description:
-            "Plateforme VRT — captures, comparaisons pixel-perfect, multi-viewports, CI/CD GitLab, Coach IA et analyse Vision pour les régressions visuelles.",
+            'Plateforme QA web — régressions visuelles, performance, SEO, accessibilité et tracking analytics. AI Coach, multi-viewports, surveillance à chaque deploy.',
         },
         {
-          title: 'dream-defender',
-          language: 'C · WebAssembly',
-          url: 'https://github.com/Tamsi/dream-defender',
+          title: 'visualq-mcp',
+          language: 'TypeScript · MCP',
+          url: 'https://github.com/abecms/visualq-mcp',
           source: 'github',
           description:
-            'Jeu navigateur compilé en WebAssembly — démo jouable sur Vercel.',
-        },
-        {
-          title: 'ScoreJamAi',
-          language: 'Next.js · TypeScript',
-          url: 'https://github.com/abecms/ScoreJamAi',
-          source: 'github',
-          description:
-            "Générateur de formulaires de notation propulsé par l'IA — publication, collecte et évaluation automatique des réponses.",
+            'Serveur MCP pour VisualQ — lancer des runs VRT, interroger les échecs et approuver les baselines depuis Cursor ou Claude.',
         },
       ] satisfies ProjectItem[],
     },
@@ -448,8 +472,8 @@ export const dictionaries = {
       titleAccent: 'MCP agents & AI workflows',
       subtitle:
         'Based in Paris — I build MCP servers, LLM workflows, and Next.js apps for product teams and enterprise clients.',
-      ctaPrimary: 'View projects',
-      ctaSecondary: 'Get in touch',
+      ctaPrimary: 'Read the blog',
+      ctaSecondary: 'View projects',
       adventureTeaser: {
         kicker: 'Side quest',
         title: 'Isometric adventure',
@@ -507,7 +531,7 @@ export const dictionaries = {
         { text: 'VisualQ', highlight: true },
         { text: ' (visual regression testing). Trained at ' },
         { text: '42', highlight: true },
-        { text: ', MCP certified (Hugging Face) and ML specialization (Coursera).' },
+        { text: ', MCP & AI Agents certified (Hugging Face) and ML specialization (Coursera).' },
       ] satisfies BioSegment[],
       location: 'Paris, France',
       company: 'Livingcolor',
@@ -535,6 +559,14 @@ export const dictionaries = {
             'Drupal & Symfony sites, React / Next.js apps (France TV, Harmonie Mutuelle, TV5Monde), React Native (Asmodee, Crédit Agricole), Shopify, and AI integrations (MCP, Playwright, Firebase) for team workflows.',
         },
         {
+          title: 'AI Agents Fundamentals',
+          org: 'Hugging Face',
+          period: 'Jun 2026',
+          location: 'Online',
+          description:
+            'Certification on AI agent fundamentals — tool calling, memory, orchestration, and deploying autonomous agents.',
+        },
+        {
           title: 'Fundamentals of MCP',
           org: 'Hugging Face',
           period: 'Nov 2025',
@@ -545,13 +577,13 @@ export const dictionaries = {
         {
           title: 'Machine Learning Specialization',
           org: 'Stanford Online · Coursera',
-          period: 'Sep 2024',
+          period: 'May 2024',
           location: 'Online',
           description:
             'Supervised & unsupervised learning, neural networks, recommender systems, reinforcement learning.',
         },
         {
-          title: 'Level II Certificate — Computer Programming',
+          title: 'Level 11 Certificate — Computer Programming',
           org: '42',
           period: '2021',
           location: 'Paris',
@@ -637,28 +669,44 @@ export const dictionaries = {
             'MCP bridge to Red Bee Media OTT APIs — for Cursor, Claude, and MCP clients automating the streaming platform.',
         },
         {
+          title: 'livingcolor-plugin',
+          language: 'Python · Hermes Agent',
+          url: 'https://github.com/abecms/livingcolor-plugin',
+          source: 'github',
+          description:
+            'Hermes Agent plugin for autonomous delivery — work orders, Jira gates, and human-approved deploys.',
+        },
+        {
+          title: 'livingcolor-skills',
+          language: 'TypeScript · Hermes',
+          url: 'https://github.com/Tamsi/livingcolor-skills',
+          source: 'github',
+          description:
+            'Portable, versioned Hermes skills — reusable expert behaviors for AI agents.',
+        },
+        {
+          title: 'livingcolor-evolution',
+          language: 'TypeScript · Hermes',
+          url: 'https://github.com/Tamsi/livingcolor-evolution',
+          source: 'github',
+          description:
+            'Auto-evolution of Hermes skills from the web — continuous audit and refresh of agent behaviors.',
+        },
+        {
           title: 'VisualQ',
           language: 'Next.js · TypeScript',
           url: 'https://github.com/abecms/visualq',
           source: 'github',
           description:
-            'VRT platform — screenshots, pixel-perfect diffs, multi-viewport runs, GitLab CI, AI Coach, and Vision analysis for visual regressions.',
+            'Web QA platform — visual regressions, performance, SEO, accessibility, and analytics tracking. AI Coach, multi-viewport runs, continuous monitoring on every deploy.',
         },
         {
-          title: 'dream-defender',
-          language: 'C · WebAssembly',
-          url: 'https://github.com/Tamsi/dream-defender',
+          title: 'visualq-mcp',
+          language: 'TypeScript · MCP',
+          url: 'https://github.com/abecms/visualq-mcp',
           source: 'github',
           description:
-            'Browser game compiled to WebAssembly — playable demo on Vercel.',
-        },
-        {
-          title: 'ScoreJamAi',
-          language: 'Next.js · TypeScript',
-          url: 'https://github.com/abecms/ScoreJamAi',
-          source: 'github',
-          description:
-            'AI-powered scoring form builder — publish forms and let AI grade responses with detailed analytics.',
+            'MCP server for VisualQ — run VRT, poll failures, and approve baselines from Cursor or Claude.',
         },
       ] satisfies ProjectItem[],
     },

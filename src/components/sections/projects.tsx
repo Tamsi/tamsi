@@ -21,7 +21,7 @@ function SourceIcon({ source }: { source: ProjectItem['source'] }) {
 
 const DEMO_URLS: Record<string, string> = {
   'ai-code-reviewer-mcp': 'https://huggingface.co/spaces/ImTamsi/ai-code-reviewer',
-  'dream-defender': 'https://dream-defender.vercel.app',
+  VisualQ: 'https://visualq.ai',
 }
 
 export function Projects() {

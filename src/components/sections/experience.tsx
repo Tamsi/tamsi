@@ -25,11 +25,20 @@ const itemsMeta: {
   {
     orgUrl: 'https://huggingface.co/ImTamsi',
     icon: Award,
+    certificateUrl:
+      'https://huggingface.co/datasets/agents-course/certificates/resolve/main/certificates/ImTamsi/2026-06-05.png',
+  },
+  {
+    orgUrl: 'https://huggingface.co/ImTamsi',
+    icon: Award,
+    certificateUrl:
+      'https://huggingface.co/datasets/mcp-course/certificates/resolve/main/certificates/ImTamsi/2025-11-06.png',
   },
   {
     orgUrl: 'https://www.coursera.org/account/accomplishments/specialization/IVNLIOO6YYHM',
     icon: Award,
-    certificateUrl: '/coursera.pdf',
+    certificateUrl:
+      'https://www.coursera.org/account/accomplishments/specialization/IVNLIOO6YYHM',
   },
   {
     orgUrl: 'https://42.fr/',
