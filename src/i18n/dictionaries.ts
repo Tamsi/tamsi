@@ -261,6 +261,15 @@ export const dictionaries = {
             'Pont MCP vers les API Red Bee Media OTT — pour Cursor, Claude et les clients MCP qui automatisent la plateforme streaming.',
         },
         {
+          title: 'handship',
+          language: 'Python · Gradio',
+          url: 'https://huggingface.co/spaces/ImTamsi/handship',
+          source: 'huggingface',
+          featured: true,
+          description:
+            'Jeu de vaisseau spatial contrôlé à la main — webcam et détection de pose, jouable directement sur Hugging Face.',
+        },
+        {
           title: 'livingcolor-plugin',
           language: 'Python · Hermes Agent',
           url: 'https://github.com/abecms/livingcolor-plugin',
@@ -283,22 +292,6 @@ export const dictionaries = {
           source: 'github',
           description:
             'Auto-évolution des skills Hermes depuis le web — audit et mise à jour continue des comportements agents.',
-        },
-        {
-          title: 'VisualQ',
-          language: 'Next.js · TypeScript',
-          url: 'https://github.com/abecms/visualq',
-          source: 'github',
-          description:
-            'Plateforme QA web — régressions visuelles, performance, SEO, accessibilité et tracking analytics. AI Coach, multi-viewports, surveillance à chaque deploy.',
-        },
-        {
-          title: 'visualq-mcp',
-          language: 'TypeScript · MCP',
-          url: 'https://github.com/abecms/visualq-mcp',
-          source: 'github',
-          description:
-            'Serveur MCP pour VisualQ — lancer des runs VRT, interroger les échecs et approuver les baselines depuis Cursor ou Claude.',
         },
       ] satisfies ProjectItem[],
     },
@@ -669,6 +662,15 @@ export const dictionaries = {
             'MCP bridge to Red Bee Media OTT APIs — for Cursor, Claude, and MCP clients automating the streaming platform.',
         },
         {
+          title: 'handship',
+          language: 'Python · Gradio',
+          url: 'https://huggingface.co/spaces/ImTamsi/handship',
+          source: 'huggingface',
+          featured: true,
+          description:
+            'Hand-controlled spaceship game — webcam and pose detection, playable directly on Hugging Face.',
+        },
+        {
           title: 'livingcolor-plugin',
           language: 'Python · Hermes Agent',
           url: 'https://github.com/abecms/livingcolor-plugin',
@@ -691,22 +693,6 @@ export const dictionaries = {
           source: 'github',
           description:
             'Auto-evolution of Hermes skills from the web — continuous audit and refresh of agent behaviors.',
-        },
-        {
-          title: 'VisualQ',
-          language: 'Next.js · TypeScript',
-          url: 'https://github.com/abecms/visualq',
-          source: 'github',
-          description:
-            'Web QA platform — visual regressions, performance, SEO, accessibility, and analytics tracking. AI Coach, multi-viewport runs, continuous monitoring on every deploy.',
-        },
-        {
-          title: 'visualq-mcp',
-          language: 'TypeScript · MCP',
-          url: 'https://github.com/abecms/visualq-mcp',
-          source: 'github',
-          description:
-            'MCP server for VisualQ — run VRT, poll failures, and approve baselines from Cursor or Claude.',
         },
       ] satisfies ProjectItem[],
     },
