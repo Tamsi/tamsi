@@ -2,7 +2,7 @@
 
 # Tamsi Besson
 
-**Full-stack developer in Paris** — I build **autonomous AI agents**, **MCP servers**, and **production SaaS** for media & enterprise teams.
+**AI developer in Paris** — I build **autonomous AI agents**, **MCP servers**, and **production SaaS** for media & enterprise teams.
 
 [![Website](https://img.shields.io/badge/tamsi.dev-0a0a0a?style=for-the-badge)](https://tamsi.dev)
 [![Cursor](https://img.shields.io/badge/Cursor-@tamsi-000?style=for-the-badge&logo=cursor&logoColor=white)](https://cursor.com/@tamsi)
