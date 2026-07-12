@@ -3,17 +3,17 @@ import type { BlogPost } from './types'
 export const huggimon: BlogPost = {
   slug: 'huggimon-ai-trainer-card',
   publishedAt: '2026-07-09',
-  tags: ['Hugging Face', 'Gradio', 'Open source', 'Side project'],
+  tags: ['Hugging Face', 'Next.js', 'Open source', 'Side project'],
   readingTimeMinutes: 5,
   content: {
     fr: {
       title: 'HuggiMon — ta carte de dresseur IA depuis ton profil Hugging Face',
       description:
-        'Un Space Gradio qui transforme l’activité publique du Hub (modèles, datasets, spaces, likes, followers) en carte collectible partageable — stats, type, rareté et attaques inclus.',
+        'Un site Next.js qui transforme l’activité publique du Hub en carte Pokémon TCG interactive — holo shaders, binder de followers, PNG et page partageable.',
       blocks: [
         {
           type: 'paragraph',
-          text: 'Sur Hugging Face, ton profil public raconte déjà une histoire : les modèles que tu publies, les Spaces que tu maintiens, les datasets que tu partages, les likes et les téléchargements qui s’accumulent. HuggiMon prend ces signaux — uniquement des données publiques — et les convertit en **carte de dresseur IA** : un objet visuel, partageable, un peu Pokémon, un peu GitHub README flair.',
+          text: 'Sur Hugging Face, ton profil public raconte déjà une histoire : les modèles que tu publies, les Spaces que tu maintiens, les datasets que tu partages, les likes et les téléchargements qui s’accumulent. **HuggiMon** ([huggimon.co](https://huggimon.co)) prend ces signaux — uniquement des données publiques — et les convertit en **carte de dresseur IA** façon Pokémon TCG : tilt 3D, shaders holo, binder de followers, page dédiée par username.',
         },
         {
           type: 'heading',
@@ -22,15 +22,15 @@ export const huggimon: BlogPost = {
         },
         {
           type: 'paragraph',
-          text: 'Le Hub est excellent pour héberger du ML, moins pour « montrer qui tu es » en un coup d’œil. Les README listent des repos ; les stats sont dispersées entre models, datasets et spaces. J’avais envie d’un résumé ludique — pas un leaderboard sérieux, mais une carte que tu peux coller dans ton README, comparer avec un collègue, ou envoyer sur X sans exporter dix captures d’écran.',
+          text: 'Le Hub est excellent pour héberger du ML, moins pour « montrer qui tu es » en un coup d’œil. Les README listent des repos ; les stats sont dispersées entre models, datasets et spaces. J’avais envie d’un résumé ludique — pas un leaderboard sérieux, mais une carte que tu peux ouvrir sur `huggimon.co/ton-username`, partager sur X, ou coller dans ton README Hub.',
         },
         {
           type: 'list',
           items: [
-            'Zéro auth : un username suffit, tout est lu via l’API publique `huggingface_hub`.',
-            'PNG téléchargeable + snippet Markdown prêt à coller.',
-            'Mode comparaison : deux profils, deux cartes côte à côte.',
-            'Endpoints HTTP pour intégrer la carte ailleurs (README, site, bot).',
+            'Zéro auth : un username suffit, tout est lu via l’API publique Hugging Face.',
+            'Carte interactive avec 14 paliers holo selon ton niveau HF.',
+            'Binder 3×3 : tes followers deviennent des mini-cartes à feuilleter.',
+            'PNG téléchargeable + snippet Markdown pour ton README.',
           ],
         },
         {
@@ -40,13 +40,13 @@ export const huggimon: BlogPost = {
         },
         {
           type: 'paragraph',
-          text: 'Le flux est volontairement linéaire : fetch → score → render. Tu entres un username ; HuggiMon récupère l’overview utilisateur et jusqu’à 200 modèles, datasets et spaces publics. Un module de scoring calcule six stats (0–100), déduit un type, une rareté, un niveau, des attaques et un chemin d’évolution. Le rendu passe par du HTML (preview Gradio) et Pillow (export PNG).',
+          text: 'Le flux est linéaire : fetch → score → render. Tu ouvres `/{username}` ; HuggiMon récupère l’overview utilisateur et les repos publics (modèles, datasets, spaces). Un module de scoring calcule six stats (0–100), déduit un type, une rareté, un niveau, des attaques et une énergie (basée sur les likes). Le rendu côté client repose sur les shaders holo de [pokemon-cards-css](https://github.com/simeydotme/pokemon-cards-css) ; le serveur compose le visage de la carte en PNG 660×921.',
         },
         {
           type: 'code',
           language: 'text',
-          code: `username → fetch_hf_profile() → build_card() → render_card_html() / render_png()
-                ↳ HfApi: get_user_overview, list_models, list_datasets, list_spaces`,
+          code: `/{username} → hf-fetcher → scoring → PokemonCard (holo + tilt)
+                      ↳ /api/card/{username}/face → PNG partageable`,
         },
         {
           type: 'heading',
@@ -56,31 +56,22 @@ export const huggimon: BlogPost = {
         {
           type: 'list',
           items: [
-            '**MODEL** — modèles publiés, likes et downloads (échelle logarithmique pour l’impact).',
+            '**MODEL** — modèles publiés, likes et downloads.',
             '**DATA** — datasets et leur traction.',
             '**SPACE** — Spaces publiés et likes associés.',
             '**IMPACT** — likes + downloads agrégés sur tout le travail public.',
             '**COMMUNITY** — followers et discussions.',
-            '**DOCS** — part des repos avec une description (qualité perçue des cards Hub).',
+            '**DOCS** — part des repos avec une description.',
           ],
         },
         {
           type: 'heading',
           level: 3,
-          text: 'Type, rareté et moves',
+          text: 'Holo, énergie et binder',
         },
         {
           type: 'paragraph',
-          text: 'Le **type** (`Code`, `Vision`, `Audio`, `NLP`, `Multimodal`, `Agent`, `Dataset`) vient du tagging des repos : on compte les mots-clés dans les tags HF. Si tu publies surtout des datasets, tu bascules en type Dataset. La **rareté** suit la moyenne des stats : Common &lt; 55, Rare ≥ 55, Epic ≥ 75, Legendary ≥ 90. Les **attaques** (`Fine-tune Blast`, `Dataset Tsunami`, `Space Storm`, etc.) et le **passif** (`Token Mastery`, `Toolformer Soul`…) dépendent du type et des stats dominantes.',
-        },
-        {
-          type: 'heading',
-          level: 2,
-          text: 'Styles de carte',
-        },
-        {
-          type: 'paragraph',
-          text: 'Six thèmes visuels au choix : Starter (propre et accessible), Legendary (or et impact), Dark Mode (néon sur noir), Researcher (labo et papers), Builder (code et outils), Esport (arène et vitesse). Même données, habillage différent — utile pour matcher ton README ou ton mood du moment.',
+          text: 'Ton niveau HF détermine un **palier holo** parmi 14 (reverse holo → Secret Gold). Les likes sur ton travail deviennent des **énergies** sur la carte. Tes **followers** remplissent un binder paginé 3×3 avec animation de feuilletage — clique sur une mini-carte pour l’inspecter en grand.',
         },
         {
           type: 'heading',
@@ -89,19 +80,20 @@ export const huggimon: BlogPost = {
         },
         {
           type: 'paragraph',
-          text: 'Chaque génération produit une URL d’image stable et un snippet Markdown. Tu peux aussi appeler l’API directement :',
+          text: 'Chaque profil a une URL publique et un snippet README prêt à coller :',
         },
         {
           type: 'code',
           language: 'markdown',
-          code: `[![HuggiMon](https://imtamsi-huggimon.hf.space/api/card/ImTamsi.png)](https://huggingface.co/spaces/ImTamsi/huggimon)`,
+          code: `[![HuggiMon](https://huggimon.co/api/card/ImTamsi/face)](https://huggimon.co/ImTamsi)`,
         },
         {
           type: 'list',
           items: [
-            '`GET /api/card/{username}` — métadonnées JSON (stats, type, rareté, attaques).',
-            '`GET /api/card/{username}.png?style=Legendary` — image PNG (cache 5 min).',
-            '`/card/{username}` — page dédiée avec preview plein écran.',
+            '`GET /{username}` — page profil (carte + binder + partage).',
+            '`GET /api/card/{username}` — métadonnées JSON (stats, type, rareté, énergie).',
+            '`GET /api/card/{username}/face` — PNG composé 660×921.',
+            '`GET /api/binder/{username}` — page binder des followers (`?page=` optionnel).',
           ],
         },
         {
@@ -112,10 +104,10 @@ export const huggimon: BlogPost = {
         {
           type: 'list',
           items: [
-            '**Gradio 6** — UI (génération + comparaison) montée sur un `gr.Server` FastAPI.',
-            '**huggingface_hub** — lecture seule du profil public.',
-            '**Pillow** — rasterisation de la carte en PNG.',
-            '**MIT** — fork, self-host ou contribution bienvenues.',
+            '**Next.js** — app dans `web/`, déployée sur Vercel ([huggimon.co](https://huggimon.co)).',
+            '**pokemon-cards-css** — effets holo 3D (tilt, glare, shaders par rareté), port React via `@react-spring/web`.',
+            '**gitfut** — inspiration pour le pattern `/{username}` et l’embed README (appliqué au Hub HF plutôt qu’à GitHub).',
+            '**MIT** — code ouvert sur [github.com/Tamsi/huggimon](https://github.com/Tamsi/huggimon).',
           ],
         },
         {
@@ -125,13 +117,13 @@ export const huggimon: BlogPost = {
         },
         {
           type: 'paragraph',
-          text: 'Le Space tourne sur Hugging Face — entre ton username, choisis un style, télécharge le PNG ou copie le snippet. Si le Space dort (inactivité HF), un clic « Restart » le réveille. C’est un side project du Build Small Hackathon : fun d’abord, mais le scoring est transparent et rejouable — ouvre `scoring.py` si tu veux challenger la formule.',
+          text: 'Va sur [huggimon.co](https://huggimon.co), entre un @username HF, ou ouvre directement [huggimon.co/ImTamsi](https://huggimon.co/ImTamsi). C’est un side project du Build Small Hackathon : fun d’abord, mais le scoring est transparent — le repo est sur GitHub si tu veux challenger la formule ou contribuer.',
         },
         {
           type: 'list',
           items: [
-            'Space : huggingface.co/spaces/ImTamsi/huggimon',
-            'Repo : github.com/Tamsi/huggimon (si publié) ou fichiers du Space',
+            'Site : huggimon.co',
+            'Repo : github.com/Tamsi/huggimon',
           ],
         },
       ],
@@ -139,11 +131,11 @@ export const huggimon: BlogPost = {
     en: {
       title: 'HuggiMon — your AI trainer card from your Hugging Face profile',
       description:
-        'A Gradio Space that turns public Hub activity (models, datasets, spaces, likes, followers) into a shareable collectible card — stats, type, rarity, and moves included.',
+        'A Next.js site that turns public Hub activity into an interactive Pokémon TCG card — holo shaders, follower binder, PNG export, and a shareable profile page.',
       blocks: [
         {
           type: 'paragraph',
-          text: 'On Hugging Face, your public profile already tells a story: models you ship, Spaces you maintain, datasets you share, likes and downloads that add up. HuggiMon takes those signals — public data only — and turns them into an **AI trainer card**: a visual, shareable object, part Pokémon, part GitHub README flair.',
+          text: 'On Hugging Face, your public profile already tells a story: models you ship, Spaces you maintain, datasets you share, likes and downloads that add up. **HuggiMon** ([huggimon.co](https://huggimon.co)) takes those signals — public data only — and turns them into a **Pokémon TCG-style trainer card**: 3D tilt, holo shaders, a follower binder, and a dedicated page per username.',
         },
         {
           type: 'heading',
@@ -152,15 +144,15 @@ export const huggimon: BlogPost = {
         },
         {
           type: 'paragraph',
-          text: 'The Hub is great at hosting ML, less at showing “who you are” at a glance. READMEs list repos; stats are split across models, datasets, and spaces. I wanted a playful summary — not a serious leaderboard, but a card you can drop in your README, compare with a colleague, or post on X without stitching ten screenshots.',
+          text: 'The Hub is great at hosting ML, less at showing “who you are” at a glance. READMEs list repos; stats are split across models, datasets, and spaces. I wanted a playful summary — not a serious leaderboard, but a card you can open at `huggimon.co/your-username`, share on X, or drop in your Hub README.',
         },
         {
           type: 'list',
           items: [
-            'No auth: a username is enough; everything is read via the public `huggingface_hub` API.',
-            'Downloadable PNG + ready-to-paste Markdown snippet.',
-            'Compare mode: two profiles, two cards side by side.',
-            'HTTP endpoints to embed the card elsewhere (README, site, bot).',
+            'No auth: a username is enough; everything is read via the public Hugging Face API.',
+            'Interactive card with 14 holo tiers based on your HF level.',
+            '3×3 binder: your followers become mini-cards to flip through.',
+            'Downloadable PNG + Markdown snippet for your README.',
           ],
         },
         {
@@ -170,13 +162,13 @@ export const huggimon: BlogPost = {
         },
         {
           type: 'paragraph',
-          text: 'The flow is deliberately linear: fetch → score → render. You enter a username; HuggiMon pulls the user overview and up to 200 public models, datasets, and spaces. A scoring module computes six stats (0–100), infers type, rarity, level, attacks, and an evolution path. Rendering goes through HTML (Gradio preview) and Pillow (PNG export).',
+          text: 'The flow is linear: fetch → score → render. You open `/{username}`; HuggiMon pulls the user overview and public repos (models, datasets, spaces). A scoring module computes six stats (0–100), infers type, rarity, level, attacks, and energy (from likes). Client rendering uses [pokemon-cards-css](https://github.com/simeydotme/pokemon-cards-css) holo shaders; the server composes the card face as a 660×921 PNG.',
         },
         {
           type: 'code',
           language: 'text',
-          code: `username → fetch_hf_profile() → build_card() → render_card_html() / render_png()
-                ↳ HfApi: get_user_overview, list_models, list_datasets, list_spaces`,
+          code: `/{username} → hf-fetcher → scoring → PokemonCard (holo + tilt)
+                      ↳ /api/card/{username}/face → shareable PNG`,
         },
         {
           type: 'heading',
@@ -186,31 +178,22 @@ export const huggimon: BlogPost = {
         {
           type: 'list',
           items: [
-            '**MODEL** — published models, likes, and downloads (log scale for impact).',
+            '**MODEL** — published models, likes, and downloads.',
             '**DATA** — datasets and their traction.',
             '**SPACE** — published Spaces and associated likes.',
             '**IMPACT** — aggregate likes + downloads across public work.',
             '**COMMUNITY** — followers and discussions.',
-            '**DOCS** — share of repos with a description (perceived Hub card quality).',
+            '**DOCS** — share of repos with a description.',
           ],
         },
         {
           type: 'heading',
           level: 3,
-          text: 'Type, rarity, and moves',
+          text: 'Holo, energy, and binder',
         },
         {
           type: 'paragraph',
-          text: '**Type** (`Code`, `Vision`, `Audio`, `NLP`, `Multimodal`, `Agent`, `Dataset`) comes from repo tags: keyword hits across HF tags. If you mostly publish datasets, you flip to Dataset type. **Rarity** follows the stat average: Common &lt; 55, Rare ≥ 55, Epic ≥ 75, Legendary ≥ 90. **Attacks** (`Fine-tune Blast`, `Dataset Tsunami`, `Space Storm`, etc.) and **passive** (`Token Mastery`, `Toolformer Soul`…) depend on type and dominant stats.',
-        },
-        {
-          type: 'heading',
-          level: 2,
-          text: 'Card styles',
-        },
-        {
-          type: 'paragraph',
-          text: 'Six visual themes: Starter (clean and accessible), Legendary (gold and impact), Dark Mode (neon on black), Researcher (lab and papers), Builder (code and tools), Esport (arena and speed). Same data, different skin — handy to match your README or current vibe.',
+          text: 'Your HF level picks a **holo tier** among 14 (reverse holo → Secret Gold). Likes on your work become **energy** on the card. Your **followers** fill a paginated 3×3 binder with a page-flip animation — click any mini-card to inspect it enlarged.',
         },
         {
           type: 'heading',
@@ -219,19 +202,20 @@ export const huggimon: BlogPost = {
         },
         {
           type: 'paragraph',
-          text: 'Each generation yields a stable image URL and a Markdown snippet. You can also hit the API directly:',
+          text: 'Each profile has a public URL and a ready-to-paste README snippet:',
         },
         {
           type: 'code',
           language: 'markdown',
-          code: `[![HuggiMon](https://imtamsi-huggimon.hf.space/api/card/ImTamsi.png)](https://huggingface.co/spaces/ImTamsi/huggimon)`,
+          code: `[![HuggiMon](https://huggimon.co/api/card/ImTamsi/face)](https://huggimon.co/ImTamsi)`,
         },
         {
           type: 'list',
           items: [
-            '`GET /api/card/{username}` — JSON metadata (stats, type, rarity, attacks).',
-            '`GET /api/card/{username}.png?style=Legendary` — PNG image (5 min cache).',
-            '`/card/{username}` — dedicated full-screen preview page.',
+            '`GET /{username}` — profile page (card + binder + share).',
+            '`GET /api/card/{username}` — JSON metadata (stats, type, rarity, energy).',
+            '`GET /api/card/{username}/face` — composed 660×921 PNG.',
+            '`GET /api/binder/{username}` — follower binder page (`?page=` optional).',
           ],
         },
         {
@@ -242,10 +226,10 @@ export const huggimon: BlogPost = {
         {
           type: 'list',
           items: [
-            '**Gradio 6** — UI (generate + compare) on a FastAPI `gr.Server`.',
-            '**huggingface_hub** — read-only public profile access.',
-            '**Pillow** — card rasterization to PNG.',
-            '**MIT** — fork, self-host, or contribute welcome.',
+            '**Next.js** — app in `web/`, deployed on Vercel ([huggimon.co](https://huggimon.co)).',
+            '**pokemon-cards-css** — 3D holo effects (tilt, glare, rarity shaders), React port via `@react-spring/web`.',
+            '**gitfut** — inspiration for the `/{username}` pattern and README embed (applied to the HF Hub instead of GitHub).',
+            '**MIT** — open source at [github.com/Tamsi/huggimon](https://github.com/Tamsi/huggimon).',
           ],
         },
         {
@@ -255,13 +239,13 @@ export const huggimon: BlogPost = {
         },
         {
           type: 'paragraph',
-          text: 'The Space runs on Hugging Face — enter your username, pick a style, download the PNG or copy the snippet. If the Space is sleeping (HF inactivity), hit Restart to wake it. It’s a Build Small Hackathon side project: fun first, but scoring is transparent and replayable — open `scoring.py` if you want to challenge the formula.',
+          text: 'Go to [huggimon.co](https://huggimon.co), enter an HF @username, or open [huggimon.co/ImTamsi](https://huggimon.co/ImTamsi) directly. It’s a Build Small Hackathon side project: fun first, but scoring is transparent — the repo is on GitHub if you want to challenge the formula or contribute.',
         },
         {
           type: 'list',
           items: [
-            'Space: huggingface.co/spaces/ImTamsi/huggimon',
-            'Source: Space files on the Hub',
+            'Site: huggimon.co',
+            'Repo: github.com/Tamsi/huggimon',
           ],
         },
       ],
