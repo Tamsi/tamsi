@@ -38,8 +38,7 @@ Cursor / Claude  →  AI agentic IDE and Cloud automations
 
 | Project | Stack | Highlights |
 |---------|-------|------------|
-| [**ai-code-reviewer-mcp**](https://github.com/Tamsi/ai-code-reviewer-mcp) | TypeScript · MCP | Automated GitHub review — bugs, security, tech debt, missing tests · [Live demo on HF](https://huggingface.co/spaces/ImTamsi/ai-code-reviewer) |
-| [**git-mentor**](https://github.com/Tamsi/git-mentor) | TypeScript · Ink TUI | Evidence-backed GitHub career coach — local-first, Ollama, bundled GitHub MCP |
+| [**huggimon**](https://github.com/Tamsi/huggimon) | TypeScript | A pokemon-style holo card from your huggingface.co profile |
 | [**livingcolor-plugin**](https://github.com/abecms/livingcolor-plugin) | Python · Hermes | Autonomous delivery platform with human-gated work orders and Jira PM dashboard |
 | [**livingcolor-skills**](https://github.com/Tamsi/livingcolor-skills) | TypeScript | Portable, versioned AI skills — the npm for agent expert behaviors |
 | [**redbee-mcp**](https://github.com/Tamsi/redbee-mcp) | Python · MCP | Red Bee media API bridge for streaming & OTT workflows |
