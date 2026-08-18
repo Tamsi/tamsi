@@ -19,7 +19,7 @@
 | **AI agents** | [**livingcolor-plugin**](https://github.com/abecms/livingcolor-plugin) · [**livingcolor-skills**](https://github.com/Tamsi/livingcolor-skills) · [**livingcolor-evolution**](https://github.com/Tamsi/livingcolor-evolution) | Hermes Agent plugin for autonomous delivery (Jira gates, work orders, human-approved deploys), portable versioned skills, and a curator that keeps skills fresh from the web |
 | **MCP & devtools** | [**ai-code-reviewer-mcp**](https://github.com/Tamsi/ai-code-reviewer-mcp) · [**git-mentor**](https://github.com/Tamsi/git-mentor) · [**redbee-mcp**](https://github.com/Tamsi/redbee-mcp) · [**visualq-mcp**](https://github.com/abecms/visualq-mcp) | Model Context Protocol bridges for code review, GitHub career coaching, Red Bee OTT APIs, and VisualQ VRT — wired into Cursor & Claude |
 | **SaaS products** | [**VisualQ**](https://visualq.ai) · [**Reelify**](https://reelify-prodsite.vercel.app) · [**ScoreJamAi**](https://score-jam-ai.vercel.app) | Visual regression testing with anti-shift diffing, LLM-driven product demo videos from any URL, and AI-powered scoring forms |
-| **Open source** | [**abecms**](https://github.com/abecms/abecms) · [**shopify-app-starter**](https://github.com/Tamsi/shopify-app-starter) | API-first headless CMS (180+ ⭐) and a Shopify embedded-app starter |
+| **Open source** | [**huggimon**](https://github.com/Tamsi/huggimon) · [**abecms**](https://github.com/abecms/abecms) · [**shopify-app-starter**](https://github.com/Tamsi/shopify-app-starter) | Pokémon-style trainer card from a Hugging Face profile ([huggimon.co](https://huggimon.co)), API-first headless CMS (180+ ⭐), and a Shopify embedded-app starter |
 
 ---
 
@@ -38,7 +38,7 @@ Cursor / Claude  →  AI agentic IDE and Cloud automations
 
 | Project | Stack | Highlights |
 |---------|-------|------------|
-| [**huggimon**](https://github.com/Tamsi/huggimon) | TypeScript | A pokemon-style holo card from your huggingface.co profile |
+| [**huggimon**](https://github.com/Tamsi/huggimon) | TypeScript | Pokémon-style holo trainer card from your Hugging Face profile — [huggimon.co](https://huggimon.co) |
 | [**livingcolor-plugin**](https://github.com/abecms/livingcolor-plugin) | Python · Hermes | Autonomous delivery platform with human-gated work orders and Jira PM dashboard |
 | [**livingcolor-skills**](https://github.com/Tamsi/livingcolor-skills) | TypeScript | Portable, versioned AI skills — the npm for agent expert behaviors |
 | [**redbee-mcp**](https://github.com/Tamsi/redbee-mcp) | Python · MCP | Red Bee media API bridge for streaming & OTT workflows |
@@ -50,7 +50,7 @@ Cursor / Claude  →  AI agentic IDE and Cloud automations
 
 **Full-Stack developer @ [Livingcolor](https://www.livingcolor.fr)** since 2018 — Drupal, Symfony, React/Next.js, React Native, Shopify and AI integrations
 
-**42** Digital Technologies Architect, Datorprogrammering · Multiple **AI certifiactions** from Stanford Online and Hugging Face
+**42** Digital Technologies Architect, Datorprogrammering · Multiple **AI certifications** from Stanford Online and Hugging Face
 
 ---
 
