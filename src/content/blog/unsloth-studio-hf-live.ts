@@ -121,6 +121,7 @@ unsloth studio -p 8888
         {
           type: 'list',
           items: [
+            'Article atelier : /blog/unsloth-studio',
             'Doc Studio : unsloth.ai/docs/new/studio',
             'Repo : github.com/unslothai/unsloth',
             'Annonce HF : post Daniel Hanchen sur le Hub',
@@ -241,6 +242,7 @@ unsloth studio -p 8888
         {
           type: 'list',
           items: [
+            'Workshop article: /blog/unsloth-studio',
             'Studio docs: unsloth.ai/docs/new/studio',
             'Repo: github.com/unslothai/unsloth',
             'HF announcement: Daniel Hanchen’s post on the Hub',
