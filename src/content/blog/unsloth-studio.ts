@@ -1,135 +1,114 @@
 import type { BlogPost } from './types'
 
-const COVER = '/blog/unsloth-studio-hf-live.png'
+const COVER = '/blog/unsloth-qwen38-gguf.jpg'
+const UNSLOTH_TWEET = 'https://x.com/UnslothAI/status/2088627177655050362'
 
 export const unslothStudio: BlogPost = {
   slug: 'unsloth-studio',
   publishedAt: '2026-08-18',
-  tags: ['Unsloth', 'Fine-tuning', 'Local LLM', 'GGUF', 'Hermes'],
+  tags: ['Unsloth', 'Local LLM', 'GGUF', 'Qwen', 'Fine-tuning'],
   readingTimeMinutes: 6,
   content: {
     fr: {
-      title: 'Unsloth Studio — l’atelier local pour fine-tuner et servir des LLM',
+      title: 'Unsloth Studio — faire tourner et entraîner des LLM en local',
       description:
-        'Pourquoi j’utilise Unsloth Studio comme couche atelier : chat, Data Recipes, QLoRA et export GGUF — sans notebook ni GPU cloud à la minute.',
+        'Studio, le Desktop et les kernels Unsloth : GGUF / MLX, fine-tune low-VRAM, Data Recipes — et pourquoi le GGUF Qwen3.8-27B tient en 17 Go.',
       blocks: [
         {
           type: 'paragraph',
-          text: 'J’ai déjà un endpoint Qwen en vLLM pour l’agent lourd, Ollama pour le léger, et Hermes pour ce qui doit tourner sans moi. Ce qui manquait, c’est l’atelier : préparer un dataset, fine-tuner un modèle open, comparer le résultat au baseline, l’exporter en GGUF — sans enchaîner un notebook, trois YAML et un compte RunPod. Unsloth Studio est cette couche.',
+          text: 'Mi-août, Unsloth a poussé un GGUF de Qwen3.8-27B. En moins de 24 heures : 1 000 likes, 3e modèle trending sur Hugging Face, 1 M de downloads. Leur phrase utile n’est pas le compteur — c’est « Run on 17GB RAM/VRAM setups via Unsloth ». Un 27B frontier-adjacent qui tient sur une machine que tu possèdes, c’est exactement le job de Studio.',
         },
         {
           type: 'image',
           src: COVER,
-          alt: 'Interface Unsloth Studio pendant une démo Hugging Face',
+          alt: 'Annonce Unsloth : Qwen3.8-27B GGUF, 1000 likes en 24 h, exécutable en 17 Go via Unsloth',
           caption:
-            'Unsloth Studio — UI locale pour chat, training et export (démo Hugging Face).',
+            'UnslothAI — Qwen3.8-27B GGUF : 1 000 likes en 24 h, #3 trending, 1 M de downloads, 17 Go RAM/VRAM.',
           link: {
-            href: '/blog/unsloth-studio-hf-live-daniel-hanchen',
-            label: 'Notes du live HF avec Daniel Hanchen →',
+            href: UNSLOTH_TWEET,
+            label: 'Le post UnslothAI →',
           },
         },
         {
           type: 'heading',
           level: 2,
-          text: 'Le vrai problème',
+          text: 'Ce qu’est Unsloth',
         },
         {
           type: 'paragraph',
-          text: 'Fine-tuner un Qwen ou un Gemma n’est plus réservé aux labs. En revanche, le parcours reste cassé : Hugging Face Transformers + PEFT pour le training, un autre outil pour la quant, Ollama ou llama.cpp pour servir, et tes données qui passent souvent par un GPU cloud facturé à la minute. Dès que le dataset contient du métier (tickets, docs internes, transcripts), je ne veux plus envoyer les poids ni les fichiers ailleurs.',
+          text: 'Unsloth (github.com/unslothai/unsloth) est d’abord une lib de training : kernels custom, ~2× plus vite, ~70 % de VRAM en moins vs le stack Transformers + PEFT, sans perte de qualité annoncée. Studio est l’UI locale par-dessus : une app Desktop (Mac, Windows, Linux) ou un `unsloth studio` dans le navigateur. Même moteur, plus de notebook.',
         },
         {
           type: 'list',
           items: [
-            'Une UI locale, pas une collection de notebooks.',
-            'Tes docs restent sur la machine — PDF, CSV, JSON, DOCX.',
-            'Les kernels Unsloth : environ 2× plus vite, ~70 % de VRAM en moins vs le stack HF + PEFT classique.',
-            'Un export vers le stack que j’utilise déjà : GGUF, safetensors, LoRA, vLLM, Ollama.',
+            'Inférence locale : GGUF, safetensors, MLX sur Mac, diffusion image/vidéo.',
+            'Training no-code : 500+ modèles texte, vision, TTS, embeddings — QLoRA, LoRA, FP8, full.',
+            'Data Recipes : PDF, CSV, JSON, DOCX, TXT → dataset (NVIDIA NeMo Data Designer).',
+            'Export : GGUF, safetensors 16-bit, adaptateur LoRA — vers llama.cpp, Ollama, vLLM, LM Studio.',
+            'Agents : endpoint OpenAI-compatible + `unsloth start` (Claude Code, Codex, Hermes, OpenCode).',
           ],
         },
         {
           type: 'heading',
           level: 2,
-          text: 'Ce qu’est Unsloth Studio',
+          text: 'Pourquoi 17 Go changent le calcul',
         },
         {
           type: 'paragraph',
-          text: 'Unsloth Studio (beta) est l’UI web du projet Unsloth. No-code pour l’essentiel, branchée sur les mêmes kernels que la lib Python. Tu l’installes en app Desktop (Mac, Windows, Linux) ou en CLI. Elle tourne en local — chat, training, export — et peut exposer un endpoint OpenAI-compatible pour Claude Code, Codex ou Hermes.',
+          text: 'Le GGUF Unsloth de Qwen3.8-27B (huggingface.co/unsloth/Qwen3.8-27B-GGUF) est le cas d’école. Le même modèle en BF16 pèse ~55 Go. En quant Unsloth, il rentre dans 17 Go — RTX 4070, Mac 32 Go en MLX, petite instance cloud. Tu ne loues plus une H100 pour « juste essayer ». Tu charges, tu chats, tu compares, tu exportes.',
         },
         {
           type: 'list',
           items: [
-            'Chat : GGUF, safetensors, MLX sur Mac, comparaison côte à côte, tool calling self-healing, exécution Bash/Python sandboxée.',
-            'Training : texte, vision, audio/TTS, embeddings — QLoRA, LoRA ou full fine-tune.',
-            'Data Recipes : tes fichiers bruts deviennent un dataset via un graphe de nœuds (NVIDIA NeMo Data Designer).',
-            'Export : 16-bit mergé, adaptateur LoRA seul, ou GGUF pour llama.cpp / Ollama / LM Studio / vLLM.',
+            'Pas besoin de fine-tuner pour s’en servir : Studio charge un GGUF et c’est tout.',
+            'Tool calling self-healing, web search privé, exécution Bash/Python sandboxée.',
+            'Arena : deux modèles / quants côte à côte dans la même UI.',
+            'Offline : pas de télémétrie d’usage ; hardware minimal pour la compat.',
           ],
         },
         {
           type: 'heading',
           level: 2,
-          text: 'Le parcours que je retiens',
+          text: 'Le parcours Studio',
         },
         {
           type: 'paragraph',
-          text: 'Je ne m’en sers pas comme chat du quotidien — Cursor et vLLM restent là. Studio, c’est la boucle « adapter un modèle à un cas », une fois le dataset sous la main.',
+          text: 'La doc (unsloth.ai/docs/new/studio) décrit une boucle unique. Tu n’enchaînes plus Transformers, un quantizer, Ollama et un YAML.',
         },
         {
           type: 'list',
           items: [
-            'Charger un modèle Hub ou local (Qwen, Gemma, Nemotron…), souvent en QLoRA 4-bit.',
-            'Importer des PDF / CSV / JSON, ou construire le set dans Data Recipes.',
-            'Lancer le run : loss, norme de gradient, VRAM et température en live.',
-            'Comparer le checkpoint au baseline dans le chat (arena).',
-            'Exporter en GGUF (Q4_K_M par défaut) ou safetensors 16-bit selon que ça part sur Ollama ou vLLM.',
-          ],
-        },
-        {
-          type: 'heading',
-          level: 3,
-          text: 'QLoRA, LoRA, full',
-        },
-        {
-          type: 'list',
-          items: [
-            'QLoRA — base 4-bit + adaptateur. Le moins de VRAM, le bon défaut sur une carte consommateur.',
-            'LoRA — base 16-bit + adaptateur. Plus de marge qualité, plus de mémoire.',
-            'Full fine-tune — tous les poids. Utile si tu as la VRAM ; sinon c’est du gaspillage.',
+            'Lancer Desktop ou `unsloth studio` — chercher un modèle Hub ou un GGUF local.',
+            'Optionnel : Data Recipes pour fabriquer le set à partir de tes fichiers.',
+            'Fine-tune QLoRA (défaut low-VRAM) / LoRA / full, métriques et VRAM en temps réel.',
+            'Comparer le checkpoint au baseline dans le chat.',
+            'Exporter vers le runtime que tu as déjà.',
           ],
         },
         {
           type: 'heading',
           level: 2,
-          text: 'Lancer Studio',
+          text: 'Installer',
         },
         {
           type: 'paragraph',
-          text: 'Le plus simple : l’app Desktop (unsloth.ai/download/mac sur mon laptop). En CLI :',
+          text: 'Desktop : unsloth.ai/download/mac (aussi Windows et Linux). CLI :',
         },
         {
           type: 'code',
           language: 'bash',
-          code: `# Install (macOS / Linux / WSL)
+          code: `# macOS / Linux / WSL
 curl -fsSL https://unsloth.ai/install.sh | sh
 
-# UI locale
 unsloth studio -H 0.0.0.0 -p 8888
 # → http://127.0.0.1:8888
 
-# HTTPS via tunnel Cloudflare (optionnel)
+# Tunnel HTTPS Cloudflare (optionnel)
 unsloth studio --secure`,
         },
         {
           type: 'paragraph',
-          text: 'Sur NVIDIA, training + inférence GPU. Sur Mac : training, MLX et GGUF — suffisant pour itérer sur laptop. CPU seul : chat et Data Recipes, pas le gros fine-tune. AMD : le chat marche ; le training Studio arrive (Unsloth Core existe déjà).',
-        },
-        {
-          type: 'heading',
-          level: 3,
-          text: 'Brancher Hermes (et les autres agents)',
-        },
-        {
-          type: 'paragraph',
-          text: 'Une fois un modèle chargé dans Studio, `unsloth start` le pose derrière un agent. Pour mon stack LivingColor / Hermes :',
+          text: 'NVIDIA : training + inférence GPU. Mac : training, MLX et GGUF. CPU : chat et Data Recipes. Le training lourd reste côté GPU NVIDIA. Une fois un modèle chargé :',
         },
         {
           type: 'code',
@@ -138,23 +117,13 @@ unsloth studio --secure`,
 # aussi : claude, codex, opencode, openclaw`,
         },
         {
-          type: 'paragraph',
-          text: 'Ça ferme la boucle avec l’article Hermes : l’agent tourne sur un modèle que je contrôle, pas sur un flagship facturé à la tâche. Même idée que le serveur Qwen distant — sauf que là, le modèle peut être un fine-tune à moi, servi depuis la machine.',
-        },
-        {
           type: 'heading',
           level: 2,
-          text: 'Où ça se place dans mon stack',
+          text: 'Dans mon stack',
         },
         {
-          type: 'list',
-          items: [
-            'Cursor — IDE. L’inférence lourde pointe vers vLLM, pas vers le modèle premium intégré.',
-            'Qwen 27B / vLLM sur AWS — agent quotidien, gros contexte, plusieurs clients MCP.',
-            'Unsloth Studio — atelier : dataset, fine-tune, quant, comparaison, export.',
-            'Ollama / llama.cpp — servir un GGUF exporté (git-mentor, essais laptop).',
-            'Hermes — automatisation hors IDE, éventuellement via `unsloth start hermes`.',
-          ],
+          type: 'paragraph',
+          text: 'vLLM sur AWS garde l’agent quotidien. Studio est là où j’essaie un GGUF du jour — Qwen3.8-27B en 4-bit sur le M1, par exemple — et où je fine-tunerais un corpus qui ne doit pas sortir de la machine. Détail sur le 27B : /blog/qwen-3-8-27b',
         },
         {
           type: 'heading',
@@ -163,144 +132,120 @@ unsloth studio --secure`,
         },
         {
           type: 'paragraph',
-          text: 'Studio ne remplace ni Cursor ni mon endpoint distant. Il remplace le bricolage notebook + cloud GPU dès que je veux adapter un modèle open à un corpus local. Open-source, offline, et assez complet pour aller jusqu’à l’export. Les notes du live HF restent la meilleure intro visuelle ; la doc Unsloth pour l’install.',
+          text: 'Unsloth n’est plus seulement une lib de LoRA rapide. Studio en fait l’endroit où tu cours, compares et exportes les modèles open du moment — y compris un 27B qui rentre en 17 Go. Le tweet Qwen3.8 n’est pas du marketing vide : c’est la preuve que le local a rattrapé le rythme des sorties.',
         },
         {
           type: 'list',
           items: [
             'Doc Studio : unsloth.ai/docs/new/studio',
-            'Desktop : unsloth.ai/download/mac',
             'Repo : github.com/unslothai/unsloth',
-            'Live HF : /blog/unsloth-studio-hf-live-daniel-hanchen',
+            'GGUF Qwen3.8-27B : huggingface.co/unsloth/Qwen3.8-27B-GGUF',
+            'Annonce : x.com/UnslothAI/status/2088627177655050362',
             'Qwen 3.8 27B : /blog/qwen-3-8-27b',
-            'Qwen self-hosted : /blog/qwen-3-6-27b-remote-server',
-            'Hermes : /blog/hermes-automation-cheaper-models',
           ],
         },
       ],
     },
     en: {
-      title: 'Unsloth Studio — the local workshop to fine-tune and serve LLMs',
+      title: 'Unsloth Studio — run and train LLMs locally',
       description:
-        'Why I use Unsloth Studio as the workshop layer: chat, Data Recipes, QLoRA, and GGUF export — no notebook, no minute-billed cloud GPU.',
+        'Studio, Desktop, and Unsloth kernels: GGUF / MLX, low-VRAM fine-tunes, Data Recipes — and why the Qwen3.8-27B GGUF fits in 17 GB.',
       blocks: [
         {
           type: 'paragraph',
-          text: 'I already have a Qwen endpoint on vLLM for the heavy agent, Ollama for the light path, and Hermes for work that should run without me. What was missing is the workshop: prep a dataset, fine-tune an open model, compare it to the baseline, export GGUF — without chaining a notebook, three YAML files, and a RunPod tab. Unsloth Studio is that layer.',
+          text: 'In mid-August Unsloth shipped a Qwen3.8-27B GGUF. In under 24 hours: 1,000 likes, #3 trending model on Hugging Face, 1M downloads. The useful line isn’t the counter — it’s “Run on 17GB RAM/VRAM setups via Unsloth.” A frontier-adjacent 27B that fits on hardware you own is exactly what Studio is for.',
         },
         {
           type: 'image',
           src: COVER,
-          alt: 'Unsloth Studio UI during a Hugging Face demo',
+          alt: 'Unsloth announcement: Qwen3.8-27B GGUF, 1000 likes in 24h, runnable in 17 GB via Unsloth',
           caption:
-            'Unsloth Studio — local UI for chat, training, and export (Hugging Face demo).',
+            'UnslothAI — Qwen3.8-27B GGUF: 1,000 likes in 24h, #3 trending, 1M downloads, 17 GB RAM/VRAM.',
           link: {
-            href: '/blog/unsloth-studio-hf-live-daniel-hanchen',
-            label: 'Notes from the HF live with Daniel Hanchen →',
+            href: UNSLOTH_TWEET,
+            label: 'The UnslothAI post →',
           },
         },
         {
           type: 'heading',
           level: 2,
-          text: 'The actual problem',
+          text: 'What Unsloth is',
         },
         {
           type: 'paragraph',
-          text: 'Fine-tuning a Qwen or Gemma is no longer lab-only. The path is still broken, though: Hugging Face Transformers + PEFT for training, another tool for quant, Ollama or llama.cpp to serve, and your data often crossing a minute-billed cloud GPU. As soon as the dataset is work-shaped (tickets, internal docs, transcripts), I don’t want weights or files leaving the machine.',
+          text: 'Unsloth (github.com/unslothai/unsloth) started as a training library: custom kernels, ~2× faster, ~70% less VRAM than Transformers + PEFT, with no claimed quality loss. Studio is the local UI on top: a Desktop app (Mac, Windows, Linux) or `unsloth studio` in the browser. Same engine, no notebook.',
         },
         {
           type: 'list',
           items: [
-            'A local UI, not a pile of notebooks.',
-            'Your docs stay on the box — PDF, CSV, JSON, DOCX.',
-            'Unsloth kernels: about 2× faster, ~70% less VRAM vs the classic HF + PEFT stack.',
-            'Export into the stack I already run: GGUF, safetensors, LoRA, vLLM, Ollama.',
+            'Local inference: GGUF, safetensors, MLX on Mac, image/video diffusion.',
+            'No-code training: 500+ text, vision, TTS, embedding models — QLoRA, LoRA, FP8, full.',
+            'Data Recipes: PDF, CSV, JSON, DOCX, TXT → dataset (NVIDIA NeMo Data Designer).',
+            'Export: GGUF, 16-bit safetensors, LoRA adapter — to llama.cpp, Ollama, vLLM, LM Studio.',
+            'Agents: OpenAI-compatible endpoint + `unsloth start` (Claude Code, Codex, Hermes, OpenCode).',
           ],
         },
         {
           type: 'heading',
           level: 2,
-          text: 'What Unsloth Studio is',
+          text: 'Why 17 GB changes the math',
         },
         {
           type: 'paragraph',
-          text: 'Unsloth Studio (beta) is the web UI for the Unsloth project. No-code for most of it, backed by the same kernels as the Python library. Install it as a Desktop app (Mac, Windows, Linux) or via CLI. It runs locally — chat, training, export — and can expose an OpenAI-compatible endpoint for Claude Code, Codex, or Hermes.',
+          text: 'Unsloth’s Qwen3.8-27B GGUF (huggingface.co/unsloth/Qwen3.8-27B-GGUF) is the textbook case. The same model in BF16 is ~55 GB. Unsloth’s quant fits in 17 GB — RTX 4070, 32 GB Mac on MLX, a small cloud box. You don’t rent an H100 to “just try it.” You load, chat, compare, export.',
         },
         {
           type: 'list',
           items: [
-            'Chat: GGUF, safetensors, MLX on Mac, side-by-side comparison, self-healing tool calling, sandboxed Bash/Python.',
-            'Training: text, vision, audio/TTS, embeddings — QLoRA, LoRA, or full fine-tune.',
-            'Data Recipes: raw files become a dataset through a node graph (NVIDIA NeMo Data Designer).',
-            'Export: merged 16-bit, LoRA adapter only, or GGUF for llama.cpp / Ollama / LM Studio / vLLM.',
+            'No need to fine-tune to use it: Studio loads a GGUF and you’re in.',
+            'Self-healing tool calling, private web search, sandboxed Bash/Python.',
+            'Arena: two models / quants side by side in the same UI.',
+            'Offline: no usage telemetry; minimal hardware info for compatibility.',
           ],
         },
         {
           type: 'heading',
           level: 2,
-          text: 'The loop I actually use',
+          text: 'The Studio loop',
         },
         {
           type: 'paragraph',
-          text: 'I don’t use it as daily chat — Cursor and vLLM stay. Studio is the “adapt a model to a case” loop, once the dataset is in hand.',
+          text: 'The docs (unsloth.ai/docs/new/studio) describe one loop. You no longer chain Transformers, a quantizer, Ollama, and a YAML file.',
         },
         {
           type: 'list',
           items: [
-            'Load a Hub or local model (Qwen, Gemma, Nemotron…), usually QLoRA 4-bit.',
-            'Import PDFs / CSVs / JSON, or build the set in Data Recipes.',
-            'Start the run: live loss, gradient norm, VRAM, and temperature.',
-            'Compare the checkpoint to the baseline in chat (arena).',
-            'Export GGUF (Q4_K_M by default) or 16-bit safetensors depending on Ollama vs vLLM.',
-          ],
-        },
-        {
-          type: 'heading',
-          level: 3,
-          text: 'QLoRA, LoRA, full',
-        },
-        {
-          type: 'list',
-          items: [
-            'QLoRA — 4-bit base + adapter. Lowest VRAM, the right default on a consumer card.',
-            'LoRA — 16-bit base + adapter. More quality headroom, more memory.',
-            'Full fine-tune — every weight. Fine if you have the VRAM; otherwise waste.',
+            'Launch Desktop or `unsloth studio` — search a Hub model or a local GGUF.',
+            'Optional: Data Recipes to build the set from your files.',
+            'Fine-tune QLoRA (low-VRAM default) / LoRA / full, metrics and VRAM in real time.',
+            'Compare the checkpoint to the baseline in chat.',
+            'Export to the runtime you already run.',
           ],
         },
         {
           type: 'heading',
           level: 2,
-          text: 'Launching Studio',
+          text: 'Install',
         },
         {
           type: 'paragraph',
-          text: 'Easiest path: the Desktop app (unsloth.ai/download/mac on my laptop). CLI:',
+          text: 'Desktop: unsloth.ai/download/mac (Windows and Linux too). CLI:',
         },
         {
           type: 'code',
           language: 'bash',
-          code: `# Install (macOS / Linux / WSL)
+          code: `# macOS / Linux / WSL
 curl -fsSL https://unsloth.ai/install.sh | sh
 
-# Local UI
 unsloth studio -H 0.0.0.0 -p 8888
 # → http://127.0.0.1:8888
 
-# HTTPS via Cloudflare tunnel (optional)
+# Cloudflare HTTPS tunnel (optional)
 unsloth studio --secure`,
         },
         {
           type: 'paragraph',
-          text: 'On NVIDIA: GPU training + inference. On Mac: training, MLX, and GGUF — enough to iterate on a laptop. CPU only: chat and Data Recipes, not the heavy fine-tune. AMD: chat works; Studio training is coming (Unsloth Core already exists).',
-        },
-        {
-          type: 'heading',
-          level: 3,
-          text: 'Wiring Hermes (and other agents)',
-        },
-        {
-          type: 'paragraph',
-          text: 'Once a model is loaded in Studio, `unsloth start` puts it behind an agent. For my LivingColor / Hermes stack:',
+          text: 'NVIDIA: GPU training + inference. Mac: training, MLX, and GGUF. CPU: chat and Data Recipes. Heavy training stays on NVIDIA GPUs. Once a model is loaded:',
         },
         {
           type: 'code',
@@ -309,23 +254,13 @@ unsloth studio --secure`,
 # also: claude, codex, opencode, openclaw`,
         },
         {
-          type: 'paragraph',
-          text: 'That closes the loop with the Hermes post: the agent runs on a model I control, not a flagship billed per task. Same idea as the remote Qwen server — except here the model can be a fine-tune of mine, served from the machine.',
-        },
-        {
           type: 'heading',
           level: 2,
-          text: 'Where it sits in my stack',
+          text: 'In my stack',
         },
         {
-          type: 'list',
-          items: [
-            'Cursor — IDE. Heavy inference points at vLLM, not the built-in premium model.',
-            'Qwen 27B / vLLM on AWS — daily agent, long context, several MCP clients.',
-            'Unsloth Studio — workshop: dataset, fine-tune, quant, compare, export.',
-            'Ollama / llama.cpp — serve an exported GGUF (git-mentor, laptop trials).',
-            'Hermes — out-of-IDE automation, optionally via `unsloth start hermes`.',
-          ],
+          type: 'paragraph',
+          text: 'vLLM on AWS still owns the daily agent. Studio is where I try the GGUF of the day — Qwen3.8-27B in 4-bit on the M1, for instance — and where I’d fine-tune a corpus that shouldn’t leave the machine. More on the 27B: /blog/qwen-3-8-27b',
         },
         {
           type: 'heading',
@@ -334,18 +269,16 @@ unsloth studio --secure`,
         },
         {
           type: 'paragraph',
-          text: 'Studio doesn’t replace Cursor or my remote endpoint. It replaces the notebook + cloud-GPU scramble whenever I want to adapt an open model to a local corpus. Open source, offline, and complete enough to reach export. The HF live notes remain the best visual intro; Unsloth docs for install.',
+          text: 'Unsloth is no longer just a fast LoRA library. Studio is where you run, compare, and export the open models of the week — including a 27B that fits in 17 GB. The Qwen3.8 tweet isn’t empty marketing: it’s proof local caught up to the release cadence.',
         },
         {
           type: 'list',
           items: [
             'Studio docs: unsloth.ai/docs/new/studio',
-            'Desktop: unsloth.ai/download/mac',
             'Repo: github.com/unslothai/unsloth',
-            'HF live: /blog/unsloth-studio-hf-live-daniel-hanchen',
+            'Qwen3.8-27B GGUF: huggingface.co/unsloth/Qwen3.8-27B-GGUF',
+            'Announcement: x.com/UnslothAI/status/2088627177655050362',
             'Qwen 3.8 27B: /blog/qwen-3-8-27b',
-            'Qwen self-hosted: /blog/qwen-3-6-27b-remote-server',
-            'Hermes: /blog/hermes-automation-cheaper-models',
           ],
         },
       ],
