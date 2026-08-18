@@ -12,6 +12,14 @@ describe('dictionaries', () => {
     expect(locales).toContain(defaultLocale)
   })
 
+  it('exposes SEO keywords and skip-to-content copy in every locale', () => {
+    for (const loc of locales) {
+      expect(dictionaries[loc].meta.keywords.length).toBeGreaterThan(3)
+      expect(dictionaries[loc].a11y.skipToContent.length).toBeGreaterThan(0)
+      expect(dictionaries[loc].blog.writtenBy).toContain('{name}')
+    }
+  })
+
   it('keeps parallel collections in sync across locales', () => {
     const projectsCounts = locales.map((l) => dictionaries[l].projects.items.length)
     const experienceCounts = locales.map((l) => dictionaries[l].experience.items.length)

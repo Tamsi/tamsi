@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest'
 import {
+  buildHumansTxt,
+  buildLlmsFullTxt,
   buildLlmsTxt,
   buildPortfolioMachineBlocks,
   blocksToPlainText,
@@ -37,5 +39,21 @@ describe('portfolio-machine', () => {
     expect(txt).toContain('/sitemap.xml')
     expect(txt).toContain('llms.txt?locale=en')
     expect(txt).toContain('ai-code-reviewer-mcp')
+    expect(txt).toContain('/llms-full.txt')
+    expect(txt).toContain('/feed.xml')
+    expect(txt).toContain('## Blog')
+  })
+
+  it('builds a full dump with article bodies', () => {
+    const full = buildLlmsFullTxt('en')
+    expect(full.length).toBeGreaterThan(buildLlmsTxt('en').length)
+    expect(full).toContain('## Full articles')
+  })
+
+  it('exports humans.txt with identity facts', () => {
+    const humans = buildHumansTxt()
+    expect(humans).toContain('Tamsi Besson')
+    expect(humans).toContain('Paris')
+    expect(humans).toContain('llms.txt')
   })
 })

@@ -2,17 +2,16 @@ import { ImageResponse } from 'next/og'
 import { OG_IMAGE_SIZE, PERSON_NAME } from '@/data/site-links'
 import { OgFrame } from '@/lib/og-frame'
 
-export const alt = `${PERSON_NAME} — AI Engineer · MCP & AI devtools`
+export const alt = `${PERSON_NAME} — machine-readable portfolio`
 export const size = OG_IMAGE_SIZE
 export const contentType = 'image/png'
 
-export default function OpenGraphImage() {
+export default function MachineOpenGraphImage() {
   return new ImageResponse(
     (
       <OgFrame
-        title={PERSON_NAME}
-        subtitle="AI Engineer · MCP servers · AI devtools · Paris"
-        footer="Portfolio · Open source · Machine view at /machine"
+        title="Machine-readable portfolio"
+        subtitle="Structured view for agents, crawlers, and llms.txt"
       />
     ),
     { ...size },

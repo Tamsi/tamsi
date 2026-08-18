@@ -23,18 +23,32 @@ export type InterestGroup = {
 export const dictionaries = {
   fr: {
     meta: {
-      title: 'Tamsi Besson — Full-stack · MCP & AI devtools',
+      title: 'Tamsi Besson — AI Engineer à Paris | MCP, agents & Next.js',
       description:
-        'AI Engineer à Paris. Serveurs MCP, revue de code IA, Next.js, TypeScript, Python. Portfolio et projets open source sur GitHub.',
-      machineTitle: 'Tamsi Besson — Portfolio lisible par machine',
+        'AI Engineer à Paris. Serveurs MCP, workflows LLM et apps Next.js — portfolio, blog technique et projets open source (HuggiMon, redbee-mcp).',
+      keywords: [
+        'Tamsi Besson',
+        'AI Engineer',
+        'MCP',
+        'Model Context Protocol',
+        'Next.js',
+        'TypeScript',
+        'LLM',
+        'Paris',
+        'open source',
+      ],
+      machineTitle: 'Portfolio lisible par machine',
       machineDescription:
         'Portfolio structuré pour agents IA et crawlers : expérience, projets open source, stack MCP/LLM. Version visuelle sur tamsi.dev.',
-      blogTitle: 'Blog — Tamsi Besson',
+      blogTitle: 'Blog',
       blogDescription:
-        'Pourquoi j’ai monté ces outils : tokens LLM gratuits, MCP pour le travail quotidien, revue de code sans surcoût Cursor.',
-      adventureTitle: 'Aventure isométrique · Tamsi Besson',
+        'Notes techniques : LLM locaux, serveurs MCP, fine-tuning Unsloth, revue de code IA et tooling Cursor — sans marketing.',
+      adventureTitle: 'Aventure isométrique',
       adventureDescription:
-        'Mini-jeu style Dofus : terrain herbeux, déplacement au clic.',
+        'Mini-jeu isométrique style Dofus : exploration, combats au tour par tour et parchemins qui mènent aux articles du blog.',
+    },
+    a11y: {
+      skipToContent: 'Aller au contenu',
     },
     nav: {
       about: 'À propos',
@@ -322,6 +336,7 @@ export const dictionaries = {
       allPosts: 'Tous les articles',
       backToBlog: 'Retour au blog',
       readingTime: '{minutes} min de lecture',
+      writtenBy: 'Par {name}',
     },
     contact: {
       title: 'Contact',
@@ -443,18 +458,32 @@ export const dictionaries = {
 
   en: {
     meta: {
-      title: 'Tamsi Besson — Full-stack · MCP & AI devtools',
+      title: 'Tamsi Besson — AI Engineer in Paris | MCP, agents & Next.js',
       description:
-        'AI Engineer in Paris. MCP servers, AI code review, Next.js, TypeScript, Python. Portfolio and open source on GitHub.',
-      machineTitle: 'Tamsi Besson — Machine-readable portfolio',
+        'AI Engineer in Paris. MCP servers, LLM workflows and Next.js apps — portfolio, technical blog, and open source (HuggiMon, redbee-mcp).',
+      keywords: [
+        'Tamsi Besson',
+        'AI Engineer',
+        'MCP',
+        'Model Context Protocol',
+        'Next.js',
+        'TypeScript',
+        'LLM',
+        'Paris',
+        'open source',
+      ],
+      machineTitle: 'Machine-readable portfolio',
       machineDescription:
         'Structured portfolio for AI agents and crawlers: experience, open source, MCP/LLM stack. Visual site at tamsi.dev.',
-      blogTitle: 'Blog — Tamsi Besson',
+      blogTitle: 'Blog',
       blogDescription:
-        'Why I built these tools: free LLM tokens, MCP for daily work, code review without extra Cursor cost.',
-      adventureTitle: 'Isometric adventure · Tamsi Besson',
+        'Technical notes: local LLMs, MCP servers, Unsloth fine-tuning, AI code review, and Cursor tooling — no marketing fluff.',
+      adventureTitle: 'Isometric adventure',
       adventureDescription:
-        'Dofus-style mini-game: grassy field, click to move.',
+        'Dofus-style isometric mini-game: explore, turn-based combat, and scrolls that lead to the blog posts.',
+    },
+    a11y: {
+      skipToContent: 'Skip to content',
     },
     nav: {
       about: 'About',
@@ -741,6 +770,7 @@ export const dictionaries = {
       allPosts: 'All posts',
       backToBlog: 'Back to blog',
       readingTime: '{minutes} min read',
+      writtenBy: 'By {name}',
     },
     contact: {
       title: 'Contact',

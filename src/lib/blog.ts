@@ -74,3 +74,85 @@ export function blogPostLocaleUrl(slug: string, locale: Locale): string {
   }
   return url.pathname + url.search
 }
+
+export function latestBlogPublishedAt(): Date {
+  const posts = getAllBlogPosts()
+  return posts[0] ? new Date(posts[0].publishedAt) : new Date('2026-01-01')
+}
+
+export function blogPostPlainText(post: BlogPost, locale: Locale): string {
+  const content = getBlogPostContent(post, locale)
+  const parts = [content.title, content.description]
+  for (const block of content.blocks) {
+    switch (block.type) {
+      case 'paragraph':
+      case 'heading':
+        parts.push(block.text)
+        break
+      case 'list':
+        parts.push(...block.items)
+        break
+      case 'code':
+        parts.push(block.code)
+        break
+      case 'image':
+        parts.push(block.alt)
+        if (block.caption) parts.push(block.caption)
+        break
+    }
+  }
+  return parts.filter(Boolean).join('\n')
+}
+
+export function countWords(text: string): number {
+  return text
+    .replace(/[`*_\[\]()#>-]/g, ' ')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean).length
+}
+
+export function blogPostWordCount(post: BlogPost, locale: Locale): number {
+  return countWords(blogPostPlainText(post, locale))
+}
+
+export function blogPostToMarkdown(post: BlogPost, locale: Locale): string {
+  const content = getBlogPostContent(post, locale)
+  const lines = [
+    `# ${content.title}`,
+    '',
+    content.description,
+    '',
+    `Date: ${post.publishedAt}`,
+    `Tags: ${post.tags.join(', ')}`,
+    `URL: ${SITE_URL}${blogPostLocaleUrl(post.slug, locale)}`,
+    '',
+  ]
+
+  for (const block of content.blocks) {
+    switch (block.type) {
+      case 'paragraph':
+        lines.push(block.text, '')
+        break
+      case 'heading':
+        lines.push(`${'#'.repeat(block.level)} ${block.text}`, '')
+        break
+      case 'list':
+        lines.push(...block.items.map((item) => `- ${item}`), '')
+        break
+      case 'code':
+        lines.push(`\`\`\`${block.language}`, block.code, '```', '')
+        break
+      case 'image': {
+        const src = block.src.startsWith('http')
+          ? block.src
+          : `${SITE_URL}${block.src}`
+        lines.push(`![${block.alt}](${src})`, '')
+        if (block.caption) lines.push(`_${block.caption}_`, '')
+        break
+      }
+    }
+  }
+
+  return lines.join('\n').trim() + '\n'
+}

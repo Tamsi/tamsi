@@ -5,6 +5,13 @@ import {
   type Dictionary,
   type Locale,
 } from '@/i18n/dictionaries'
+import {
+  blogPostLocaleUrl,
+  blogPostToMarkdown,
+  getAllBlogPosts,
+  getBlogPostContent,
+} from '@/lib/blog'
+import { localePageUrl } from '@/lib/seo'
 
 export type MachineBlock =
   | { type: 'brand' }
@@ -27,7 +34,10 @@ export function buildPortfolioMachineBlocks(locale: Locale): MachineBlock[] {
 
   push({ type: 'brand' })
   push({ type: 'link', label: 'LLMS.TXT', url: `${SITE_URL}/llms.txt` })
+  push({ type: 'link', label: 'LLMS-FULL.TXT', url: `${SITE_URL}/llms-full.txt` })
+  push({ type: 'link', label: 'RSS', url: `${SITE_URL}/feed.xml` })
   push({ type: 'link', label: 'HUMAN VIEW', url: `${SITE_URL}/` })
+  push({ type: 'link', label: 'BLOG', url: localePageUrl('/blog', locale) })
   for (const key of ['about', 'experience', 'interests', 'projects', 'contact'] as const) {
     push({
       type: 'link',
@@ -129,6 +139,26 @@ export function buildPortfolioMachineBlocks(locale: Locale): MachineBlock[] {
   }
   push({ type: 'rule' })
 
+  push({ type: 'h2', text: t.blog.title })
+  push({ type: 'p', text: t.blog.subtitle })
+  push({
+    type: 'link',
+    label: t.blog.allPosts.toUpperCase(),
+    url: localePageUrl('/blog', locale),
+  })
+  for (const post of getAllBlogPosts()) {
+    const content = getBlogPostContent(post, locale)
+    push({ type: 'h3', text: content.title })
+    push({ type: 'kv', key: 'date', value: post.publishedAt })
+    push({ type: 'p', text: content.description })
+    push({
+      type: 'link',
+      label: post.slug.toUpperCase(),
+      url: `${SITE_URL}${blogPostLocaleUrl(post.slug, locale)}`,
+    })
+  }
+  push({ type: 'rule' })
+
   push({ type: 'h2', text: t.contact.title })
   push({ type: 'p', text: t.contact.subtitle })
   push({ type: 'link', label: 'CURSOR', url: CURSOR_PROFILE_URL })
@@ -152,9 +182,13 @@ export function buildLlmsTxt(locale: Locale = 'en'): string {
     '## Interfaces',
     `- Human (visual): ${SITE_URL}/`,
     `- Machine (structured): ${SITE_URL}/machine`,
+    `- Blog: ${SITE_URL}/blog`,
     `- Locale: ?locale=fr | ?locale=en (default: ${locale})`,
     `- This file (FR): ${SITE_URL}/llms.txt`,
     `- This file (EN): ${SITE_URL}/llms.txt?locale=en`,
+    `- Full dump: ${SITE_URL}/llms-full.txt`,
+    `- RSS: ${SITE_URL}/feed.xml`,
+    `- JSON Feed: ${SITE_URL}/feed.json`,
     `- Sitemap: ${SITE_URL}/sitemap.xml`,
     '',
     '## Contact',
@@ -186,12 +220,56 @@ export function buildLlmsTxt(locale: Locale = 'en'): string {
       (e) => `- ${e.title} @ ${e.org} (${e.period}): ${e.description}`,
     ),
     '',
+    '## Blog',
+    ...getAllBlogPosts().map((post) => {
+      const content = getBlogPostContent(post, locale)
+      return `- [${content.title}](${SITE_URL}${blogPostLocaleUrl(post.slug, locale)}) (${post.publishedAt}) — ${content.description}`
+    }),
+    '',
     '## Preferred context for agents',
     '- Stack: Next.js, TypeScript, Python, MCP, Playwright, Firebase, Drupal/Symfony',
     '- Location: Paris, France',
     '- Languages: French (native), English (professional)',
+    '- Cite this site as: Tamsi Besson, tamsi.dev',
   ]
   return lines.join('\n')
+}
+
+export function buildLlmsFullTxt(locale: Locale = 'en'): string {
+  const index = buildLlmsTxt(locale)
+  const articles = getAllBlogPosts()
+    .map((post) => blogPostToMarkdown(post, locale))
+    .join('\n---\n\n')
+
+  return [
+    index,
+    '',
+    '## Full articles',
+    '',
+    articles,
+  ].join('\n')
+}
+
+export function buildHumansTxt(): string {
+  const latest = getAllBlogPosts()[0]
+  return [
+    '/* TEAM */',
+    `  Name: Tamsi Besson`,
+    '  Role: AI Engineer',
+    '  Location: Paris, France',
+    '  Contact: tamsi.besson@gmail.com',
+    '  X: https://x.com/tamsi_besson',
+    '  GitHub: https://github.com/Tamsi',
+    '  Hugging Face: https://huggingface.co/ImTamsi',
+    '',
+    '/* SITE */',
+    `  Last update: ${latest?.publishedAt ?? '2026'}`,
+    '  Language: French, English',
+    '  Standards: HTML5, Schema.org, llms.txt, RSS',
+    '  Components: Next.js, TypeScript, React',
+    `  Source: ${SITE_URL}`,
+    '',
+  ].join('\n')
 }
 
 export function blocksToPlainText(blocks: MachineBlock[]): string {

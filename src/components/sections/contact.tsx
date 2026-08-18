@@ -84,7 +84,7 @@ export function Contact() {
                 <MotionLink
                   href={href}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="me noopener noreferrer"
                   className="portfolio-btn-outline gap-2 px-4 py-2 text-sm"
                 >
                   <Icon className="size-4" />

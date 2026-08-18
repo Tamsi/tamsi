@@ -416,6 +416,23 @@ a:hover .portfolio-entry-title,
   }
 }
 
+.skip-to-content {
+  position: absolute;
+  left: 1rem;
+  top: -100%;
+  z-index: 100;
+  border-radius: var(--landing-radius-pill);
+  background: var(--landing-accent);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.skip-to-content:focus {
+  top: 1rem;
+}
+
 .portfolio-article {
   font-family: var(--landing-font-body);
   color: var(--landing-text-muted);
@@ -445,6 +462,28 @@ a:hover .portfolio-entry-title,
 
 .portfolio-article p {
   font-size: 1.0625rem;
+}
+
+.portfolio-article a {
+  color: var(--landing-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+.portfolio-article a:hover {
+  color: var(--landing-accent-hover);
+}
+
+.portfolio-article strong {
+  font-weight: 600;
+  color: var(--landing-text);
+}
+
+.portfolio-article :not(pre) > code {
+  border-radius: 0.3rem;
+  background: #f4f4f5;
+  padding: 0.1em 0.35em;
+  font-size: 0.9em;
 }
 
 .portfolio-article ul {

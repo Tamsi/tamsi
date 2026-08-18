@@ -117,7 +117,7 @@ export function Hero() {
             key={label}
             href={href}
             target="_blank"
-            rel="noopener noreferrer"
+            rel="me noopener noreferrer"
             className="portfolio-btn-outline gap-2 px-4 py-2 text-sm"
             aria-label={label}
             initial={reduced ? undefined : { opacity: 0, scale: 0.9 }}

@@ -5,6 +5,7 @@ import { Clock } from 'lucide-react'
 import { ArticleContent } from '@/components/blog/article-content'
 import { BlogBackLink } from '@/components/blog/blog-listing'
 import type { BlogPost } from '@/content/blog'
+import { PERSON_NAME } from '@/data/site-links'
 import { formatBlogDate, getBlogPostContent } from '@/lib/blog'
 import { useLocale } from '@/i18n/locale-context'
 
@@ -22,7 +23,13 @@ export function BlogPostView({ post }: BlogPostViewProps) {
 
       <header className="mb-10 border-b border-[var(--landing-border-subtle)] pb-8">
         <p className="portfolio-section-label mb-3">
-          {formatBlogDate(post.publishedAt, locale)}
+          <span>
+            {t.blog.writtenBy.replace('{name}', PERSON_NAME)}
+          </span>
+          {' · '}
+          <time dateTime={post.publishedAt}>
+            {formatBlogDate(post.publishedAt, locale)}
+          </time>
         </p>
         <h1 className="portfolio-heading-lg mb-4">{content.title}</h1>
         <p className="portfolio-body mb-4">{content.description}</p>

@@ -1,11 +1,14 @@
 import { describe, it, expect } from 'vitest'
 import {
   assertBlogPostsHaveAllLocales,
+  blogPostToMarkdown,
+  blogPostWordCount,
   formatBlogDate,
   getAllBlogPosts,
   getBlogPost,
   getBlogPostContent,
   getBlogSlugs,
+  latestBlogPublishedAt,
 } from './blog'
 import { locales } from '@/i18n/dictionaries'
 
@@ -41,5 +44,14 @@ describe('blog', () => {
         expect(content.blocks.length).toBeGreaterThan(0)
       }
     }
+  })
+
+  it('exports markdown and a word count for GEO / RSS', () => {
+    const post = getAllBlogPosts()[0]
+    const markdown = blogPostToMarkdown(post, 'en')
+    expect(markdown).toContain(`# ${getBlogPostContent(post, 'en').title}`)
+    expect(markdown).toContain('https://tamsi.dev/blog/')
+    expect(blogPostWordCount(post, 'en')).toBeGreaterThan(20)
+    expect(latestBlogPublishedAt().getTime()).toBeGreaterThan(0)
   })
 })

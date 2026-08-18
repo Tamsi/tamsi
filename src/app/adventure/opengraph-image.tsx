@@ -2,17 +2,16 @@ import { ImageResponse } from 'next/og'
 import { OG_IMAGE_SIZE, PERSON_NAME } from '@/data/site-links'
 import { OgFrame } from '@/lib/og-frame'
 
-export const alt = `${PERSON_NAME} — AI Engineer · MCP & AI devtools`
+export const alt = `${PERSON_NAME} — isometric adventure`
 export const size = OG_IMAGE_SIZE
 export const contentType = 'image/png'
 
-export default function OpenGraphImage() {
+export default function AdventureOpenGraphImage() {
   return new ImageResponse(
     (
       <OgFrame
-        title={PERSON_NAME}
-        subtitle="AI Engineer · MCP servers · AI devtools · Paris"
-        footer="Portfolio · Open source · Machine view at /machine"
+        title="Isometric adventure"
+        subtitle="A Dofus-style side quest on tamsi.dev"
       />
     ),
     { ...size },

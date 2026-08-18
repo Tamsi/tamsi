@@ -4,7 +4,7 @@ import { BlogListing } from '@/components/blog/blog-listing'
 import { Contact } from '@/components/sections/contact'
 import { JsonLd } from '@/components/seo/json-ld'
 import { getServerLocale } from '@/i18n/locale.server'
-import { buildBlogListingMetadata, buildBlogListingJsonLd } from '@/lib/seo'
+import { buildBlogListingMetadata, buildBlogListingStructuredData } from '@/lib/seo'
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getServerLocale()
@@ -16,9 +16,9 @@ export default async function BlogPage() {
 
   return (
     <>
-      <JsonLd data={buildBlogListingJsonLd(locale)} />
+      <JsonLd data={buildBlogListingStructuredData(locale)} />
       <Navbar />
-      <main className="relative">
+      <main id="main-content" className="relative">
         <BlogListing />
         <Contact />
       </main>

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Navbar } from "@/components/sections/navbar";
 import { Hero } from "@/components/sections/hero";
 import { About } from "@/components/sections/about";
@@ -9,7 +10,12 @@ import { Contact } from "@/components/sections/contact";
 import { HomepageScroll } from "@/components/ui/homepage-scroll";
 import { JsonLd } from "@/components/seo/json-ld";
 import { getServerLocale } from "@/i18n/locale.server";
-import { buildStructuredDataGraph } from "@/lib/seo";
+import { buildPageMetadata, buildStructuredDataGraph } from "@/lib/seo";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getServerLocale();
+  return buildPageMetadata(locale, "/");
+}
 
 export default async function Home() {
   const locale = await getServerLocale();
@@ -18,7 +24,7 @@ export default async function Home() {
     <>
       <JsonLd data={buildStructuredDataGraph(locale, "/")} />
       <Navbar />
-      <main className="relative isolate">
+      <main id="main-content" className="relative isolate">
         <HomepageScroll>
           <Hero />
           <About />

@@ -33,7 +33,9 @@ export default async function MachinePage({ searchParams }: PageProps) {
     <>
       <JsonLd data={buildStructuredDataGraph(locale, '/machine')} />
       <MachineChrome>
-        <MachineDocument blocks={blocks} />
+        <main id="main-content">
+          <MachineDocument blocks={blocks} />
+        </main>
       </MachineChrome>
     </>
   )

@@ -29,7 +29,9 @@ export default async function AdventurePage({ searchParams }: PageProps) {
   return (
     <>
       <JsonLd data={buildStructuredDataGraph(locale, '/adventure')} />
-      <AdventureChrome />
+      <main id="main-content">
+        <AdventureChrome />
+      </main>
     </>
   )
 }

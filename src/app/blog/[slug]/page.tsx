@@ -7,7 +7,7 @@ import { Contact } from '@/components/sections/contact'
 import { JsonLd } from '@/components/seo/json-ld'
 import { getServerLocale } from '@/i18n/locale.server'
 import { getBlogPost, getBlogSlugs } from '@/lib/blog'
-import { buildBlogPostJsonLd, buildBlogPostMetadata } from '@/lib/seo'
+import { buildBlogPostMetadata, buildBlogPostStructuredData } from '@/lib/seo'
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -37,10 +37,10 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <>
-      <JsonLd data={buildBlogPostJsonLd(locale, post)} />
+      <JsonLd data={buildBlogPostStructuredData(locale, post)} />
       <Navbar />
       <BlogReadProgress articleId="blog-post" />
-      <main className="relative">
+      <main id="main-content" className="relative">
         <article
           id="blog-post"
           className="portfolio-section pt-[calc(var(--landing-nav-h)+2rem)]"

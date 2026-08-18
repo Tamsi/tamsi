@@ -1,5 +1,6 @@
 import type { BlogBlock } from '@/content/blog'
 import { BlogImage } from '@/components/blog/blog-image'
+import { InlineText } from '@/components/blog/inline-text'
 
 export function ArticleContent({ blocks }: { blocks: BlogBlock[] }) {
   return (
@@ -7,12 +8,24 @@ export function ArticleContent({ blocks }: { blocks: BlogBlock[] }) {
       {blocks.map((block, index) => {
         switch (block.type) {
           case 'paragraph':
-            return <p key={index}>{block.text}</p>
+            return (
+              <p key={index}>
+                <InlineText text={block.text} />
+              </p>
+            )
           case 'heading':
             if (block.level === 2) {
-              return <h2 key={index}>{block.text}</h2>
+              return (
+                <h2 key={index}>
+                  <InlineText text={block.text} />
+                </h2>
+              )
             }
-            return <h3 key={index}>{block.text}</h3>
+            return (
+              <h3 key={index}>
+                <InlineText text={block.text} />
+              </h3>
+            )
           case 'code':
             return (
               <pre key={index} data-language={block.language}>
@@ -23,7 +36,9 @@ export function ArticleContent({ blocks }: { blocks: BlogBlock[] }) {
             return (
               <ul key={index}>
                 {block.items.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item}>
+                    <InlineText text={item} />
+                  </li>
                 ))}
               </ul>
             )
