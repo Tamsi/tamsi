@@ -23,7 +23,7 @@ export type InterestGroup = {
 export const dictionaries = {
   fr: {
     meta: {
-      title: 'Tamsi Besson — AI Engineer à Paris | MCP, agents & Next.js',
+      title: 'Tamsi Besson — AI engineer · MCP & AI devtools',
       description:
         'AI Engineer à Paris. Serveurs MCP, workflows LLM et apps Next.js — portfolio, blog technique et projets open source (HuggiMon, redbee-mcp).',
       keywords: [
@@ -458,7 +458,7 @@ export const dictionaries = {
 
   en: {
     meta: {
-      title: 'Tamsi Besson — AI Engineer in Paris | MCP, agents & Next.js',
+      title: 'Tamsi Besson — AI engineer · MCP & AI devtools',
       description:
         'AI Engineer in Paris. MCP servers, LLM workflows and Next.js apps — portfolio, technical blog, and open source (HuggiMon, redbee-mcp).',
       keywords: [
