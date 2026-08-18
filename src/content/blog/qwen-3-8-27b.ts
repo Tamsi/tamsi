@@ -1,109 +1,107 @@
 import type { BlogPost } from './types'
 
-const COVER = '/blog/qwen-3-8-27b-tetris-mlx.jpg'
-const X_POST = 'https://x.com/tamsi_besson/status/2089656034449080484'
+const BENCH = '/blog/qwen-3-8-27b-benchmarks.png'
 
 export const qwen38: BlogPost = {
-  slug: 'qwen-3-8-27b-local-mlx',
+  slug: 'qwen-3-8-27b',
   publishedAt: '2026-08-18',
-  tags: ['Qwen', 'Unsloth', 'MLX', 'Local LLM', 'Apple Silicon'],
-  readingTimeMinutes: 5,
+  tags: ['Qwen', 'Local LLM', 'Open source', 'Benchmarks'],
+  readingTimeMinutes: 6,
   content: {
     fr: {
-      title: 'Qwen 3.8 27B en local — Tetris à 11 tok/s sur un Mac M1',
+      title: 'Qwen 3.8 27B — le 27B open qui rapproche le frontier du local',
       description:
-        'Qwen3.8-27B en MLX 4-bit dans Unsloth Studio, sur un MacBook M1 32 Go : un Tetris jouable à ~11 tokens/s, sans GPU cloud.',
+        'Caractéristiques de Qwen3.8-27B, scores officiels face à 3.6 et à Opus 4.6 Max, et ce que ça change pour l’IA locale.',
       blocks: [
         {
           type: 'paragraph',
-          text: 'En juin j’avais monté un Qwen 3.6 27B en vLLM sur AWS pour arrêter de payer les tokens Cursor. Qwen 3.8 27B, sorti en août, change la donne d’un autre côté : le même gabarit 27B tient sur le laptop. J’ai lancé le checkpoint MLX 4-bit dans Unsloth Studio, sur un MacBook M1 32 Go, et demandé un Tetris. Résultat : ~11 tok/s, un jeu vraiment jouable, zéro GPU cloud.',
+          text: 'Qwen3.8-27B est sorti à la mi-août 2026 : un dense 27B Apache 2.0, multimodal natif, 262k de contexte. Pas un MoE de 2 T de paramètres — un modèle que tu peux télécharger et servir. La model card le place au-dessus de Qwen3.6-27B partout, et au-dessus de Claude Opus 4.6 Max sur plusieurs benches de code et d’agent. Chiffres vendeur, à prendre comme plafond en attendant des reproductions indépendantes — mais le signal pour l’IA locale est clair.',
         },
         {
           type: 'image',
-          src: COVER,
-          alt: 'Unsloth Studio : Qwen 3.8 27B génère un Tetris HTML, preview à droite, 10.5 tok/s',
+          src: BENCH,
+          alt: 'Barres groupées : Qwen3.8-27B, Qwen3.6-27B et Claude Opus 4.6 Max sur six benchmarks officiels',
           caption:
-            'Unsloth Studio — Tetris servi en local (hold, next, ghost piece). 10,5 tok/s en bas du message.',
+            'Scores de la model card officielle (Qwen/Qwen3.8-27B). SWE-bench Pro et les benches coding utilisent le harness Claude Code.',
           link: {
-            href: X_POST,
-            label: 'Le test sur X →',
+            href: 'https://huggingface.co/Qwen/Qwen3.8-27B',
+            label: 'Model card Hugging Face →',
           },
         },
         {
           type: 'heading',
           level: 2,
-          text: 'Ce que 3.8 change par rapport à 3.6',
+          text: 'Caractéristiques',
         },
         {
           type: 'paragraph',
-          text: 'Qwen3.8-27B (Apache 2.0) est un dense multimodal : texte + images + vidéo, 262k de contexte natif (extensible à 1M via YaRN), attention hybride (Gated DeltaNet + Gated Attention). C’est le petit frère dense de la génération 3.8, pensé pour tourner chez toi plutôt que derrière une API.',
+          text: 'Le 27B est le dense compact de la génération Qwen3.8, construit sur l’archi Qwen3.5 : 64 couches, attention hybride (16 blocs Gated Attention, le reste en Gated DeltaNet linéaire), encodeur vision, Multi-Token Prediction. Apache 2.0, poids ouverts, pensé pour le déploiement — pas seulement pour une API cloud.',
         },
         {
           type: 'list',
           items: [
-            'Même classe 27B que mon serveur AWS, mais servi en local via MLX 4-bit.',
-            'Unsloth publie des quants dynamiques / MLX dès le jour 0 — c’est ce que Studio charge.',
-            'vLLM 0.17+ le sert aussi (FP8, NVFP4) si je veux le coller sur l’instance 48 Go à la place du 3.6.',
-            'Multimodal natif : utile pour des diffs, des captures, pas seulement du texte.',
+            '27B dense (≈28B avec la tour vision), 64 couches, hidden 5120, vocab 248 320.',
+            'Contexte natif 262 144 tokens, extensible à 1 000 000 via YaRN.',
+            'Multimodal natif : images et vidéo (docs, schémas STEM, vidéos longues).',
+            'Thinking on by default, réglable via `reasoning_effort` (xhigh / medium / low) et `preserve_thinking`.',
+            'Servi par vLLM 0.17+, SGLang, Transformers ≥ 5.8 ; quants communautaires MLX / GGUF / NVFP4 / FP8 dès le jour 0.',
           ],
         },
         {
           type: 'heading',
           level: 2,
-          text: 'Le test : un Tetris, pas un hello-world',
+          text: 'Ce que disent les benches',
         },
         {
           type: 'paragraph',
-          text: 'Le prompt n’était pas « écris une fonction add ». Studio a généré une page HTML, l’a servie sur `http://127.0.0.1:8642/tetris.html`, et ouvert la preview à côté du chat. Le jeu a un hold, une pièce suivante, un ghost, un score, un niveau, et les contrôles classiques (←/→, rotation, soft/hard drop, C, P). Ce n’est pas un proto cassé : on peut y jouer.',
+          text: 'Sur la carte officielle, le saut vs 3.6 est surtout agentique et coding. DeepSWE 1.1 passe de 13,3 à 42,2. QwenSWEBench de 49,3 à 79,0. SWE-bench Pro 61,7 vs 53,5 (et 53,4 pour Opus 4.6 Max, harness différent pour Opus). LiveCodeBench v6 90,3 vs 83,9. Côté vision / computer use : OSWorld-Verified 84,3 vs 63,9.',
         },
         {
           type: 'list',
           items: [
-            'Machine : MacBook M1, 32 Go de RAM.',
-            'Runtime : Unsloth Studio, Qwen3.8-27B, MLX 4-bit.',
-            'Débit : ~11 tok/s (10,5 affichés sous la réponse).',
-            'Livrable : Tetris HTML local, pas un gist théorique.',
+            'Terminal-Bench 2.1 : 73,0 (3.6 : 63,4 — Opus : 78,2).',
+            'SWE-bench Pro : 61,7 (3.6 : 53,5 — Opus : 53,4).',
+            'LiveCodeBench v6 : 90,3 (3.6 : 83,9 — Opus : 88,8).',
+            'CoWorkBench : 70,7 (3.6 : 61,0 — Opus : 68,2).',
+            'IFBench : 79,5 (3.6 : 69,1 — Opus : 62,5).',
+            'OSWorld-Verified : 84,3 (3.6 : 63,9 — Opus : 72,7).',
           ],
         },
         {
           type: 'paragraph',
-          text: '11 tok/s, ce n’est pas du streaming cloud. C’est assez pour une session de proto : tu vois le code arriver, tu relances, tu corriges. Sur un 27B en 4-bit, sur une puce 2020, je m’attendais à plus de galère. Ça tient.',
+          text: 'Opus reste devant sur Terminal-Bench, GPQA Diamond (91,3 vs 89,2) et Humanity’s Last Exam. Le 27B n’est pas « mieux qu’Opus partout ». Il est assez proche, sur assez de tâches d’ingénierie, pour qu’un poids open de 27B change le calcul local vs API.',
         },
         {
           type: 'heading',
           level: 2,
-          text: 'Laptop vs serveur : qui fait quoi',
+          text: 'Impact sur l’IA locale',
         },
         {
           type: 'paragraph',
-          text: 'Je ne jette pas l’instance AWS. Le 3.6 en vLLM reste le cerveau lourd : gros diffs, plusieurs MCP en parallèle, sessions agent qui durent. Le 3.8 en MLX, c’est l’atelier sur les genoux — Unsloth Studio, un modèle chargé, un brief, un livrable. Même philosophie que l’article Studio : le cloud pour le débit, le local pour le contrôle.',
+          text: 'Jusqu’ici, le local tenait surtout le volume : petits modèles, quants agressifs, tâches courtes. Le frontier agentique (gros diffs, computer use, boucles d’outils) restait facturé au token. Un 27B Apache qui affiche des scores de coding / SWE au niveau d’un Opus cloud, et qui tourne en FP8 sur une 48 Go ou en 4-bit sur laptop, déplace la frontière.',
         },
         {
           type: 'list',
           items: [
-            'AWS / vLLM / 3.6 (et bientôt 3.8 FP8 si je swap) — Cursor + MCP, tokens « gratuits » à l’heure GPU.',
-            'M1 / Unsloth Studio / 3.8 MLX 4-bit — essais, UI, petits jeux, lecture de captures.',
-            'Ollama — git-mentor et le chemin offline court.',
+            'Plus de licence à négocier, plus de quota qui coupe une session agent au milieu d’un refactor.',
+            '262k de contexte natif : un repo, pas un fichier, tient dans une fenêtre locale.',
+            'Vision + computer use (OSWorld, WebArena, AndroidWorld) : le local n’est plus « texte only ».',
+            'Quants jour 0 (Unsloth, MLX, GGUF, NVFP4) : le même poids va du Mac au serveur vLLM.',
+            'Thinking contrôlable : tu paies le raisonnement seulement quand la tâche le justifie.',
           ],
         },
         {
+          type: 'paragraph',
+          text: 'Ça ne tue pas les APIs. Ça rend défendable de garder le travail quotidien — revue, proto, MCP, Hermes — sur une machine que tu contrôles. Le 3.6 m’avait déjà poussé vers vLLM self-hosted ; le 3.8 rend ce choix moins « compromis qualité ».',
+        },
+        {
           type: 'heading',
-          level: 3,
-          text: 'Si je le sers comme le 3.6',
+          level: 2,
+          text: 'Un essai local',
         },
         {
           type: 'paragraph',
-          text: 'Le checkpoint officiel se lance en vLLM (0.17+, transformers ≥ 5.8). Sur une 48 Go, FP8 est le palier raisonnable ; BF16 demande plutôt 80 Go. Recette minimale :',
-        },
-        {
-          type: 'code',
-          language: 'bash',
-          code: `vllm serve Qwen/Qwen3.8-27B \\
-  --max-model-len 262144
-
-# Laptop (ce que j’ai réellement testé)
-# Unsloth Studio → charger Qwen3.8-27B MLX 4-bit
-# → http://127.0.0.1:8888`,
+          text: 'Je l’ai fait tourner en MLX 4-bit dans Unsloth Studio sur un MacBook M1 32 Go. Pas un bench : un Tetris HTML, ~11 tok/s, assez fluide pour itérer. Détail ici : x.com/tamsi_besson/status/2089656034449080484',
         },
         {
           type: 'heading',
@@ -112,13 +110,13 @@ export const qwen38: BlogPost = {
         },
         {
           type: 'paragraph',
-          text: 'Le 3.6 m’avait convaincu de self-hoster. Le 3.8 me convainc que le 27B n’est plus réservé à la carte cloud : un M1 32 Go + MLX 4-bit + Studio suffit pour un vrai livrable. Tetris n’est pas un benchmark, c’est un test de « est-ce que je peux m’en servir ». Oui.',
+          text: 'Qwen 3.8 27B n’est pas un miracle de taille. C’est un dense open, multimodal, long-contexte, dont les scores officiels de coding et d’agent se rapprochent des flagships cloud. Pour l’IA locale, c’est le palier où « self-host un 27B » cesse d’être un hobby et devient une option d’ingénierie. Les reproductions indépendantes diront si les barres tiennent ; les poids, eux, sont déjà là.',
         },
         {
           type: 'list',
           items: [
-            'Test X : x.com/tamsi_besson/status/2089656034449080484',
-            'Poids : huggingface.co/Qwen/Qwen3.8-27B',
+            'Model card : huggingface.co/Qwen/Qwen3.8-27B',
+            'Essai local : x.com/tamsi_besson/status/2089656034449080484',
             'Studio : /blog/unsloth-studio',
             'Serveur 3.6 : /blog/qwen-3-6-27b-remote-server',
           ],
@@ -126,100 +124,99 @@ export const qwen38: BlogPost = {
       ],
     },
     en: {
-      title: 'Qwen 3.8 27B locally — Tetris at 11 tok/s on an M1 Mac',
+      title: 'Qwen 3.8 27B — the open 27B that pulls the frontier onto local hardware',
       description:
-        'Qwen3.8-27B in MLX 4-bit inside Unsloth Studio, on a 32 GB M1 MacBook: a playable Tetris at ~11 tokens/s, no cloud GPU.',
+        'Qwen3.8-27B specs, official scores versus 3.6 and Opus 4.6 Max, and what that changes for local AI.',
       blocks: [
         {
           type: 'paragraph',
-          text: 'In June I stood up Qwen 3.6 27B on vLLM/AWS to stop paying Cursor tokens. Qwen 3.8 27B, released in August, flips another switch: the same 27B class now fits on the laptop. I loaded the MLX 4-bit checkpoint in Unsloth Studio on a 32 GB M1 MacBook and asked for Tetris. Result: ~11 tok/s, a game you can actually play, zero cloud GPU.',
+          text: 'Qwen3.8-27B shipped mid-August 2026: a dense 27B under Apache 2.0, native multimodal, 262k context. Not a 2T MoE — a model you can download and serve. The model card puts it above Qwen3.6-27B everywhere, and above Claude Opus 4.6 Max on several coding and agent benches. Vendor numbers, treat them as a ceiling until independent labs reproduce them — but the signal for local AI is clear.',
         },
         {
           type: 'image',
-          src: COVER,
-          alt: 'Unsloth Studio: Qwen 3.8 27B generates an HTML Tetris, preview on the right, 10.5 tok/s',
+          src: BENCH,
+          alt: 'Grouped bars: Qwen3.8-27B, Qwen3.6-27B, and Claude Opus 4.6 Max on six official benchmarks',
           caption:
-            'Unsloth Studio — Tetris served locally (hold, next, ghost piece). 10.5 tok/s under the reply.',
+            'Official model-card scores (Qwen/Qwen3.8-27B). SWE-bench Pro and coding benches use the Claude Code harness.',
           link: {
-            href: X_POST,
-            label: 'The test on X →',
+            href: 'https://huggingface.co/Qwen/Qwen3.8-27B',
+            label: 'Hugging Face model card →',
           },
         },
         {
           type: 'heading',
           level: 2,
-          text: 'What 3.8 changes versus 3.6',
+          text: 'Specs',
         },
         {
           type: 'paragraph',
-          text: 'Qwen3.8-27B (Apache 2.0) is a dense multimodal model: text + images + video, 262k native context (extendable to 1M via YaRN), hybrid attention (Gated DeltaNet + Gated Attention). It’s the dense little sibling of the 3.8 generation, built to run on your machine instead of behind an API.',
+          text: 'The 27B is the compact dense model in the Qwen3.8 generation, built on the Qwen3.5 architecture: 64 layers, hybrid attention (16 Gated Attention blocks, the rest linear Gated DeltaNet), a vision encoder, multi-token prediction. Apache 2.0, open weights, meant for deployment — not only a cloud API.',
         },
         {
           type: 'list',
           items: [
-            'Same 27B class as my AWS box, served locally via MLX 4-bit.',
-            'Unsloth ships dynamic / MLX quants on day zero — that’s what Studio loads.',
-            'vLLM 0.17+ serves it too (FP8, NVFP4) if I swap it onto the 48 GB instance instead of 3.6.',
-            'Native multimodal: useful for diffs and screenshots, not just text.',
+            '27B dense (≈28B with the vision tower), 64 layers, hidden 5120, vocab 248,320.',
+            'Native context 262,144 tokens, extensible to 1,000,000 via YaRN.',
+            'Native multimodal: images and video (docs, STEM diagrams, long videos).',
+            'Thinking on by default, tunable with `reasoning_effort` (xhigh / medium / low) and `preserve_thinking`.',
+            'Served by vLLM 0.17+, SGLang, Transformers ≥ 5.8; community MLX / GGUF / NVFP4 / FP8 quants on day zero.',
           ],
         },
         {
           type: 'heading',
           level: 2,
-          text: 'The test: Tetris, not hello-world',
+          text: 'What the benches say',
         },
         {
           type: 'paragraph',
-          text: 'The prompt wasn’t “write an add function.” Studio generated an HTML page, served it at `http://127.0.0.1:8642/tetris.html`, and opened the preview next to the chat. The game has hold, next piece, ghost, score, level, and the usual controls (←/→, rotate, soft/hard drop, C, P). Not a broken prototype: you can play it.',
+          text: 'On the official card, the jump versus 3.6 is mostly agentic and coding. DeepSWE 1.1 goes from 13.3 to 42.2. QwenSWEBench from 49.3 to 79.0. SWE-bench Pro 61.7 vs 53.5 (and 53.4 for Opus 4.6 Max, different harness for Opus). LiveCodeBench v6 90.3 vs 83.9. On vision / computer use: OSWorld-Verified 84.3 vs 63.9.',
         },
         {
           type: 'list',
           items: [
-            'Machine: M1 MacBook, 32 GB RAM.',
-            'Runtime: Unsloth Studio, Qwen3.8-27B, MLX 4-bit.',
-            'Throughput: ~11 tok/s (10.5 shown under the reply).',
-            'Deliverable: local HTML Tetris, not a theoretical gist.',
+            'Terminal-Bench 2.1: 73.0 (3.6: 63.4 — Opus: 78.2).',
+            'SWE-bench Pro: 61.7 (3.6: 53.5 — Opus: 53.4).',
+            'LiveCodeBench v6: 90.3 (3.6: 83.9 — Opus: 88.8).',
+            'CoWorkBench: 70.7 (3.6: 61.0 — Opus: 68.2).',
+            'IFBench: 79.5 (3.6: 69.1 — Opus: 62.5).',
+            'OSWorld-Verified: 84.3 (3.6: 63.9 — Opus: 72.7).',
           ],
         },
         {
           type: 'paragraph',
-          text: '11 tok/s isn’t cloud streaming. It’s enough for a proto session: you watch the code land, rerun, fix. On a 4-bit 27B, on a 2020 chip, I expected more pain. It holds.',
+          text: 'Opus still leads on Terminal-Bench, GPQA Diamond (91.3 vs 89.2), and Humanity’s Last Exam. The 27B is not “better than Opus everywhere.” It is close enough, on enough engineering tasks, that an open 27B changes the local-versus-API math.',
         },
         {
           type: 'heading',
           level: 2,
-          text: 'Laptop vs server: who does what',
+          text: 'Impact on local AI',
         },
         {
           type: 'paragraph',
-          text: 'I’m not killing the AWS instance. 3.6 on vLLM stays the heavy brain: large diffs, several MCP clients in parallel, long agent sessions. 3.8 on MLX is the lap workshop — Unsloth Studio, one loaded model, a brief, a deliverable. Same split as the Studio post: cloud for throughput, local for control.',
+          text: 'Until now, local mostly won on volume: small models, aggressive quants, short tasks. Frontier agent work (large diffs, computer use, tool loops) stayed metered. A 27B Apache model posting coding / SWE scores next to a cloud Opus, running FP8 on a 48 GB card or 4-bit on a laptop, moves that line.',
         },
         {
           type: 'list',
           items: [
-            'AWS / vLLM / 3.6 (and 3.8 FP8 if I swap) — Cursor + MCP, “free” tokens billed as GPU hours.',
-            'M1 / Unsloth Studio / 3.8 MLX 4-bit — trials, UI, small games, reading screenshots.',
-            'Ollama — git-mentor and the short offline path.',
+            'No license to negotiate, no quota cutting an agent session mid-refactor.',
+            '262k native context: a repo, not a file, fits in a local window.',
+            'Vision + computer use (OSWorld, WebArena, AndroidWorld): local is no longer text-only.',
+            'Day-zero quants (Unsloth, MLX, GGUF, NVFP4): the same weights go from a Mac to a vLLM box.',
+            'Controllable thinking: you pay for reasoning only when the task justifies it.',
           ],
         },
         {
+          type: 'paragraph',
+          text: 'That doesn’t kill APIs. It makes it reasonable to keep daily work — review, proto, MCP, Hermes — on a machine you control. 3.6 already pushed me toward self-hosted vLLM; 3.8 makes that choice less of a quality compromise.',
+        },
+        {
           type: 'heading',
-          level: 3,
-          text: 'If I serve it like 3.6',
+          level: 2,
+          text: 'A local run',
         },
         {
           type: 'paragraph',
-          text: 'The official checkpoint runs on vLLM (0.17+, transformers ≥ 5.8). On a 48 GB card, FP8 is the sane tier; BF16 wants closer to 80 GB. Minimal recipe:',
-        },
-        {
-          type: 'code',
-          language: 'bash',
-          code: `vllm serve Qwen/Qwen3.8-27B \\
-  --max-model-len 262144
-
-# Laptop (what I actually tested)
-# Unsloth Studio → load Qwen3.8-27B MLX 4-bit
-# → http://127.0.0.1:8888`,
+          text: 'I ran it in MLX 4-bit inside Unsloth Studio on a 32 GB M1 MacBook. Not a bench: an HTML Tetris, ~11 tok/s, fast enough to iterate. Notes here: x.com/tamsi_besson/status/2089656034449080484',
         },
         {
           type: 'heading',
@@ -228,13 +225,13 @@ export const qwen38: BlogPost = {
         },
         {
           type: 'paragraph',
-          text: '3.6 convinced me to self-host. 3.8 convinces me the 27B is no longer cloud-card-only: a 32 GB M1 + MLX 4-bit + Studio is enough for a real deliverable. Tetris isn’t a benchmark — it’s a “can I actually use this” test. Yes.',
+          text: 'Qwen 3.8 27B is not a size miracle. It is an open dense multimodal long-context model whose official coding and agent scores sit next to cloud flagships. For local AI, this is the rung where “self-host a 27B” stops being a hobby and becomes an engineering option. Independent reproductions will say whether the bars hold; the weights are already here.',
         },
         {
           type: 'list',
           items: [
-            'X test: x.com/tamsi_besson/status/2089656034449080484',
-            'Weights: huggingface.co/Qwen/Qwen3.8-27B',
+            'Model card: huggingface.co/Qwen/Qwen3.8-27B',
+            'Local run: x.com/tamsi_besson/status/2089656034449080484',
             'Studio: /blog/unsloth-studio',
             '3.6 server: /blog/qwen-3-6-27b-remote-server',
           ],
