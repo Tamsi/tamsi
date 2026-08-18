@@ -5,7 +5,7 @@ const UNSLOTH_TWEET = 'https://x.com/UnslothAI/status/2088627177655050362'
 
 export const unslothStudio: BlogPost = {
   slug: 'unsloth-studio',
-  publishedAt: '2026-08-18',
+  publishedAt: '2026-08-12',
   tags: ['Unsloth', 'Local LLM', 'GGUF', 'Qwen', 'Fine-tuning'],
   readingTimeMinutes: 6,
   content: {
