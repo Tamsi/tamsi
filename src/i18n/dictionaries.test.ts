@@ -34,4 +34,18 @@ describe('dictionaries', () => {
       }
     }
   })
+
+  it('keeps featured project titles aligned with the GitHub README', () => {
+    const featuredTitles = (locale: (typeof locales)[number]) =>
+      dictionaries[locale].projects.items.filter((p) => p.featured).map((p) => p.title)
+
+    expect(featuredTitles('fr')).toEqual(featuredTitles('en'))
+    expect(featuredTitles('fr')).toEqual([
+      'huggimon',
+      'livingcolor-plugin',
+      'livingcolor-skills',
+      'redbee-mcp',
+      'visualq-mcp',
+    ])
+  })
 })

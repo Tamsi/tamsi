@@ -114,9 +114,9 @@ export const dictionaries = {
         { text: 'En parallèle, je publie des ' },
         { text: 'outils open source', highlight: true },
         { text: ' sur GitHub — ' },
-        { text: 'ai-code-reviewer-mcp', highlight: true },
+        { text: 'HuggiMon', highlight: true },
         { text: ', ' },
-        { text: 'git-mentor', highlight: true },
+        { text: 'livingcolor-skills', highlight: true },
         { text: ', ' },
         { text: 'redbee-mcp', highlight: true },
         { text: ' — et contribue à des produits comme ' },
@@ -232,24 +232,34 @@ export const dictionaries = {
       sectionBadge: 'Open source',
       sectionSubtitle: 'Sélection alignée sur mon GitHub — démos live quand disponibles.',
       featuredLabel: 'À la une',
+      otherLabel: 'Autres',
       items: [
         {
-          title: 'ai-code-reviewer-mcp',
-          language: 'TypeScript · MCP',
-          url: 'https://github.com/Tamsi/ai-code-reviewer-mcp',
+          title: 'huggimon',
+          language: 'TypeScript',
+          url: 'https://github.com/Tamsi/huggimon',
           source: 'github',
           featured: true,
           description:
-            'Serveur MCP de revue de code GitHub — bugs, sécurité, dette technique, tests manquants via un LLM compatible OpenAI. Démo Gradio sur Hugging Face.',
+            'Carte de dresseur IA façon Pokémon TCG à partir de ton profil Hugging Face — tilt 3D, shaders holo, page dédiée par username.',
         },
         {
-          title: 'git-mentor',
-          language: 'TypeScript · CLI',
-          url: 'https://github.com/Tamsi/git-mentor',
+          title: 'livingcolor-plugin',
+          language: 'Python · Hermes',
+          url: 'https://github.com/abecms/livingcolor-plugin',
           source: 'github',
           featured: true,
           description:
-            'Coach de carrière GitHub local-first — TUI Ink, Ollama, preuves et recommandations basées sur ton historique de dépôts.',
+            'Plugin Hermes Agent pour la livraison autonome — work orders, gates Jira et déploiements validés par l\'humain.',
+        },
+        {
+          title: 'livingcolor-skills',
+          language: 'TypeScript',
+          url: 'https://github.com/Tamsi/livingcolor-skills',
+          source: 'github',
+          featured: true,
+          description:
+            'Skills Hermes versionnées et portables — comportements experts réutilisables pour agents IA.',
         },
         {
           title: 'redbee-mcp',
@@ -261,29 +271,37 @@ export const dictionaries = {
             'Pont MCP vers les API Red Bee Media OTT — pour Cursor, Claude et les clients MCP qui automatisent la plateforme streaming.',
         },
         {
+          title: 'visualq-mcp',
+          language: 'TypeScript · MCP',
+          url: 'https://github.com/abecms/visualq-mcp',
+          source: 'github',
+          featured: true,
+          description:
+            'Pont MCP VisualQ — lancer des VRT, suivre les échecs et approuver les baselines depuis Cursor ou Claude.',
+        },
+        {
+          title: 'ai-code-reviewer-mcp',
+          language: 'TypeScript · MCP',
+          url: 'https://github.com/Tamsi/ai-code-reviewer-mcp',
+          source: 'github',
+          description:
+            'Serveur MCP de revue de code GitHub — bugs, sécurité, dette technique, tests manquants via un LLM compatible OpenAI. Démo Gradio sur Hugging Face.',
+        },
+        {
+          title: 'git-mentor',
+          language: 'TypeScript · CLI',
+          url: 'https://github.com/Tamsi/git-mentor',
+          source: 'github',
+          description:
+            'Coach de carrière GitHub local-first — TUI Ink, Ollama, preuves et recommandations basées sur ton historique de dépôts.',
+        },
+        {
           title: 'handship',
           language: 'Python · Gradio',
           url: 'https://huggingface.co/spaces/ImTamsi/handship',
           source: 'huggingface',
-          featured: true,
           description:
             'Jeu de vaisseau spatial contrôlé à la main — webcam et détection de pose, jouable directement sur Hugging Face.',
-        },
-        {
-          title: 'livingcolor-plugin',
-          language: 'Python · Hermes Agent',
-          url: 'https://github.com/abecms/livingcolor-plugin',
-          source: 'github',
-          description:
-            'Plugin Hermes Agent pour la livraison autonome — work orders, gates Jira et déploiements validés par l\'humain.',
-        },
-        {
-          title: 'livingcolor-skills',
-          language: 'TypeScript · Hermes',
-          url: 'https://github.com/Tamsi/livingcolor-skills',
-          source: 'github',
-          description:
-            'Skills Hermes versionnées et portables — comportements experts réutilisables pour agents IA.',
         },
         {
           title: 'livingcolor-evolution',
@@ -515,9 +533,9 @@ export const dictionaries = {
         { text: 'On the side I ship ' },
         { text: 'open source tools', highlight: true },
         { text: ' on GitHub — ' },
-        { text: 'ai-code-reviewer-mcp', highlight: true },
+        { text: 'HuggiMon', highlight: true },
         { text: ', ' },
-        { text: 'git-mentor', highlight: true },
+        { text: 'livingcolor-skills', highlight: true },
         { text: ', ' },
         { text: 'redbee-mcp', highlight: true },
         { text: ' — and contribute to products like ' },
@@ -633,24 +651,34 @@ export const dictionaries = {
       sectionBadge: 'Open source',
       sectionSubtitle: 'Curated from my GitHub — live demos when available.',
       featuredLabel: 'Featured',
+      otherLabel: 'More',
       items: [
         {
-          title: 'ai-code-reviewer-mcp',
-          language: 'TypeScript · MCP',
-          url: 'https://github.com/Tamsi/ai-code-reviewer-mcp',
+          title: 'huggimon',
+          language: 'TypeScript',
+          url: 'https://github.com/Tamsi/huggimon',
           source: 'github',
           featured: true,
           description:
-            'MCP server for GitHub code review — bugs, security, tech debt, missing tests via an OpenAI-compatible LLM. Gradio demo on Hugging Face.',
+            'Pokémon TCG-style AI trainer card from your Hugging Face profile — 3D tilt, holo shaders, a dedicated page per username.',
         },
         {
-          title: 'git-mentor',
-          language: 'TypeScript · CLI',
-          url: 'https://github.com/Tamsi/git-mentor',
+          title: 'livingcolor-plugin',
+          language: 'Python · Hermes',
+          url: 'https://github.com/abecms/livingcolor-plugin',
           source: 'github',
           featured: true,
           description:
-            'Local-first GitHub career coach — Ink TUI, Ollama, evidence-backed recommendations from your repo history.',
+            'Hermes Agent plugin for autonomous delivery — work orders, Jira gates, and human-approved deploys.',
+        },
+        {
+          title: 'livingcolor-skills',
+          language: 'TypeScript',
+          url: 'https://github.com/Tamsi/livingcolor-skills',
+          source: 'github',
+          featured: true,
+          description:
+            'Portable, versioned Hermes skills — reusable expert behaviors for AI agents.',
         },
         {
           title: 'redbee-mcp',
@@ -662,29 +690,37 @@ export const dictionaries = {
             'MCP bridge to Red Bee Media OTT APIs — for Cursor, Claude, and MCP clients automating the streaming platform.',
         },
         {
+          title: 'visualq-mcp',
+          language: 'TypeScript · MCP',
+          url: 'https://github.com/abecms/visualq-mcp',
+          source: 'github',
+          featured: true,
+          description:
+            'VisualQ MCP bridge — run VRT, poll failures, and approve baselines from Cursor or Claude.',
+        },
+        {
+          title: 'ai-code-reviewer-mcp',
+          language: 'TypeScript · MCP',
+          url: 'https://github.com/Tamsi/ai-code-reviewer-mcp',
+          source: 'github',
+          description:
+            'MCP server for GitHub code review — bugs, security, tech debt, missing tests via an OpenAI-compatible LLM. Gradio demo on Hugging Face.',
+        },
+        {
+          title: 'git-mentor',
+          language: 'TypeScript · CLI',
+          url: 'https://github.com/Tamsi/git-mentor',
+          source: 'github',
+          description:
+            'Local-first GitHub career coach — Ink TUI, Ollama, evidence-backed recommendations from your repo history.',
+        },
+        {
           title: 'handship',
           language: 'Python · Gradio',
           url: 'https://huggingface.co/spaces/ImTamsi/handship',
           source: 'huggingface',
-          featured: true,
           description:
             'Hand-controlled spaceship game — webcam and pose detection, playable directly on Hugging Face.',
-        },
-        {
-          title: 'livingcolor-plugin',
-          language: 'Python · Hermes Agent',
-          url: 'https://github.com/abecms/livingcolor-plugin',
-          source: 'github',
-          description:
-            'Hermes Agent plugin for autonomous delivery — work orders, Jira gates, and human-approved deploys.',
-        },
-        {
-          title: 'livingcolor-skills',
-          language: 'TypeScript · Hermes',
-          url: 'https://github.com/Tamsi/livingcolor-skills',
-          source: 'github',
-          description:
-            'Portable, versioned Hermes skills — reusable expert behaviors for AI agents.',
         },
         {
           title: 'livingcolor-evolution',

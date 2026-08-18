@@ -20,11 +20,14 @@ function SourceIcon({ source }: { source: ProjectItem['source'] }) {
 }
 
 const DEMO_URLS: Record<string, string> = {
+  huggimon: 'https://huggimon.co',
   'ai-code-reviewer-mcp': 'https://huggingface.co/spaces/ImTamsi/ai-code-reviewer',
 }
 
 export function Projects() {
   const { t } = useLocale()
+  const featured = t.projects.items.filter((project) => project.featured)
+  const other = t.projects.items.filter((project) => !project.featured)
 
   return (
     <section
@@ -40,21 +43,43 @@ export function Projects() {
           </div>
         </ScrollScrub>
 
-        <ScrollItem>
-          <p className="mb-2 text-xs font-medium uppercase tracking-wider text-[var(--landing-accent)]">
-            {t.projects.featuredLabel}
-          </p>
-        </ScrollItem>
-
-        <div>
-          {t.projects.items.map((project) => (
-            <ScrollItem key={project.title}>
-              <ProjectEntry project={project} />
-            </ScrollItem>
-          ))}
-        </div>
+        <ProjectGroup label={t.projects.featuredLabel} projects={featured} />
+        <ProjectGroup
+          label={t.projects.otherLabel}
+          projects={other}
+          className="mt-10"
+        />
       </ScrollGroup>
     </section>
+  )
+}
+
+function ProjectGroup({
+  label,
+  projects,
+  className,
+}: {
+  label: string
+  projects: ProjectItem[]
+  className?: string
+}) {
+  if (projects.length === 0) return null
+
+  return (
+    <div className={className}>
+      <ScrollItem>
+        <p className="mb-2 text-xs font-medium uppercase tracking-wider text-[var(--landing-accent)]">
+          {label}
+        </p>
+      </ScrollItem>
+      <div>
+        {projects.map((project) => (
+          <ScrollItem key={project.title}>
+            <ProjectEntry project={project} />
+          </ScrollItem>
+        ))}
+      </div>
+    </div>
   )
 }
 
