@@ -6,11 +6,13 @@ import { qwen38 } from './qwen-3-8-27b'
 import { unslothStudioHfLive } from './unsloth-studio-hf-live'
 import { unslothStudio } from './unsloth-studio'
 import { huggimon } from './huggimon'
+import { dflash2 } from './dflash2'
 import type { BlogPost } from './types'
 
 export type { BlogBlock, BlogPost, BlogPostContent } from './types'
 
 export const blogPosts: BlogPost[] = [
+  dflash2,
   qwen38,
   unslothStudio,
   huggimon,
