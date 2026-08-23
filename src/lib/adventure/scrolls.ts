@@ -1,7 +1,6 @@
 import type { GridPos } from '@/lib/adventure/types'
-import type { MapId } from '@/lib/adventure/maps'
+import { DUNGEON_MAP_IDS, dungeonDepth, type MapId } from '@/lib/adventure/maps'
 import { enemyForMap } from '@/lib/adventure/enemies'
-import { dungeonDepth } from '@/lib/adventure/maps'
 
 export const TUTORIAL_SCROLL_ID = 'scroll-tuto-welcome'
 
@@ -22,6 +21,10 @@ export const BLOG_SCROLL_SLUGS = [
   'qwen-3-6-27b-remote-server',
   'redbee-mcp',
   'ai-code-reviewer-mcp',
+  'huggimon-ai-trainer-card',
+  'unsloth-studio',
+  'qwen-3-8-27b',
+  'dflash2',
 ] as const
 
 const BLOG_SCROLL_IDS = [
@@ -30,6 +33,10 @@ const BLOG_SCROLL_IDS = [
   'scroll-blog-qwen',
   'scroll-blog-redbee',
   'scroll-blog-ai-reviewer',
+  'scroll-blog-huggimon',
+  'scroll-blog-unsloth-studio',
+  'scroll-blog-qwen-38',
+  'scroll-blog-dflash2',
 ] as const
 
 const SCROLL_POSITIONS: GridPos[] = [
@@ -38,18 +45,15 @@ const SCROLL_POSITIONS: GridPos[] = [
   { x: 16, y: 5 },
   { x: 14, y: 10 },
   { x: 16, y: 6 },
+  { x: 16, y: 3 },
+  { x: 16, y: 2 },
+  { x: 13, y: 5 },
+  { x: 16, y: 4 },
 ]
 
 function buildBlogScrolls(): ScrollDefinition[] {
-  const dungeonMaps: MapId[] = [
-    'dungeon-1',
-    'dungeon-2',
-    'dungeon-3',
-    'dungeon-4',
-    'dungeon-5',
-  ]
-  return dungeonMaps.map((mapId, i) => {
-    const enemy = enemyForMap(mapId, i + 1)
+  return DUNGEON_MAP_IDS.map((mapId, i) => {
+    const enemy = enemyForMap(mapId, dungeonDepth(mapId))
     return {
       id: BLOG_SCROLL_IDS[i],
       mapId,

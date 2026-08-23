@@ -1,5 +1,5 @@
 import type { GridPos } from '@/lib/adventure/types'
-import type { MapId } from '@/lib/adventure/maps'
+import { dungeonDepth, MAP_ORDER, type MapId } from '@/lib/adventure/maps'
 
 // Enemy sprites: Clint Bellanger (CC0) — opengameart.org/content/isometric-hero-and-creatures
 export type EnemySpriteSet = 'goblin' | 'skeleton' | 'wraith' | 'brute' | 'archmage'
@@ -66,6 +66,39 @@ const ENEMY_LAYOUT: Record<
     tintHue: 0,
     scrollId: 'scroll-blog-ai-reviewer',
   },
+  'dungeon-6': {
+    id: 'enemy-dungeon-6',
+    nameKey: 'collector',
+    position: { x: 16, y: 2 },
+    spriteSet: 'goblin',
+    tintHue: 45,
+    scrollId: 'scroll-blog-huggimon',
+  },
+  'dungeon-7': {
+    id: 'enemy-dungeon-7',
+    nameKey: 'wight',
+    position: { x: 16, y: 1 },
+    spriteSet: 'skeleton',
+    tintHue: 190,
+    scrollId: 'scroll-blog-unsloth-studio',
+  },
+  'dungeon-8': {
+    id: 'enemy-dungeon-8',
+    nameKey: 'delta',
+    position: { x: 12, y: 4 },
+    spriteSet: 'wraith',
+    tintHue: 280,
+    alpha: 0.82,
+    scrollId: 'scroll-blog-qwen-38',
+  },
+  'dungeon-9': {
+    id: 'enemy-dungeon-9',
+    nameKey: 'drafter',
+    position: { x: 16, y: 3 },
+    spriteSet: 'archmage',
+    tintHue: 18,
+    scrollId: 'scroll-blog-dflash2',
+  },
 }
 
 export function enemyForMap(mapId: MapId, depth: number): EnemyDefinition | null {
@@ -82,15 +115,8 @@ export function enemyForMap(mapId: MapId, depth: number): EnemyDefinition | null
 }
 
 export function enemyById(enemyId: string): EnemyDefinition | null {
-  for (const mapId of [
-    'dungeon-1',
-    'dungeon-2',
-    'dungeon-3',
-    'dungeon-4',
-    'dungeon-5',
-  ] as const) {
-    const depth = Number(mapId.split('-')[1])
-    const enemy = enemyForMap(mapId, depth)
+  for (const mapId of MAP_ORDER) {
+    const enemy = enemyForMap(mapId, dungeonDepth(mapId))
     if (enemy?.id === enemyId) return enemy
   }
   return null
