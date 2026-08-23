@@ -667,6 +667,7 @@
   gap: 0;
   width: auto;
   max-width: calc(100vw - 2rem);
+  overflow-x: auto;
   padding: 0;
   padding-bottom: env(safe-area-inset-bottom, 0px);
   border: none;

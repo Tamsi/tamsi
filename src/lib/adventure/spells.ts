@@ -62,6 +62,38 @@ export const SPELL_DEFINITIONS: SpellDefinition[] = [
     shield: 18,
     range: 0,
   },
+  {
+    id: 'prism',
+    kind: 'attack',
+    nameKey: 'prism',
+    scrollId: 'scroll-blog-huggimon',
+    damage: 18,
+    range: 2,
+  },
+  {
+    id: 'temper',
+    kind: 'defense',
+    nameKey: 'temper',
+    scrollId: 'scroll-blog-unsloth-studio',
+    shield: 20,
+    range: 0,
+  },
+  {
+    id: 'aether',
+    kind: 'heal',
+    nameKey: 'aether',
+    scrollId: 'scroll-blog-qwen-38',
+    heal: 28,
+    range: 0,
+  },
+  {
+    id: 'surge',
+    kind: 'attack',
+    nameKey: 'surge',
+    scrollId: 'scroll-blog-dflash2',
+    damage: 24,
+    range: 3,
+  },
 ]
 
 const SPELLS_BY_ID = Object.fromEntries(
