@@ -375,6 +375,10 @@ export const dictionaries = {
         mend: 'Soin',
         chainbolt: 'Éclair en chaîne',
         bastion: 'Bastion',
+        prism: 'Prisme',
+        temper: 'Trempe',
+        aether: 'Éther',
+        surge: 'Flux',
       },
       spellBar: {
         combatOnly: 'Disponible en combat',
@@ -450,6 +454,22 @@ export const dictionaries = {
           'ai-code-reviewer-mcp': {
             title: 'AI Code Reviewer MCP',
             excerpt: 'Revue de code via MCP sans surcoût Cursor.',
+          },
+          'huggimon-ai-trainer-card': {
+            title: 'HuggiMon',
+            excerpt: 'Carte de dresseur IA depuis un profil Hugging Face.',
+          },
+          'unsloth-studio': {
+            title: 'Unsloth Studio',
+            excerpt: 'Faire tourner et entraîner des LLM en local.',
+          },
+          'qwen-3-8-27b': {
+            title: 'Qwen 3.8 27B',
+            excerpt: 'Le 27B open qui rapproche le frontier du local.',
+          },
+          dflash2: {
+            title: 'DFlash 2',
+            excerpt: '3× plus de tokens sur Qwen3.8-27B, même sortie.',
           },
         },
       },
@@ -809,6 +829,10 @@ export const dictionaries = {
         mend: 'Mend',
         chainbolt: 'Chain bolt',
         bastion: 'Bastion',
+        prism: 'Prism',
+        temper: 'Temper',
+        aether: 'Aether',
+        surge: 'Surge',
       },
       spellBar: {
         combatOnly: 'Available in combat',
@@ -884,6 +908,22 @@ export const dictionaries = {
           'ai-code-reviewer-mcp': {
             title: 'AI Code Reviewer MCP',
             excerpt: 'Code review via MCP without extra Cursor cost.',
+          },
+          'huggimon-ai-trainer-card': {
+            title: 'HuggiMon',
+            excerpt: 'AI trainer card from a Hugging Face profile.',
+          },
+          'unsloth-studio': {
+            title: 'Unsloth Studio',
+            excerpt: 'Run and train local LLMs on your own machine.',
+          },
+          'qwen-3-8-27b': {
+            title: 'Qwen 3.8 27B',
+            excerpt: 'The open 27B that brings frontier scores local.',
+          },
+          dflash2: {
+            title: 'DFlash 2',
+            excerpt: '3× more tokens on Qwen3.8-27B, same output.',
           },
         },
       },
