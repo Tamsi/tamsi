@@ -1,3 +1,4 @@
+import { hermesHud } from './hermes-hud'
 import { hermesAutomation } from './hermes-automation'
 import { aiCodeReviewerMcp } from './ai-code-reviewer-mcp'
 import { redbeeMcp } from './redbee-mcp'
@@ -12,6 +13,7 @@ import type { BlogPost } from './types'
 export type { BlogBlock, BlogPost, BlogPostContent } from './types'
 
 export const blogPosts: BlogPost[] = [
+  hermesHud,
   dflash2,
   qwen38,
   unslothStudio,
