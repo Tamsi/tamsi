@@ -99,6 +99,15 @@ const ENEMY_LAYOUT: Record<
     tintHue: 18,
     scrollId: 'scroll-blog-dflash2',
   },
+  'dungeon-10': {
+    id: 'enemy-dungeon-10',
+    nameKey: 'overlay',
+    position: { x: 16, y: 3 },
+    spriteSet: 'wraith',
+    tintHue: 165,
+    alpha: 0.82,
+    scrollId: 'scroll-blog-hermes-hud',
+  },
 }
 
 export function enemyForMap(mapId: MapId, depth: number): EnemyDefinition | null {

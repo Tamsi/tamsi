@@ -25,6 +25,7 @@ export const BLOG_SCROLL_SLUGS = [
   'unsloth-studio',
   'qwen-3-8-27b',
   'dflash2',
+  'hermes-hud-wow',
 ] as const
 
 const BLOG_SCROLL_IDS = [
@@ -37,6 +38,7 @@ const BLOG_SCROLL_IDS = [
   'scroll-blog-unsloth-studio',
   'scroll-blog-qwen-38',
   'scroll-blog-dflash2',
+  'scroll-blog-hermes-hud',
 ] as const
 
 const SCROLL_POSITIONS: GridPos[] = [
@@ -48,6 +50,7 @@ const SCROLL_POSITIONS: GridPos[] = [
   { x: 16, y: 3 },
   { x: 16, y: 2 },
   { x: 13, y: 5 },
+  { x: 16, y: 4 },
   { x: 16, y: 4 },
 ]
 

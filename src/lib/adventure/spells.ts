@@ -94,6 +94,14 @@ export const SPELL_DEFINITIONS: SpellDefinition[] = [
     damage: 24,
     range: 3,
   },
+  {
+    id: 'veil',
+    kind: 'defense',
+    nameKey: 'veil',
+    scrollId: 'scroll-blog-hermes-hud',
+    shield: 22,
+    range: 0,
+  },
 ]
 
 const SPELLS_BY_ID = Object.fromEntries(

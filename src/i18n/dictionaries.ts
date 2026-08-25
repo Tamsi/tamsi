@@ -379,6 +379,7 @@ export const dictionaries = {
         temper: 'Trempe',
         aether: 'Éther',
         surge: 'Flux',
+        veil: 'Voile',
       },
       spellBar: {
         combatOnly: 'Disponible en combat',
@@ -470,6 +471,10 @@ export const dictionaries = {
           dflash2: {
             title: 'DFlash 2',
             excerpt: '3× plus de tokens sur Qwen3.8-27B, même sortie.',
+          },
+          'hermes-hud-wow': {
+            title: 'Hermes HUD',
+            excerpt: 'Jouer à WoW et prompt en même temps.',
           },
         },
       },
@@ -833,6 +838,7 @@ export const dictionaries = {
         temper: 'Temper',
         aether: 'Aether',
         surge: 'Surge',
+        veil: 'Veil',
       },
       spellBar: {
         combatOnly: 'Available in combat',
@@ -924,6 +930,10 @@ export const dictionaries = {
           dflash2: {
             title: 'DFlash 2',
             excerpt: '3× more tokens on Qwen3.8-27B, same output.',
+          },
+          'hermes-hud-wow': {
+            title: 'Hermes HUD',
+            excerpt: 'Play WoW and prompt at the same time.',
           },
         },
       },

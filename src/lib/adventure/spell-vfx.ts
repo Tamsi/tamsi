@@ -23,6 +23,7 @@ const VFX_DURATIONS: Record<string, number> = {
   temper: 580,
   aether: 640,
   surge: 520,
+  veil: 600,
 }
 
 export function spellVfxDuration(spellId: string): number {
@@ -143,6 +144,17 @@ export function drawSpellVfx(
       ctx.beginPath()
       ctx.arc(to.x, to.y - 18, 8 + t * 10, 0, Math.PI * 2)
       ctx.fill()
+      break
+    }
+    case 'veil': {
+      const radius = 20 + t * 18
+      ctx.strokeStyle = `rgba(253, 224, 71, ${0.7 * (1 - t * 0.5)})`
+      ctx.lineWidth = 2
+      ctx.setLineDash([6, 4])
+      ctx.strokeRect(from.x - radius, from.y - 20 - radius * 0.55, radius * 2, radius * 1.1)
+      ctx.setLineDash([])
+      ctx.fillStyle = `rgba(250, 204, 21, ${0.1 * (1 - t)})`
+      ctx.fillRect(from.x - radius, from.y - 20 - radius * 0.55, radius * 2, radius * 1.1)
       break
     }
     case 'ward':

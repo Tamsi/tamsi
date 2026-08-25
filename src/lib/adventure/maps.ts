@@ -11,6 +11,7 @@ export type MapId =
   | 'dungeon-7'
   | 'dungeon-8'
   | 'dungeon-9'
+  | 'dungeon-10'
 
 export type DungeonMapId = Exclude<MapId, 'entrance'>
 
@@ -25,6 +26,7 @@ export const MAP_ORDER: MapId[] = [
   'dungeon-7',
   'dungeon-8',
   'dungeon-9',
+  'dungeon-10',
 ]
 
 export const DUNGEON_MAP_IDS = MAP_ORDER.filter(
@@ -206,6 +208,24 @@ const DUNGEON_8_ASCII = [
   '....................',
 ] as const
 
+/** Overlay frame — Hermes HUD over a playfield. */
+const DUNGEON_10_ASCII = [
+  '....................',
+  '..dddddddddddddddd..',
+  '..dddd..........dd..',
+  '..dddd..........dd..',
+  '..dddddddddddddddd..',
+  '..dd............dd..',
+  '..dddddddddddddddd..',
+  '..dddddddddddddddd..',
+  '..dddddddddddddddd..',
+  '..dd............dd..',
+  '..dddddddddddddddd..',
+  '..dddd..........dd..',
+  '..dddddddddddddddd..',
+  '....................',
+] as const
+
 /** Parallel draft lanes — DFlash speculative decode. */
 const DUNGEON_9_ASCII = [
   '....................',
@@ -381,6 +401,23 @@ export const MAP_DEFINITIONS: Record<MapId, MapDefinition> = {
     transitions: [
       {
         targetMapId: 'dungeon-8',
+        position: { x: 2, y: 7 },
+        direction: 'left',
+      },
+      {
+        targetMapId: 'dungeon-10',
+        position: { x: 17, y: 7 },
+        direction: 'right',
+      },
+    ],
+  },
+  'dungeon-10': {
+    id: 'dungeon-10',
+    ascii: DUNGEON_10_ASCII,
+    spawn: { x: 3, y: 7 },
+    transitions: [
+      {
+        targetMapId: 'dungeon-9',
         position: { x: 2, y: 7 },
         direction: 'left',
       },

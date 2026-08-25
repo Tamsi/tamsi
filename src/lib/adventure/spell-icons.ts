@@ -10,6 +10,7 @@ export const SPELL_ICON_PATHS: Record<string, string> = {
   temper: '/adventure/spells/temper.svg',
   aether: '/adventure/spells/aether.svg',
   surge: '/adventure/spells/surge.svg',
+  veil: '/adventure/spells/veil.svg',
 }
 
 export function spellIconPath(spellId: string): string | undefined {
