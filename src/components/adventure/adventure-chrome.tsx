@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState, useSyncExternalStore } from 'react'
 import { AdventureCanvas } from '@/components/adventure/adventure-canvas'
 import { AdventureCombatCanvas } from '@/components/adventure/adventure-combat-canvas'
 import { AdventureDialog } from '@/components/adventure/adventure-dialog'
@@ -26,11 +26,17 @@ import {
   setCurrentMapId,
 } from '@/lib/adventure/progress'
 import { MAP_SCROLLS, TUTORIAL_SCROLL_ID } from '@/lib/adventure/scrolls'
-import { readUnlockedSpells, unlockSpellForScroll } from '@/lib/adventure/spells'
+import { readUnlockedSpells } from '@/lib/adventure/spells'
 import { defaultLocale, dictionaries, locales, type Locale } from '@/i18n/dictionaries'
 
 function resolveLocale(param: string | null): Locale {
   return locales.includes(param as Locale) ? (param as Locale) : defaultLocale
+}
+
+const subscribeNoop = () => () => {}
+
+function useIsClient() {
+  return useSyncExternalStore(subscribeNoop, () => true, () => false)
 }
 
 export function AdventureChrome() {
@@ -51,18 +57,21 @@ export function AdventureChrome() {
   const [pickupToast, setPickupToast] = useState<string | null>(null)
   const [combatState, setCombatState] = useState<CombatState | null>(null)
   const [lastUnlockedSpell, setLastUnlockedSpell] = useState<string | null>(null)
+  const [didHydrateProgress, setDidHydrateProgress] = useState(false)
+  const isClient = useIsClient()
 
   const tutorialComplete = completedQuestIds.includes(TUTORIAL_SCROLL_ID)
 
-  useEffect(() => {
+  if (isClient && !didHydrateProgress) {
     const progress = readAdventureProgress()
+    setDidHydrateProgress(true)
     setMainQuestAccepted(progress.mainQuestAccepted)
     setCompletedQuestIds(progress.completedQuestIds)
     setDefeatedEnemyIds(progress.defeatedEnemyIds)
     setMapId(progress.currentMapId)
     setCollectedScrollIds(readInventory())
     setUnlockedSpellIds(readUnlockedSpells())
-  }, [])
+  }
 
   const scrollMeta = useMemo(() => {
     const meta: Record<string, { title: string; excerpt: string }> = {}

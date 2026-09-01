@@ -5,7 +5,6 @@ import { motion } from 'motion/react'
 import {
   ScrollGroup,
   ScrollItem,
-  ScrollReveal,
   ScrollScrub,
 } from '@/components/ui/homepage-scroll'
 import { SectionLabel } from '@/components/ui/section-label'

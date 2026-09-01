@@ -28,7 +28,6 @@ export function AdventureInventory({
   onClose,
   scrollIds,
   scrollMeta,
-  scrollDefs,
   copy,
   onReadScroll,
 }: AdventureInventoryProps) {
@@ -42,8 +41,6 @@ export function AdventureInventory({
   }, [open, onClose])
 
   if (!open) return null
-
-  const defsById = Object.fromEntries(scrollDefs.map((s) => [s.id, s]))
 
   return (
     <div className="adventure-quest-overlay" role="presentation" onClick={onClose}>
@@ -72,7 +69,6 @@ export function AdventureInventory({
           <ul className="adventure-inventory-list">
             {scrollIds.map((id) => {
               const meta = scrollMeta[id]
-              const def = defsById[id]
               if (!meta) return null
               return (
                 <li key={id}>

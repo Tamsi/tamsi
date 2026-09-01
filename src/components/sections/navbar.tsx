@@ -8,25 +8,14 @@ import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useLocale } from '@/i18n/locale-context'
 
-const anchorNavKeys = [
-  'about',
-  'blog',
-  'experience',
-  'interests',
-  'projects',
-  'contact',
-] as const
-
-type NavKey = (typeof anchorNavKeys)[number]
-
-const navItems: { key: NavKey; href: string }[] = [
+const navItems = [
   { key: 'about', href: '/#about' },
   { key: 'blog', href: '/#blog' },
   { key: 'experience', href: '/#experience' },
   { key: 'interests', href: '/#interests' },
   { key: 'projects', href: '/#projects' },
   { key: 'contact', href: '/#contact' },
-]
+] as const
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)

@@ -3,9 +3,9 @@
 import {
   createContext,
   useContext,
-  useState,
   useEffect,
   useCallback,
+  useSyncExternalStore,
   type ReactNode,
 } from 'react'
 import {
@@ -24,6 +24,30 @@ interface LocaleContextValue {
 
 const LocaleContext = createContext<LocaleContextValue | null>(null)
 
+const localeListeners = new Set<() => void>()
+
+function subscribeLocale(onStoreChange: () => void) {
+  localeListeners.add(onStoreChange)
+  return () => {
+    localeListeners.delete(onStoreChange)
+  }
+}
+
+function emitLocaleChange() {
+  for (const listener of localeListeners) listener()
+}
+
+function readStoredLocale(): Locale | null {
+  const cookieLocale = readLocaleCookie()
+  if (cookieLocale) return cookieLocale
+  try {
+    const stored = localStorage.getItem('locale')
+    return stored && locales.includes(stored as Locale) ? (stored as Locale) : null
+  } catch {
+    return null
+  }
+}
+
 type LocaleProviderProps = {
   children: ReactNode
   /** From server cookie — must match the first client render to avoid hydration errors. */
@@ -31,31 +55,20 @@ type LocaleProviderProps = {
 }
 
 export function LocaleProvider({ children, initialLocale }: LocaleProviderProps) {
-  const [locale, setLocaleRaw] = useState<Locale>(initialLocale)
+  const locale = useSyncExternalStore(
+    subscribeLocale,
+    () => readStoredLocale() ?? initialLocale,
+    () => initialLocale,
+  )
 
   useEffect(() => {
     document.documentElement.lang = locale
+    if (!readLocaleCookie() && readStoredLocale()) {
+      persistLocaleCookie(locale)
+    }
   }, [locale])
 
-  useEffect(() => {
-    const cookieLocale = readLocaleCookie()
-    if (cookieLocale) {
-      if (cookieLocale !== initialLocale) setLocaleRaw(cookieLocale)
-      return
-    }
-    try {
-      const stored = localStorage.getItem('locale') as Locale | null
-      if (stored && locales.includes(stored) && stored !== initialLocale) {
-        setLocaleRaw(stored)
-        persistLocaleCookie(stored)
-      }
-    } catch {
-      // ignore
-    }
-  }, [initialLocale])
-
   const setLocale = useCallback((next: Locale) => {
-    setLocaleRaw(next)
     persistLocaleCookie(next)
     try {
       localStorage.setItem('locale', next)
@@ -64,6 +77,7 @@ export function LocaleProvider({ children, initialLocale }: LocaleProviderProps)
     }
     document.documentElement.lang = next
     document.title = dictionaries[next].meta.title
+    emitLocaleChange()
   }, [])
 
   return (

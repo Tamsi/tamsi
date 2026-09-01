@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { AdventureMapArrows } from '@/components/adventure/adventure-map-arrows'
 import { pickGrassId } from '@/lib/adventure/dofus-assets'
 import { dungeonDepth, type MapId } from '@/lib/adventure/maps'
@@ -219,14 +219,20 @@ export function AdventureCanvas({
   const handleArrowNavigate = useCallback((direction: 'left' | 'right') => {
     pendingNavRef.current = direction
   }, [])
-  worldRef.current = {
-    mapId,
-    mainQuestAccepted,
-    tutorialComplete,
-    collectedScrollIds,
-    defeatedEnemyIds,
-  }
-  callbacksRef.current = { onNpcInteract, onScrollPickup, onMapChange, onEnemyEngage }
+
+  useLayoutEffect(() => {
+    worldRef.current = {
+      mapId,
+      mainQuestAccepted,
+      tutorialComplete,
+      collectedScrollIds,
+      defeatedEnemyIds,
+    }
+  }, [mapId, mainQuestAccepted, tutorialComplete, collectedScrollIds, defeatedEnemyIds])
+
+  useLayoutEffect(() => {
+    callbacksRef.current = { onNpcInteract, onScrollPickup, onMapChange, onEnemyEngage }
+  }, [onNpcInteract, onScrollPickup, onMapChange, onEnemyEngage])
 
   useEffect(() => {
     const spawn = findSpawn(mapId)
@@ -260,7 +266,6 @@ export function AdventureCanvas({
     let raf = 0
 
     const getMapId = () => worldRef.current.mapId
-    const { cols, rows } = mapSize(getMapId())
 
     const isScrollVisibleAt = (x: number, y: number): boolean => {
       const w = worldRef.current

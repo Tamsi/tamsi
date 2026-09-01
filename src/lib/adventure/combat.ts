@@ -1,6 +1,6 @@
 import type { EnemyDefinition } from '@/lib/adventure/enemies'
 import { createSpellVfx, spellVfxDuration } from '@/lib/adventure/spell-vfx'
-import { getSpell, STARTER_SPELL_ID } from '@/lib/adventure/spells'
+import { getSpell } from '@/lib/adventure/spells'
 import type { GridPos } from '@/lib/adventure/types'
 
 export const COMBAT_COLS = 14
@@ -219,7 +219,7 @@ export function castCombatSpell(
     if (manhattan(state.playerPos, target) > spell.range) return state
     if (target.x !== state.enemyPos.x || target.y !== state.enemyPos.y) return state
     const raw = spell.damage ?? 0
-    const { hp, shield, dealt } = applyDamage(
+    const { hp, dealt } = applyDamage(
       state.enemyHp,
       0,
       raw,

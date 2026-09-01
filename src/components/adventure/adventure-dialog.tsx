@@ -15,7 +15,7 @@ import {
   TUTORIAL_SCROLL_ID,
   type ScrollDefinition,
 } from '@/lib/adventure/scrolls'
-import { spellForScroll, unlockSpellForScroll } from '@/lib/adventure/spells'
+import { unlockSpellForScroll } from '@/lib/adventure/spells'
 
 type DialogCopy = {
   continue: string
@@ -111,16 +111,30 @@ export function AdventureDialog({
   })
   const [step, setStep] = useState<DialogStep>('intro')
   const [activeScroll, setActiveScroll] = useState<ScrollDefinition | undefined>()
+  const [sync, setSync] = useState({
+    open,
+    collectedScrollIds,
+    completedQuestIds,
+    lastUnlockedSpell,
+  })
 
-  useEffect(() => {
-    if (!open) return
+  if (
+    open &&
+    (sync.open !== open ||
+      sync.collectedScrollIds !== collectedScrollIds ||
+      sync.completedQuestIds !== completedQuestIds ||
+      sync.lastUnlockedSpell !== lastUnlockedSpell)
+  ) {
+    setSync({ open, collectedScrollIds, completedQuestIds, lastUnlockedSpell })
     const p = readAdventureProgress()
     p.completedQuestIds = completedQuestIds
     setProgress(p)
     const resolved = resolveDialogStep(p, collectedScrollIds, lastUnlockedSpell)
     setStep(resolved.step)
     setActiveScroll(resolved.activeScroll)
-  }, [open, collectedScrollIds, completedQuestIds, lastUnlockedSpell])
+  } else if (!open && sync.open) {
+    setSync({ ...sync, open: false })
+  }
 
   useEffect(() => {
     if (!open) return

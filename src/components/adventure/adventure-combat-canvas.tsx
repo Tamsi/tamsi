@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 import { drawProceduralStone } from '@/lib/adventure/grass-tile'
 import {
   ATTACK_ANIM_MS,
@@ -204,7 +204,9 @@ export function AdventureCombatCanvas({
   const viewportRef = useRef<Viewport>({ originX: 0, originY: 0, scale: 1 })
   const spritesRef = useRef<AdventureSprites | null>(null)
   const stateRef = useRef(state)
-  stateRef.current = state
+  useLayoutEffect(() => {
+    stateRef.current = state
+  }, [state])
 
   const moveRef = useRef<CombatMoveAnim>({
     grid: { ...state.playerPos },
