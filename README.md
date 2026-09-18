@@ -40,7 +40,7 @@
   <tr>
     <td width="33%" align="center" valign="top">
       <a href="https://hermes-agent.nousresearch.com/">
-        <img src="./public/interests/hermes.png" alt="Hermes Agent by Nous Research" width="280" />
+        <img src="https://web-assets.nousresearch.com/nousnet-web/img/landing/portal-art.4fc19cfb0cdaa444.svg" alt="Hermes Agent by Nous Research" width="280" />
       </a>
       <br />
       <sub><strong>Hermes Agent</strong> → LivingColor plugin → Jira to PR/MR, human-gated</sub>
