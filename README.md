@@ -40,21 +40,21 @@
   <tr>
     <td width="33%" align="center" valign="top">
       <a href="https://hermes-agent.nousresearch.com/">
-        <img src="https://web-assets.nousresearch.com/nousnet-web/img/landing/portal-art.4fc19cfb0cdaa444.svg" alt="Hermes Agent by Nous Research" width="280" />
+        <img src="https://web-assets.nousresearch.com/nousnet-web/img/landing/portal-art.4fc19cfb0cdaa444.svg" alt="Hermes Agent by Nous Research" height="150" />
       </a>
       <br />
       <sub><strong>Hermes Agent</strong> → LivingColor plugin → Jira to PR/MR, human-gated</sub>
     </td>
     <td width="33%" align="center" valign="top">
       <a href="https://www.livingcolor.fr/">
-        <img src="./public/profile/card-inu.jpg" alt="INU — Livingcolor desktop PM agent" width="280" />
+        <img src="./public/profile/card-inu.jpg" alt="INU — Livingcolor desktop PM agent" height="150" />
       </a>
       <br />
       <sub><strong>INU</strong> · livingcolor.fr — desktop PM agent: scope tickets in plain language, keep decisions attached to the work</sub>
     </td>
     <td width="33%" align="center" valign="top">
       <a href="https://cursor.com/@tamsi">
-        <img src="./public/interests/cursor.jpg" alt="Cursor IDE" width="280" />
+        <img src="./public/interests/cursor.jpg" alt="Cursor IDE" height="150" />
       </a>
       <br />
       <sub><strong>Cursor</strong> → agentic IDE, rules, skills, and cloud automations</sub>
