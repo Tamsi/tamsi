@@ -38,174 +38,30 @@
 
 ---
 
-## What I build
-
-<table>
-  <tr>
-    <td width="50%" align="center" valign="top">
-      <a href="https://github.com/abecms/livingcolor-plugin">
-        <img src="./public/profile/card-agents.jpg" alt="AI agents — LivingColor / Hermes" width="440" />
-      </a>
-      <br /><br />
-      <strong>AI agents</strong>
-      <br />
-      <a href="https://github.com/abecms/livingcolor-plugin">livingcolor-plugin</a>
-      ·
-      <a href="https://github.com/Tamsi/livingcolor-skills">skills</a>
-      ·
-      <a href="https://github.com/Tamsi/livingcolor-evolution">evolution</a>
-      <br />
-      <sub>Hermes plugin for Jira-gated delivery, portable versioned skills, and a curator that keeps them fresh from the web.</sub>
-    </td>
-    <td width="50%" align="center" valign="top">
-      <a href="https://github.com/Tamsi/redbee-mcp">
-        <img src="./public/profile/card-mcp.jpg" alt="MCP servers and AI devtools" width="440" />
-      </a>
-      <br /><br />
-      <strong>MCP &amp; devtools</strong>
-      <br />
-      <a href="https://github.com/Tamsi/ai-code-reviewer-mcp">ai-code-reviewer-mcp</a>
-      ·
-      <a href="https://github.com/Tamsi/git-mentor">git-mentor</a>
-      ·
-      <a href="https://github.com/Tamsi/redbee-mcp">redbee-mcp</a>
-      ·
-      <a href="https://github.com/abecms/visualq-mcp">visualq-mcp</a>
-      <br />
-      <sub>Bridges for code review, GitHub career coaching, Red Bee OTT, and VisualQ VRT — wired into Cursor &amp; Claude.</sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center" valign="top">
-      <a href="https://visualq.ai">
-        <img src="./public/profile/card-saas.jpg" alt="SaaS products — VisualQ, Reelify, ScoreJamAi" width="440" />
-      </a>
-      <br /><br />
-      <strong>SaaS products</strong>
-      <br />
-      <a href="https://visualq.ai">VisualQ</a>
-      ·
-      <a href="https://reelify-prodsite.vercel.app">Reelify</a>
-      ·
-      <a href="https://score-jam-ai.vercel.app">ScoreJamAi</a>
-      <br />
-      <sub>Visual regression with anti-shift diffing, LLM demo videos from any URL, and AI-powered scoring forms.</sub>
-    </td>
-    <td width="50%" align="center" valign="top">
-      <a href="https://huggimon.co">
-        <img src="./public/profile/card-oss.jpg" alt="Open source — HuggiMon and more" width="440" />
-      </a>
-      <br /><br />
-      <strong>Open source</strong>
-      <br />
-      <a href="https://github.com/Tamsi/huggimon">huggimon</a>
-      ·
-      <a href="https://github.com/abecms/abecms">abecms</a>
-      ·
-      <a href="https://github.com/Tamsi/shopify-app-starter">shopify-app-starter</a>
-      <br />
-      <sub>Pokémon-style HF trainer cards, an API-first headless CMS (180+ ⭐), and a Shopify embedded-app starter.</sub>
-    </td>
-  </tr>
-</table>
-
----
-
-## Featured
-
-<table>
-  <tr>
-    <td width="50%" align="center" valign="top">
-      <a href="https://huggimon.co">
-        <img src="./public/profile/shot-huggimon.jpg" alt="HuggiMon — holographic Hugging Face trainer cards" width="440" />
-      </a>
-      <br /><br />
-      <strong><a href="https://github.com/Tamsi/huggimon">HuggiMon</a></strong> · TypeScript
-      <br />
-      <sub>Holo trainer card from any Hugging Face profile — 3D tilt, 14 foil tiers, follower binder. Live at <a href="https://huggimon.co">huggimon.co</a>.</sub>
-    </td>
-    <td width="50%" align="center" valign="top">
-      <a href="https://visualq.ai">
-        <img src="./public/profile/shot-visualq.jpg" alt="VisualQ — Quality OS" width="440" />
-      </a>
-      <br /><br />
-      <strong><a href="https://visualq.ai">VisualQ</a></strong> · Quality OS
-      <br />
-      <sub>Eight quality pillars, VRT + FRT + tracking, gated on every PR. MCP: <a href="https://github.com/abecms/visualq-mcp">visualq-mcp</a>.</sub>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center" valign="top">
-      <a href="https://tamsi.dev">
-        <img src="./public/profile/shot-tamsi.jpg" alt="tamsi.dev — portfolio" width="440" />
-      </a>
-      <br /><br />
-      <strong><a href="https://tamsi.dev">tamsi.dev</a></strong> · Next.js
-      <br />
-      <sub>Portfolio, blog, and a few side quests — isometric adventure included.</sub>
-    </td>
-    <td width="50%" align="center" valign="top">
-      <a href="https://huggingface.co/ImTamsi">
-        <img src="./public/profile/shot-hf.jpg" alt="Hugging Face profile ImTamsi" width="440" />
-      </a>
-      <br /><br />
-      <strong><a href="https://huggingface.co/ImTamsi">Hugging Face</a></strong> · @ImTamsi
-      <br />
-      <sub>Spaces, collections, and demos — HandShip, code-reviewer, local Qwen experiments.</sub>
-    </td>
-  </tr>
-</table>
-
-<p align="center">
-  <a href="https://github.com/Tamsi/huggimon">
-    <img src="https://github-readme-stats.shion.dev/api/pin/?username=Tamsi&repo=huggimon&theme=transparent&hide_border=true" alt="huggimon repo card" />
-  </a>
-  <a href="https://github.com/abecms/livingcolor-plugin">
-    <img src="https://github-readme-stats.shion.dev/api/pin/?username=abecms&repo=livingcolor-plugin&theme=transparent&hide_border=true" alt="livingcolor-plugin repo card" />
-  </a>
-  <a href="https://github.com/Tamsi/livingcolor-skills">
-    <img src="https://github-readme-stats.shion.dev/api/pin/?username=Tamsi&repo=livingcolor-skills&theme=transparent&hide_border=true" alt="livingcolor-skills repo card" />
-  </a>
-  <a href="https://github.com/Tamsi/redbee-mcp">
-    <img src="https://github-readme-stats.shion.dev/api/pin/?username=Tamsi&repo=redbee-mcp&theme=transparent&hide_border=true" alt="redbee-mcp repo card" />
-  </a>
-</p>
-
----
-
 ## Agent stack
 
 <table>
   <tr>
-    <td width="50%" align="center" valign="top">
+    <td width="33%" align="center" valign="top">
       <a href="https://hermes-agent.nousresearch.com/">
-        <img src="./public/interests/hermes.png" alt="Hermes Agent by Nous Research" width="440" />
+        <img src="./public/interests/hermes.png" alt="Hermes Agent by Nous Research" width="280" />
       </a>
       <br />
       <sub><strong>Hermes Agent</strong> → LivingColor plugin → Jira to PR/MR, human-gated</sub>
     </td>
-    <td width="50%" align="center" valign="top">
-      <a href="https://modelcontextprotocol.io">
-        <img src="./public/interests/mcp.png" alt="Model Context Protocol" width="440" />
+    <td width="33%" align="center" valign="top">
+      <a href="https://www.livingcolor.fr/">
+        <img src="./public/profile/card-inu.jpg" alt="INU — Livingcolor desktop PM agent" width="280" />
       </a>
       <br />
-      <sub><strong>MCP</strong> → servers for Cursor, Claude, and custom tool bridges</sub>
+      <sub><strong>INU</strong> · livingcolor.fr — desktop PM agent: scope tickets in plain language, keep decisions attached to the work</sub>
     </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center" valign="top">
+    <td width="33%" align="center" valign="top">
       <a href="https://cursor.com/@tamsi">
-        <img src="./public/interests/cursor.jpg" alt="Cursor IDE" width="440" />
+        <img src="./public/interests/cursor.jpg" alt="Cursor IDE" width="280" />
       </a>
       <br />
-      <sub><strong>Cursor / Claude</strong> → agentic IDE and cloud automations</sub>
-    </td>
-    <td width="50%" align="center" valign="top">
-      <a href="https://huggingface.co/ImTamsi">
-        <img src="./public/interests/huggingface.png" alt="Hugging Face" width="440" />
-      </a>
-      <br />
-      <sub><strong>Hugging Face</strong> → local models, Spaces, and trainer cards</sub>
+      <sub><strong>Cursor</strong> → agentic IDE, rules, skills, and cloud automations</sub>
     </td>
   </tr>
 </table>
