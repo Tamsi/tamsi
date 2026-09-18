@@ -15,20 +15,22 @@
 
 ---
 
-<table>
-  <tr>
-    <td align="center" valign="top">
-      <a href="https://huggimon.co/ImTamsi">
-        <img src="./public/profile/huggimon-card.png" alt="HuggiMon trainer card" width="260" />
-      </a>
-    </td>
-    <td align="center" valign="top">
-      <a href="https://gitfut.com/Tamsi">
-        <img src="https://gitfut.com/Tamsi.png?country=FR" alt="GitFut player card" width="260" />
-      </a>
-    </td>
-  </tr>
-</table>
+<div align="center">
+  <table>
+    <tr>
+      <td align="center" valign="top">
+        <a href="https://huggimon.co/ImTamsi">
+          <img src="./public/profile/huggimon-card.png" alt="HuggiMon trainer card" width="260" />
+        </a>
+      </td>
+      <td align="center" valign="top">
+        <a href="https://gitfut.com/Tamsi">
+          <img src="https://gitfut.com/Tamsi.png?country=FR" alt="GitFut player card" width="260" />
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
 
 ---
 
