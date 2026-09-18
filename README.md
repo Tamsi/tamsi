@@ -158,16 +158,16 @@
 
 <p align="center">
   <a href="https://github.com/Tamsi/huggimon">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=Tamsi&repo=huggimon&theme=transparent&hide_border=true" alt="huggimon repo card" />
+    <img src="https://github-readme-stats.shion.dev/api/pin/?username=Tamsi&repo=huggimon&theme=transparent&hide_border=true" alt="huggimon repo card" />
   </a>
   <a href="https://github.com/abecms/livingcolor-plugin">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=abecms&repo=livingcolor-plugin&theme=transparent&hide_border=true" alt="livingcolor-plugin repo card" />
+    <img src="https://github-readme-stats.shion.dev/api/pin/?username=abecms&repo=livingcolor-plugin&theme=transparent&hide_border=true" alt="livingcolor-plugin repo card" />
   </a>
   <a href="https://github.com/Tamsi/livingcolor-skills">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=Tamsi&repo=livingcolor-skills&theme=transparent&hide_border=true" alt="livingcolor-skills repo card" />
+    <img src="https://github-readme-stats.shion.dev/api/pin/?username=Tamsi&repo=livingcolor-skills&theme=transparent&hide_border=true" alt="livingcolor-skills repo card" />
   </a>
   <a href="https://github.com/Tamsi/redbee-mcp">
-    <img src="https://github-readme-stats.vercel.app/api/pin/?username=Tamsi&repo=redbee-mcp&theme=transparent&hide_border=true" alt="redbee-mcp repo card" />
+    <img src="https://github-readme-stats.shion.dev/api/pin/?username=Tamsi&repo=redbee-mcp&theme=transparent&hide_border=true" alt="redbee-mcp repo card" />
   </a>
 </p>
 
@@ -215,10 +215,8 @@
 ## GitHub
 
 <div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=Tamsi&show_icons=true&theme=transparent&hide_border=true#gh-dark-mode-only" alt="GitHub stats" height="165" />
-  <img src="https://github-readme-stats.vercel.app/api?username=Tamsi&show_icons=true&theme=default&hide_border=true#gh-light-mode-only" alt="GitHub stats" height="165" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Tamsi&layout=compact&theme=transparent&hide_border=true#gh-dark-mode-only" alt="Top languages" height="165" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Tamsi&layout=compact&theme=default&hide_border=true#gh-light-mode-only" alt="Top languages" height="165" />
+  <img src="https://github-readme-stats.shion.dev/api?username=Tamsi&show_icons=true&theme=transparent&hide_border=true" alt="GitHub stats" height="165" />
+  <img src="https://github-readme-stats.shion.dev/api/top-langs/?username=Tamsi&layout=compact&theme=transparent&hide_border=true" alt="Top languages" height="165" />
 </div>
 
 ---
