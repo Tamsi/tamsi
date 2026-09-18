@@ -8,11 +8,15 @@ import { unslothStudioHfLive } from './unsloth-studio-hf-live'
 import { unslothStudio } from './unsloth-studio'
 import { huggimon } from './huggimon'
 import { dflash2 } from './dflash2'
+import { jevHarness } from './jev-harness'
+import { ternaryBonsai2 } from './ternary-bonsai-2-27b'
 import type { BlogPost } from './types'
 
 export type { BlogBlock, BlogPost, BlogPostContent } from './types'
 
 export const blogPosts: BlogPost[] = [
+  jevHarness,
+  ternaryBonsai2,
   hermesHud,
   dflash2,
   qwen38,
