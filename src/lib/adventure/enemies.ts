@@ -108,6 +108,22 @@ const ENEMY_LAYOUT: Record<
     alpha: 0.82,
     scrollId: 'scroll-blog-hermes-hud',
   },
+  'dungeon-11': {
+    id: 'enemy-dungeon-11',
+    nameKey: 'oracle',
+    position: { x: 16, y: 3 },
+    spriteSet: 'archmage',
+    tintHue: 200,
+    scrollId: 'scroll-blog-jev',
+  },
+  'dungeon-12': {
+    id: 'enemy-dungeon-12',
+    nameKey: 'sproutling',
+    position: { x: 16, y: 4 },
+    spriteSet: 'goblin',
+    tintHue: 95,
+    scrollId: 'scroll-blog-bonsai-2',
+  },
 }
 
 export function enemyForMap(mapId: MapId, depth: number): EnemyDefinition | null {

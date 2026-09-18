@@ -102,6 +102,22 @@ export const SPELL_DEFINITIONS: SpellDefinition[] = [
     shield: 22,
     range: 0,
   },
+  {
+    id: 'verdict',
+    kind: 'attack',
+    nameKey: 'verdict',
+    scrollId: 'scroll-blog-jev',
+    damage: 22,
+    range: 2,
+  },
+  {
+    id: 'sprout',
+    kind: 'heal',
+    nameKey: 'sprout',
+    scrollId: 'scroll-blog-bonsai-2',
+    heal: 30,
+    range: 0,
+  },
 ]
 
 const SPELLS_BY_ID = Object.fromEntries(

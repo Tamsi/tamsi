@@ -12,6 +12,8 @@ export type MapId =
   | 'dungeon-8'
   | 'dungeon-9'
   | 'dungeon-10'
+  | 'dungeon-11'
+  | 'dungeon-12'
 
 export type DungeonMapId = Exclude<MapId, 'entrance'>
 
@@ -27,6 +29,8 @@ export const MAP_ORDER: MapId[] = [
   'dungeon-8',
   'dungeon-9',
   'dungeon-10',
+  'dungeon-11',
+  'dungeon-12',
 ]
 
 export const DUNGEON_MAP_IDS = MAP_ORDER.filter(
@@ -226,6 +230,42 @@ const DUNGEON_10_ASCII = [
   '....................',
 ] as const
 
+/** Classifier forks — Jev noul / choice / score. */
+const DUNGEON_11_ASCII = [
+  '....................',
+  '..dddddddddddddddd..',
+  '..ddd....ddd...ddd..',
+  '..ddd....ddd...ddd..',
+  '..dddddddddddddddd..',
+  '..ddd..........ddd..',
+  '..dddddddddddddddd..',
+  '..dddddddddddddddd..',
+  '..dddddddddddddddd..',
+  '..ddd..........ddd..',
+  '..dddddddddddddddd..',
+  '..ddd....ddd...ddd..',
+  '..dddddddddddddddd..',
+  '....................',
+] as const
+
+/** Ternary canopy — Bonsai 2 compressed 27B. */
+const DUNGEON_12_ASCII = [
+  '....................',
+  '......dddddddddd....',
+  '....dddd....dddd....',
+  '....dddd....dddd....',
+  '..dddddddddddddddd..',
+  '..dd............dd..',
+  '..dddddddddddddddd..',
+  '..dddddddddddddddd..',
+  '..dddddddddddddddd..',
+  '..dd............dd..',
+  '..dddddddddddddddd..',
+  '....dddd....dddd....',
+  '......dddddddddd....',
+  '....................',
+] as const
+
 /** Parallel draft lanes — DFlash speculative decode. */
 const DUNGEON_9_ASCII = [
   '....................',
@@ -418,6 +458,40 @@ export const MAP_DEFINITIONS: Record<MapId, MapDefinition> = {
     transitions: [
       {
         targetMapId: 'dungeon-9',
+        position: { x: 2, y: 7 },
+        direction: 'left',
+      },
+      {
+        targetMapId: 'dungeon-11',
+        position: { x: 17, y: 7 },
+        direction: 'right',
+      },
+    ],
+  },
+  'dungeon-11': {
+    id: 'dungeon-11',
+    ascii: DUNGEON_11_ASCII,
+    spawn: { x: 3, y: 7 },
+    transitions: [
+      {
+        targetMapId: 'dungeon-10',
+        position: { x: 2, y: 7 },
+        direction: 'left',
+      },
+      {
+        targetMapId: 'dungeon-12',
+        position: { x: 17, y: 7 },
+        direction: 'right',
+      },
+    ],
+  },
+  'dungeon-12': {
+    id: 'dungeon-12',
+    ascii: DUNGEON_12_ASCII,
+    spawn: { x: 3, y: 7 },
+    transitions: [
+      {
+        targetMapId: 'dungeon-11',
         position: { x: 2, y: 7 },
         direction: 'left',
       },

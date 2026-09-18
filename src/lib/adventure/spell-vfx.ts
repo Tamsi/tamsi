@@ -24,6 +24,8 @@ const VFX_DURATIONS: Record<string, number> = {
   aether: 640,
   surge: 520,
   veil: 600,
+  verdict: 540,
+  sprout: 640,
 }
 
 export function spellVfxDuration(spellId: string): number {
@@ -242,6 +244,46 @@ export function drawSpellVfx(
       ctx.fillStyle = `rgba(196, 181, 253, ${0.32 * (1 - t)})`
       ctx.beginPath()
       ctx.arc(from.x, from.y - 20, 16 + t * 10, 0, Math.PI * 2)
+      ctx.fill()
+      break
+    }
+    case 'verdict': {
+      ctx.strokeStyle = `rgba(45, 212, 191, ${0.9 * (1 - t * 0.25)})`
+      ctx.lineWidth = 2.5
+      ctx.shadowColor = '#2dd4bf'
+      ctx.shadowBlur = 12
+      ctx.beginPath()
+      ctx.moveTo(from.x, from.y - 20)
+      ctx.lineTo(to.x, to.y - 18)
+      ctx.stroke()
+      ctx.shadowBlur = 0
+      ctx.strokeStyle = `rgba(94, 234, 212, ${0.75 * (1 - t)})`
+      ctx.lineWidth = 2
+      ctx.beginPath()
+      ctx.moveTo(to.x - 10, to.y - 20)
+      ctx.lineTo(to.x - 2, to.y - 12)
+      ctx.lineTo(to.x + 12, to.y - 28)
+      ctx.stroke()
+      ctx.fillStyle = `rgba(45, 212, 191, ${0.35 * (1 - t)})`
+      ctx.beginPath()
+      ctx.arc(to.x, to.y - 18, 8 + t * 12, 0, Math.PI * 2)
+      ctx.fill()
+      break
+    }
+    case 'sprout': {
+      for (let i = 0; i < 3; i++) {
+        const phase = (t + i * 0.2) % 1
+        const angle = -Math.PI / 2 + (i - 1) * 0.55
+        const px = from.x + Math.cos(angle) * phase * 18
+        const py = from.y - 12 + Math.sin(angle) * phase * 18
+        ctx.fillStyle = `rgba(74, 222, 128, ${0.9 * (1 - phase)})`
+        ctx.beginPath()
+        ctx.arc(px, py, 3.5 + phase * 2, 0, Math.PI * 2)
+        ctx.fill()
+      }
+      ctx.fillStyle = `rgba(134, 239, 172, ${0.3 * (1 - t)})`
+      ctx.beginPath()
+      ctx.arc(from.x, from.y - 20, 14 + t * 10, 0, Math.PI * 2)
       ctx.fill()
       break
     }

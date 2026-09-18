@@ -11,6 +11,8 @@ export const SPELL_ICON_PATHS: Record<string, string> = {
   aether: '/adventure/spells/aether.svg',
   surge: '/adventure/spells/surge.svg',
   veil: '/adventure/spells/veil.svg',
+  verdict: '/adventure/spells/verdict.svg',
+  sprout: '/adventure/spells/sprout.svg',
 }
 
 export function spellIconPath(spellId: string): string | undefined {

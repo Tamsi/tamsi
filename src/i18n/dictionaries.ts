@@ -380,6 +380,8 @@ export const dictionaries = {
         aether: 'Éther',
         surge: 'Flux',
         veil: 'Voile',
+        verdict: 'Verdict',
+        sprout: 'Pousse',
       },
       spellBar: {
         combatOnly: 'Disponible en combat',
@@ -475,6 +477,14 @@ export const dictionaries = {
           'hermes-hud-wow': {
             title: 'Hermes HUD',
             excerpt: 'Jouer à WoW et prompt en même temps.',
+          },
+          'jev-harness': {
+            title: 'Jev',
+            excerpt: 'Classer sans payer un LLM à chaque tour.',
+          },
+          'ternary-bonsai-2-27b': {
+            title: 'Bonsai 2 27B',
+            excerpt: 'Un Qwen3.8 dans 6 Go, 98 % du FP16.',
           },
         },
       },
@@ -839,6 +849,8 @@ export const dictionaries = {
         aether: 'Aether',
         surge: 'Surge',
         veil: 'Veil',
+        verdict: 'Verdict',
+        sprout: 'Sprout',
       },
       spellBar: {
         combatOnly: 'Available in combat',
@@ -934,6 +946,14 @@ export const dictionaries = {
           'hermes-hud-wow': {
             title: 'Hermes HUD',
             excerpt: 'Play WoW and prompt at the same time.',
+          },
+          'jev-harness': {
+            title: 'Jev',
+            excerpt: 'Classify without paying an LLM every turn.',
+          },
+          'ternary-bonsai-2-27b': {
+            title: 'Bonsai 2 27B',
+            excerpt: 'Qwen3.8 in 6 GB, 98% of FP16.',
           },
         },
       },
