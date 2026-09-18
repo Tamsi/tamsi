@@ -17,21 +17,15 @@
 
 <table>
   <tr>
-    <td width="38%" align="center" valign="top">
+    <td align="center" valign="top">
       <a href="https://huggimon.co/ImTamsi">
-        <img src="./public/profile/huggimon-card.png" alt="HuggiMon trainer card for ImTamsi" width="260" />
+        <img src="./public/profile/huggimon-card.png" alt="HuggiMon trainer card" width="260" />
       </a>
-      <br />
-      <sub><a href="https://huggimon.co/ImTamsi">huggimon.co/ImTamsi</a> · LV 24 · Cosmos Holo</sub>
     </td>
-    <td valign="top">
-      <br />
-
-      **AI developer in Paris** — I build **autonomous AI agents**, **MCP servers**, and **production SaaS** for media & enterprise teams.
-
-      Full-stack @ [Livingcolor](https://www.livingcolor.fr) since 2018 — Drupal, Symfony, React/Next.js, React Native, Shopify, and AI integrations for TotalEnergies, France Télévisions, AFP, TV5Monde, and LVMH houses.
-
-      **42** Digital Technologies Architect · AI Agents & MCP (Hugging Face) · ML Specialization (Stanford Online)
+    <td align="center" valign="top">
+      <a href="https://gitfut.com/Tamsi">
+        <img src="https://gitfut.com/Tamsi.png?country=FR" alt="GitFut player card" width="260" />
+      </a>
     </td>
   </tr>
 </table>
