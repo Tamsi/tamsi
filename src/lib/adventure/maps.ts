@@ -14,6 +14,7 @@ export type MapId =
   | 'dungeon-10'
   | 'dungeon-11'
   | 'dungeon-12'
+  | 'dungeon-13'
 
 export type DungeonMapId = Exclude<MapId, 'entrance'>
 
@@ -31,6 +32,7 @@ export const MAP_ORDER: MapId[] = [
   'dungeon-10',
   'dungeon-11',
   'dungeon-12',
+  'dungeon-13',
 ]
 
 export const DUNGEON_MAP_IDS = MAP_ORDER.filter(
@@ -244,6 +246,24 @@ const DUNGEON_11_ASCII = [
   '..ddd..........ddd..',
   '..dddddddddddddddd..',
   '..ddd....ddd...ddd..',
+  '..dddddddddddddddd..',
+  '....................',
+] as const
+
+/** Split nave — Opus judgment, Sonnet throughput. */
+const DUNGEON_13_ASCII = [
+  '....................',
+  '..dddddddddddddddd..',
+  '..dd............dd..',
+  '..dd..dddddddd..dd..',
+  '..dd..dd....dd..dd..',
+  '..dd..dd....dd..dd..',
+  '..dddddddddddddddd..',
+  '..dddddddddddddddd..',
+  '..dddddddddddddddd..',
+  '..dd..dd....dd..dd..',
+  '..dd..dd....dd..dd..',
+  '..dd..dddddddd..dd..',
   '..dddddddddddddddd..',
   '....................',
 ] as const
@@ -492,6 +512,23 @@ export const MAP_DEFINITIONS: Record<MapId, MapDefinition> = {
     transitions: [
       {
         targetMapId: 'dungeon-11',
+        position: { x: 2, y: 7 },
+        direction: 'left',
+      },
+      {
+        targetMapId: 'dungeon-13',
+        position: { x: 17, y: 7 },
+        direction: 'right',
+      },
+    ],
+  },
+  'dungeon-13': {
+    id: 'dungeon-13',
+    ascii: DUNGEON_13_ASCII,
+    spawn: { x: 3, y: 7 },
+    transitions: [
+      {
+        targetMapId: 'dungeon-12',
         position: { x: 2, y: 7 },
         direction: 'left',
       },

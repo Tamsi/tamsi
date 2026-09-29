@@ -28,6 +28,7 @@ export const BLOG_SCROLL_SLUGS = [
   'hermes-hud-wow',
   'jev-harness',
   'ternary-bonsai-2-27b',
+  'claude-opus-sonnet-5-5',
 ] as const
 
 const BLOG_SCROLL_IDS = [
@@ -43,6 +44,7 @@ const BLOG_SCROLL_IDS = [
   'scroll-blog-hermes-hud',
   'scroll-blog-jev',
   'scroll-blog-bonsai-2',
+  'scroll-blog-claude-55',
 ] as const
 
 const SCROLL_POSITIONS: GridPos[] = [
@@ -57,6 +59,7 @@ const SCROLL_POSITIONS: GridPos[] = [
   { x: 16, y: 4 },
   { x: 16, y: 4 },
   { x: 16, y: 2 },
+  { x: 16, y: 5 },
   { x: 16, y: 5 },
 ]
 

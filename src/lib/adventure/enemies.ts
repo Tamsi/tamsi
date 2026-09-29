@@ -124,6 +124,14 @@ const ENEMY_LAYOUT: Record<
     tintHue: 95,
     scrollId: 'scroll-blog-bonsai-2',
   },
+  'dungeon-13': {
+    id: 'enemy-dungeon-13',
+    nameKey: 'maestro',
+    position: { x: 16, y: 3 },
+    spriteSet: 'archmage',
+    tintHue: 265,
+    scrollId: 'scroll-blog-claude-55',
+  },
 }
 
 export function enemyForMap(mapId: MapId, depth: number): EnemyDefinition | null {

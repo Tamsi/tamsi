@@ -118,6 +118,14 @@ export const SPELL_DEFINITIONS: SpellDefinition[] = [
     heal: 30,
     range: 0,
   },
+  {
+    id: 'duet',
+    kind: 'attack',
+    nameKey: 'duet',
+    scrollId: 'scroll-blog-claude-55',
+    damage: 26,
+    range: 3,
+  },
 ]
 
 const SPELLS_BY_ID = Object.fromEntries(

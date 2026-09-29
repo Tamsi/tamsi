@@ -382,6 +382,7 @@ export const dictionaries = {
         veil: 'Voile',
         verdict: 'Verdict',
         sprout: 'Pousse',
+        duet: 'Duo',
       },
       spellBar: {
         combatOnly: 'Disponible en combat',
@@ -485,6 +486,10 @@ export const dictionaries = {
           'ternary-bonsai-2-27b': {
             title: 'Bonsai 2 27B',
             excerpt: 'Un Qwen3.8 dans 6 Go, 98 % du FP16.',
+          },
+          'claude-opus-sonnet-5-5': {
+            title: 'Opus 5.5 et Sonnet 5.5',
+            excerpt: 'Le jugement d’un côté, le débit de l’autre.',
           },
         },
       },
@@ -851,6 +856,7 @@ export const dictionaries = {
         veil: 'Veil',
         verdict: 'Verdict',
         sprout: 'Sprout',
+        duet: 'Duet',
       },
       spellBar: {
         combatOnly: 'Available in combat',
@@ -954,6 +960,10 @@ export const dictionaries = {
           'ternary-bonsai-2-27b': {
             title: 'Bonsai 2 27B',
             excerpt: 'Qwen3.8 in 6 GB, 98% of FP16.',
+          },
+          'claude-opus-sonnet-5-5': {
+            title: 'Opus 5.5 and Sonnet 5.5',
+            excerpt: 'Judgment on one side, throughput on the other.',
           },
         },
       },
