@@ -10,11 +10,13 @@ import { huggimon } from './huggimon'
 import { dflash2 } from './dflash2'
 import { jevHarness } from './jev-harness'
 import { ternaryBonsai2 } from './ternary-bonsai-2-27b'
+import { claudeOpusSonnet55 } from './claude-opus-sonnet-5-5'
 import type { BlogPost } from './types'
 
 export type { BlogBlock, BlogPost, BlogPostContent } from './types'
 
 export const blogPosts: BlogPost[] = [
+  claudeOpusSonnet55,
   jevHarness,
   ternaryBonsai2,
   hermesHud,
